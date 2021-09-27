@@ -1,11 +1,11 @@
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Header from './Shared/components/Header';
+import Sales from './Sales/pages/Sales';
 
 function App() {
   return (
-      <Header />
+      <Sales />
   );
 }
 

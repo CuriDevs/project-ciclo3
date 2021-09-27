@@ -5,13 +5,13 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function Header() {
     return(
-        <Navbar bg="dark" expand="lg" variant="dark">
+        <Navbar bg="dark" expand="lg" variant="dark" >
             <Container>
                 <Navbar.Brand href="#home">JALMED</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <NavDropdown title="Modulos" id="basic-nav-dropdown">
+                        <NavDropdown title="Modulos" id="basic-nav-dropdown" menuVariant="dark">
                         <NavDropdown.Item href="#action/3.1">Administracion de Ventas</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Administracion de Productos</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.3">Administracion de usuarios</NavDropdown.Item>
@@ -21,7 +21,7 @@ function Header() {
                     </Nav>
                         <img
                         alt=""
-                        src="../Images/iconPngSinTexto.png"
+                        src="./Images/iconPngSinTexto.png"
                         width="30"
                         height="30"
                         className="d-inline-block align-top"
