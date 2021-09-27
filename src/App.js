@@ -1,8 +1,11 @@
-import Header from './Shared/components/Header';
+import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Sales from './Sales/pages/Sales';
 
 function App() {
   return (
-      <Header />
+      <Sales />
   );
 }
 
