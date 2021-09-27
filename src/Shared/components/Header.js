@@ -20,8 +20,8 @@ function Header() {
                         </NavDropdown>
                     </Nav>
                         <img
-                        alt=""
-                        src="./Images/iconPngSinTexto.png"
+                        alt="User"
+                        src="../../Images/iconPngSinTexto.png"
                         width="30"
                         height="30"
                         className="d-inline-block align-top"
