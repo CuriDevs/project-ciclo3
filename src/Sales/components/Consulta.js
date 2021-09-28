@@ -3,12 +3,15 @@ import Tab from "react-bootstrap/Tab";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Dato from "./Dato";
+import Button from "react-bootstrap/Button";
 
 var Titulos = ['Identificador','Valor Venta','Cantidad','Precio Unitario','Fecha Venta','Documento Identificación','Nombre Cliente','Vendedor'];
 var Clientes = [1,'$90000','2','$45000','2021-09-26','1031456987','Manuel Lopez','Jose Jose']
 
 function Consulta () {
     return(
+        <>
+            <Button variant="secondary" className="border border-5 border-white">Volver</Button>{' '}
             <Tab.Container defaultActiveKey="first" className="border border-5">
                 <Row className="border border-5 border-white">
                     <Col sm={1}></Col>
@@ -40,6 +43,7 @@ function Consulta () {
                     <Col sm={1}></Col>
                 </Row>
             </Tab.Container> 
+        </>
     );
 }
 
