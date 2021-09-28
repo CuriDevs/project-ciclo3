@@ -1,32 +1,41 @@
 import Button from "react-bootstrap/Button";
-import Alert from "react-bootstrap/Alert";
+import Modal from "react-bootstrap/Modal";
 import {useState} from "react";
 
 function Dato ({Clientes}) {
-    const [show, setShow] = useState(true);
-    
-        if (show) {
-            return(
-            <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-                <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-                <p>
-                    Change this and that and try again. Duis mollis, est non commodo
-                    luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-                    Cras mattis consectetur purus sit amet fermentum.
-                </p>
-            </Alert>
-            );
-        }
-        
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return(
+        <>
         <tr>
             {Clientes.map ((value) => (
                 <th>{value}</th>
             ))}
             <td><Button variant="primary">Editar</Button>{' '}</td>
-            <td><Button variant="danger" onClick={() => setShow(true)}>Eliminar</Button>{' '}</td>
+            <td><Button variant="danger" onClick={handleShow}>Eliminar</Button>{' '}</td>
         </tr>
+
+        <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+        <Modal.Title>Eliminar venta</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>¿Estas seguro de querer eliminar la venta</Modal.Body>
+        <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+            Close
+        </Button>
+        <Button variant="danger" onClick={handleClose}>
+            Eliminar
+        </Button>
+        </Modal.Footer>
+        </Modal>
+        </>
     );
+
+
 }
 
 export default Dato;
