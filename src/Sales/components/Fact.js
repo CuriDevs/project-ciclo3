@@ -1,5 +1,5 @@
-import Button from "react-bootstrap/Button";
 import Remove from "./Remove";
+import Edit from "./Edit";
 
 function Fact ({Clientes}) {
 
@@ -9,7 +9,7 @@ function Fact ({Clientes}) {
             {Clientes.map ((value) => (
                 <th>{value}</th>
             ))}
-            <td><Button variant="primary">Editar</Button>{' '}</td>
+            <td><Edit/></td>
             <td><Remove/></td>
         </tr>
         </>
