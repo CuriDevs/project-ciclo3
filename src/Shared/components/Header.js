@@ -14,7 +14,7 @@ function Header() {
                         <NavDropdown title="Modulos" id="basic-nav-dropdown" menuVariant="dark">
                         <NavDropdown.Item href="#action/3.1">Administracion de Ventas</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Administracion de Productos</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Administracion de usuarios</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">Administracion de Usuarios</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.4">Cerrar Sesion</NavDropdown.Item>
                         </NavDropdown>
