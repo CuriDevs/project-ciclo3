@@ -56,7 +56,7 @@ function Edit() {
                     <Row className="mb-3">
                     <Form.Group as={Col} controlId="formGridDocumento">
                         <Form.Label>Numero Documento</Form.Label>
-                        <Form.Control placeholder="# Documento" />
+                        <Form.Control type="number" placeholder="# Documento" />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridNombre">
