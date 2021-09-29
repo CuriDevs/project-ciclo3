@@ -17,21 +17,21 @@ const productos = [
         nombreProducto: "Lorem, ipsum.",
         descripcionProducto: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui necessitatibus ratione, sunt ab, voluptatem ipsa architecto obcaecati omnis laudantium officiis molestias, iste in. Facilis, ratione?",
         valorUnitarioProducto: 2500,
-        estado: false
+        estadoProducto: false
     },
     {
         idProducto: 2,
         nombreProducto: "Lorem, ipsum.",
         descripcionProducto: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui necessitatibus ratione, sunt ab, voluptatem ipsa architecto obcaecati omnis laudantium officiis molestias, iste in. Facilis, ratione?",
         valorUnitarioProducto: 2500,
-        estado: true
+        estadoProducto: true
     },
     {
         idProducto: 3,
         nombreProducto: "Lorem, ipsum.",
         descripcionProducto: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui necessitatibus ratione, sunt ab, voluptatem ipsa architecto obcaecati omnis laudantium officiis molestias, iste in. Facilis, ratione?",
         valorUnitarioProducto: 2500,
-        estado: false
+        estadoProducto: false
     },
     {
         idProducto: 4,
@@ -45,14 +45,14 @@ const productos = [
         nombreProducto: "Lorem, ipsum.",
         descripcionProducto: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui necessitatibus ratione, sunt ab, voluptatem ipsa architecto obcaecati omnis laudantium officiis molestias, iste in. Facilis, ratione?",
         valorUnitarioProducto: 2500,
-        estadoProducto: true
+        estadoProducto:true
     },
     {
         idProducto: 6,
         nombreProducto: "Lorem, ipsum.",
         descripcionProducto: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui necessitatibus ratione, sunt ab, voluptatem ipsa architecto obcaecati omnis laudantium officiis molestias, iste in. Facilis, ratione?",
         valorUnitarioProducto: 2500,
-        estadoProducto: true
+        estadoProducto:true
     },
     {
         idProducto: 7,
@@ -81,7 +81,7 @@ const productos = [
 
 const GestionProductos = () => {
 
-    
+    /*El set products se usara para agregar y eliminar productos (para editar no estoy seguro)*/ 
     const [products, setProducts] = useState(productos)
 
     
@@ -91,7 +91,7 @@ const GestionProductos = () => {
             <HeaderProducts />
             <CardNuevoProducto />
             <ul className="containerCard">
-                <CardProducto products={products}/>
+                <CardProducto products={products} />
             </ul>
         </div>
     )
