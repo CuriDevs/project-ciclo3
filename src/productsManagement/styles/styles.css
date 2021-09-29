@@ -1,0 +1,120 @@
+/*Estilos globales para páginas que usen este archivo (normalmente las de gestión de productos y sus componentes)*/
+*{
+    box-sizing: content-box;
+    margin: 0;
+    padding: 0;
+    padding-left: 0;
+    list-style: none;
+
+    font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+/*Estilos del page gestionProductos*/
+.containerGestionProductos{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+
+/*Estilos para ul en gestión de productos para que sea responsive las tarjetas*/
+.containerCard{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-left: 0;
+}
+
+/*Estilos de las card para el componente CardProduct*/
+.card {
+    display: flex;
+    padding: 0.5%;
+    align-items: center;
+    min-width: 18rem;
+    min-height: 20em;
+    border-radius: 15px;
+    width: 18em;
+    box-shadow: 0.25em 0.25em rgba(64, 79, 85, 0.5);
+    padding: 1%;
+    margin: 3%; 
+}
+
+.cardNuevoProducto{
+    min-height: 5em;
+    max-height: 10em;
+    justify-self: center;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+
+    
+}
+
+.titleCardAgregarProducto{
+    color: black;    
+}
+
+
+/*estilos para cuandoalguien pase por encima de alguna card*/
+.card:hover{
+    box-shadow: 0.3em 0.3em rgba(64, 79, 85, 0.5);
+    transform: scale(1.01);
+}
+
+/*Estilos para etiquetas adentro de el componente CardProduct*/
+.containerTituloCard{
+    
+    
+}
+
+.containerBtnCard{
+    display:flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.btnCardChildren{
+    border-radius: 0;
+    
+
+}
+
+
+
+
+/*Estilos para el header de gestion de productos*/
+.headerProducts{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 1%;
+}
+
+
+.header_titleProducts{
+    width: 100%;
+    text-align: center;
+}
+
+
+.containerBarraBusqueda{ 
+    display: flex;
+
+}
+
+
+.imgAgregarProducto{
+    width: 25%;
+    
+    
+}
+
+
+
