@@ -10,16 +10,18 @@ const CardProducto = (props) => {
         <>
             {props.products.map((product)=>{
                 return(
-                    <card className="card">
-                        <span>{product.idProducto}</span>
-                        <div className="containerTituloCard">
-                            <h3 className="titleCardProduct">{product.nombreProducto}</h3>
-                        </div>
-                        <span>$ {product.valorUnitarioProducto}</span>
-                        <p>Estado: {product.estadoProducto ? <span>Disponible</span> : <span>No disponible</span>}</p>
-                        <p>{product.descripcionProducto}</p>
+                    <div className="card">
+                        <div className="cardBody">
+                            <span>{product.idProducto}</span>
+                            <div className="containerTituloCard">
+                                <h3 className="titleCardProduct">{product.nombreProducto}</h3>
+                            </div>
+                            <span>$ {product.valorUnitarioProducto}</span>
+                            <p>Estado: {product.estadoProducto ? (<span>Disponible</span>) : (<span>No disponible</span>)}</p>
+                            <p className="cardDescipcion">{product.descripcionProducto}</p>
+                        </div> 
                         <BtnCardProducts />
-                    </card>
+                    </div>
                 );
             })}
         </>
