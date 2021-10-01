@@ -3,10 +3,10 @@ import Query from "../components/Query";
 
 function Sales() {
     return(
-        <div>
+        <>
             <Header />
             <Query />
-        </div>    
+        </>    
     );
 }
 

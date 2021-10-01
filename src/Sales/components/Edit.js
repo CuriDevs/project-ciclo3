@@ -19,7 +19,7 @@ function Edit() {
     return(
         <>
             <Button variant="primary" onClick={handleShow}>Editar</Button>{' '}
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} size="lg" dialogClassName="modal-100w">
                 <Modal.Header closeButton>
                 <Modal.Title>Modificación de venta</Modal.Title>
                 </Modal.Header>
@@ -28,47 +28,47 @@ function Edit() {
                 <Form>
                     <Form.Group className="mb-3" controlId="formGridAddress1">
                         <Form.Label>Identificador</Form.Label>
-                        <Form.Control type="number" readOnly placeholder="ID Unico" />
+                        <Form.Control size="sm" type="number" readOnly placeholder="ID Unico" />
                     </Form.Group>
 
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridVenta">
                         <Form.Label>Valor venta</Form.Label>
-                        <Form.Control type="number" placeholder="Valor de venta" />
+                        <Form.Control size="sm" type="number" placeholder="Valor de venta" />
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridCantidad">
                         <Form.Label>Cantidad</Form.Label>
-                        <Form.Control type="number" placeholder="Cantidad" />
+                        <Form.Control size="sm" type="number" placeholder="Cantidad" />
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridPrecio">
                         <Form.Label>Precio Unitario</Form.Label>
-                        <Form.Control type="number" placeholder="Precio por unidad" />
+                        <Form.Control size="sm" type="number" placeholder="Precio por unidad" />
                         </Form.Group>
                     </Row>
 
                     <Form.Group className="mb-3" controlId="formGridFecha">
                         <Form.Label>Fecha</Form.Label>
-                        <Form.Control plaintext readOnly placeholder={value} />
+                        <Form.Control size="sm" plaintext readOnly placeholder={value} />
                     </Form.Group>
 
                     <Row className="mb-3">
                     <Form.Group as={Col} controlId="formGridDocumento">
                         <Form.Label>Numero Documento</Form.Label>
-                        <Form.Control type="number" placeholder="# Documento" />
+                        <Form.Control size="sm" type="number" placeholder="# Documento" />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridNombre">
                         <Form.Label>Nombre Cliente</Form.Label>
-                        <Form.Control placeholder="Nombre Cliente" />
+                        <Form.Control size="sm" placeholder="Nombre Cliente" />
                     </Form.Group>
                     </Row>
 
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridVendedor">
                         <Form.Label>Vendedor</Form.Label>
-                        <Form.Control type="text" readOnly placeholder="Nombre Vendedor"/>
+                        <Form.Control size="sm" type="text" readOnly placeholder="Nombre Vendedor"/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridEstado">
