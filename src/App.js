@@ -7,7 +7,7 @@ import {
   Link
 } from "react-router-dom";
 
-
+import Register from './Sales/pages/Register';
 import Sales from './Sales/pages/Sales';
 import Products from "./productsManagement/pages/gestionProductos.jsx"
 
@@ -15,7 +15,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path={['/sales', '/products']}>
+        <Route path={['/sales', '/register', '/products']}>
             {/* Aqui va el componente de layout privado */}
               <Switch>
 
@@ -23,6 +23,9 @@ function App() {
                 <Route exact path="/sales"> 
                   <Sales />
                 </Route>
+
+                {/*ruta para acceder a la pagina de registro */}
+                <Route exact path="/register" component={Register} />
 
                 {/*  Forma 2 de hacer el enrutamiento con pagina x */}
                 <Route exact path="/products" component={Products} />
