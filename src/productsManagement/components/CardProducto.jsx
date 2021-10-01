@@ -12,7 +12,7 @@ const CardProducto = (props) => {
                 return(
                     <div className="card">
                         <div className="cardBody">
-                            <span>{product.idProducto}</span>
+                            {/*  <span>{product.idProducto}</span>  */}
                             <div className="containerTituloCard">
                                 <h3 className="titleCardProduct">{product.nombreProducto}</h3>
                             </div>
