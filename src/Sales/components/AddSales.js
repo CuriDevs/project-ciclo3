@@ -1,124 +1,130 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/AddSales.css";
-import React, {useState, useEffect} from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Container from "react-bootstrap/Container";
+import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-function AddSales () {
-  
-  const [showNotificacion, setShowNotificacion] = useState(false);
-
+function AddSales (props) {
   /*
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
   */
 
-  return (
-    <>
-    {/*esto se activara al momento de que el vendedor presione el boton de registrar*/}
-    
-    <Container className="principal">
-      <Row className="justify-content-center mt-5 mb-5">
-        <Col className="principal-first-container" lg="6">
-            <div>
-              <h1 className="mt5 mb-4"> Registro de ventas </h1>
-              <hr />
-              <Col sm>
+    return (
+      <>
+        {/* lo que esta en onClick hace lo mismo que la linea comentada de arriba solo que no le pasarias una variable(handleClose o Show) si no directaente el arrow function*/}
+  
+        {/*<Button controId="registro" variant="primary" onClick={() => {}}>{" "}Registrar{" "}</Button>*/}
+        {/*recibimos lo que nos manda el hook con la variable show y la ponemos en unas llaves dentro de modal con unos 3 puntos antes, que no se para que sirven*/}
+        <Modal {...props} className="mb">
+          <Modal.Header>
+            <Modal.Title>Regitro de ventas</Modal.Title>
+          </Modal.Header>
+  
+          <Modal.Body className="show-grid">
+            <Form>
+              <Col xs={12} md={12}>
                 <FloatingLabel
                   controlId="floatingInputIdVenta"
                   label="Identificador de venta"
+                  className="mb-3"
                 >
-                  <Form.Control type="number" placeholder="Identificador de venta" />
+                  <Form.Control type="" placeholder="Identificador de venta" />
                 </FloatingLabel>
               </Col>
               <hr />
               <Row className="mb-3">
-                <Col sm>
+                <Col xs={6} md={6}>
                   <FloatingLabel
                     controlId="floatingInputIdProducto"
                     label="Identificador de producto"
+                    className="mb-3"
                   >
-                    <Form.Control type="number" placeholder="Identificador de producto"/>
+                    <Form.Control type="" placeholder="Identificador de producto"/>
                   </FloatingLabel>
                 </Col>
-
-                <Col sm>
+  
+                <Col xs={6} md={6}>
                   <FloatingLabel
                     controlId="floatingInputValorTotal"
                     label="Valor total"
+                    className="mb-3"
                   >
-                    <Form.Control type="number" placeholder="Valor total" />
+                    <Form.Control type="" placeholder="Valor total" />
                   </FloatingLabel>
                 </Col>
               </Row>
-
+  
               <Row className="mb-3">
-                <Col sm>
+                <Col xs={6} md={4}>
                   <FloatingLabel
                     controlId="floatingInputCantidad"
                     label="Cantidad"
+                    className="mb-3"
                   >
-                    <Form.Control type="number" placeholder="Cantidad" />
+                    <Form.Control type="" placeholder="Cantidad" />
                   </FloatingLabel>
                 </Col>
-
-                <Col sm>
+  
+                <Col xs={6} md={4}>
                   <FloatingLabel
                     controlId="floatingInputPrecioUnitario"
                     label="Precio unitario"
+                    className="mb-3"
                   >
-                    <Form.Control type="number" placeholder="Precio unitario" />
+                    <Form.Control type="" placeholder="Precio unitario" />
                   </FloatingLabel>
                 </Col>
-
-                <Col sm>
+  
+                <Col xs={6} md={4}>
                   <FloatingLabel
                     controlId="floatingInputFechaVenta"
                     label="Fecha de venta"
+                    className="mb-3"
                   >
-                    <Form.Control type="date" placeholder="" />
+                    <Form.Control type="" placeholder="" />
                   </FloatingLabel>
                 </Col>
               </Row>
               <hr />
               <Row className="mb-3">
-                <Col sm>
+                <Col xs={6} md={6}>
                   <FloatingLabel
                     controlId="floatingInputIdCliente"
                     label="Identificacion del cliente"
+                    className="mb-0"
                   >
-                    <Form.Control type="number" placeholder="Identificacion del cliente"
+                    <Form.Control
+                      type=""
+                      placeholder="Identificacion del cliente"
                     />
                   </FloatingLabel>
                 </Col>
-
-                <Col sm>
+  
+                <Col xs={6} md={6}>
                   <FloatingLabel
                     controlId="floatingInputNombreCliente"
                     label="Nombre del cliente"
+                    className="mb-0"
                   >
-                    <Form.Control type="text" placeholder="Nombre del cliente" />
+                    <Form.Control type="" placeholder="Nombre del cliente" />
                   </FloatingLabel>
                 </Col>
               </Row>
-              <hr />
-
-              <Button variant="primary mt-2" onClick={() => setShowNotificacion(true)} size="lg">Registrar</Button>
-              
-            </div>
-        </Col>
-        <Col className="principal-second-container" lg="1">
-            <Button className="mt-2" variant="secondary" size="lg" href="/sales">Ventas</Button>
-        </Col>
-      </Row>
-      
-    </Container>
-    </>
-  );
+            </Form>
+          </Modal.Body>
+  
+          <Modal.Footer>
+            <Button variant="primary"> Registrar venta</Button>
+            <Button variant="secondary" onClick={props.onHide}>
+              Cerrar
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
 };
 
 export default AddSales; 

@@ -24,6 +24,9 @@
   height: var(--alturaInputs);
 }
 /*fin*/
+.btn-principal{
+  width: 80px;
+}
 
 .principal-first-container{
   border: 1px solid #DBDADA;
