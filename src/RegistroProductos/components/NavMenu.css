@@ -1,0 +1,55 @@
+.menuLista{
+    color: #03588c; 
+	font-size: 1.2rem;
+	justify-content: center;
+    text-decoration: none;
+}
+
+.menuLista li {
+	font: bold 15px Montserrat, sans-serif;
+	background-color:#03588c;
+	text-decoration:none;
+    justify-content: start;
+	
+}
+
+.menuLista li{
+	transition: all .3s;
+}
+.menuLista li:hover{
+	transform: translateX(-6px);
+
+}
+
+.Menu{
+	padding:2rem 0rem;
+	padding-left: -3rem;
+	margin:-2px 2px;
+	
+}
+
+.Menu:hover{
+	background-color: #03588c;
+}
+.Menu a{
+	color: #fff;
+	text-decoration: none;
+}
+
+.lista{
+	opacity:1;
+	width:100%;
+}
+
+.lista li{
+	opacity: 0;
+	justify-content: start;
+	padding: 1rem;
+}
+
+.lista li:hover{
+	background-color: #04bfad;
+	opacity:1;
+}
+
+

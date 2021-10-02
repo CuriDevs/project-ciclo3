@@ -1,0 +1,40 @@
+/*se modifico la anchura y altura de los labels flotantes*/
+:root{
+  --alturaInputs: 25px; /*variable para reutilizar*/
+}
+
+#floatingInputIdVenta{
+  width: 34.8em;
+  height: var(--alturaInputs);
+}
+
+
+#floatingInputIdProducto, 
+#floatingInputValorTotal,
+#floatingInputIdCliente,
+#floatingInputNombreCliente{
+  width: 15.8em;
+  height: var(--alturaInputs);
+}
+
+#floatingInputCantidad, 
+#floatingInputPrecioUnitario,
+#floatingInputFechaVenta{
+  width: 9.5em;
+  height: var(--alturaInputs);
+}
+/*fin*/
+
+.principal-first-container{
+  border: 1px solid #DBDADA;
+  border-radius: 10px;
+  padding-bottom: 10px;
+  padding-top: 15px;
+  box-shadow: 0px 10px 30px #DBDADA;
+}
+/* 
+.principal-second-container{
+  border: 1px solid #DBDADA;
+  border-radius: 10px;
+}
+ */
