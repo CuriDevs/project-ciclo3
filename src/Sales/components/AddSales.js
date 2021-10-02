@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/AddSales.css";
+import React, {useState, useEffect} from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,13 +8,21 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
+import Notificacion from "./Notification"
 function AddSales () {
+  
+  const [showNotificacion, setShowNotificacion] = useState(false);
+
   /*
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
   */
 
   return (
+    <>
+    {/*esto se activara al momento de que el vendedor presione el boton de registrar*/}
+    <Notificacion show={showNotificacion} onClose={() => setShowNotificacion(false)} delay={1500} autohide />
+
     <Container className="principal">
       <Row className="justify-content-center mt-5 mb-5">
         <Col className="principal-first-container" lg="6">
@@ -24,9 +33,8 @@ function AddSales () {
                 <FloatingLabel
                   controlId="floatingInputIdVenta"
                   label="Identificador de venta"
-                  className="mb-3"
                 >
-                  <Form.Control type="" placeholder="Identificador de venta" />
+                  <Form.Control type="number" placeholder="Identificador de venta" />
                 </FloatingLabel>
               </Col>
               <hr />
@@ -35,9 +43,8 @@ function AddSales () {
                   <FloatingLabel
                     controlId="floatingInputIdProducto"
                     label="Identificador de producto"
-                    className="mb-3"
                   >
-                    <Form.Control type="" placeholder="Identificador de producto"/>
+                    <Form.Control type="number" placeholder="Identificador de producto"/>
                   </FloatingLabel>
                 </Col>
 
@@ -45,9 +52,8 @@ function AddSales () {
                   <FloatingLabel
                     controlId="floatingInputValorTotal"
                     label="Valor total"
-                    className="mb-3"
                   >
-                    <Form.Control type="" placeholder="Valor total" />
+                    <Form.Control type="number" placeholder="Valor total" />
                   </FloatingLabel>
                 </Col>
               </Row>
@@ -57,9 +63,8 @@ function AddSales () {
                   <FloatingLabel
                     controlId="floatingInputCantidad"
                     label="Cantidad"
-                    className="mb-3"
                   >
-                    <Form.Control type="" placeholder="Cantidad" />
+                    <Form.Control type="number" placeholder="Cantidad" />
                   </FloatingLabel>
                 </Col>
 
@@ -67,9 +72,8 @@ function AddSales () {
                   <FloatingLabel
                     controlId="floatingInputPrecioUnitario"
                     label="Precio unitario"
-                    className="mb-3"
                   >
-                    <Form.Control type="" placeholder="Precio unitario" />
+                    <Form.Control type="number" placeholder="Precio unitario" />
                   </FloatingLabel>
                 </Col>
 
@@ -77,9 +81,8 @@ function AddSales () {
                   <FloatingLabel
                     controlId="floatingInputFechaVenta"
                     label="Fecha de venta"
-                    className="mb-3"
                   >
-                    <Form.Control type="" placeholder="" />
+                    <Form.Control type="date" placeholder="" />
                   </FloatingLabel>
                 </Col>
               </Row>
@@ -89,11 +92,8 @@ function AddSales () {
                   <FloatingLabel
                     controlId="floatingInputIdCliente"
                     label="Identificacion del cliente"
-                    className="mb-0"
                   >
-                    <Form.Control
-                      type=""
-                      placeholder="Identificacion del cliente"
+                    <Form.Control type="number" placeholder="Identificacion del cliente"
                     />
                   </FloatingLabel>
                 </Col>
@@ -102,22 +102,24 @@ function AddSales () {
                   <FloatingLabel
                     controlId="floatingInputNombreCliente"
                     label="Nombre del cliente"
-                    className="mb-0"
                   >
-                    <Form.Control type="" placeholder="Nombre del cliente" />
+                    <Form.Control type="text" placeholder="Nombre del cliente" />
                   </FloatingLabel>
                 </Col>
               </Row>
               <hr />
 
-              <Button variant="primary mt-2" >Registrar</Button>
+              <Button variant="primary mt-2" onClick={() => setShowNotificacion(true)} size="lg">Registrar</Button>
+              
             </div>
         </Col>
         <Col className="principal-second-container" lg="1">
-            <Button href="/sales">Ventas</Button>
+            <Button className="mt-2" variant="secondary" size="lg" href="/sales">Ventas</Button>
         </Col>
       </Row>
+      
     </Container>
+    </>
   );
 };
 
