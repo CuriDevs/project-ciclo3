@@ -1,13 +1,5 @@
 import "./App.css";
-<<<<<<< HEAD
-import Rol from './Home/pages/Rol';
 
-
-function App() {
-  return (
-      <Rol/>
-=======
-import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,6 +10,7 @@ import {
 import Register from './Sales/pages/Register';
 import Sales from './Sales/pages/Sales';
 import Products from "./productsManagement/pages/gestionProductos.jsx"
+import Rol from './Home/pages/Rol';
 
 function App() {
   return (
@@ -37,6 +30,9 @@ function App() {
 
                 {/*  Forma 2 de hacer el enrutamiento con pagina x */}
                 <Route exact path="/products" component={Products} />
+
+                <Route exact path="/rol" component={Rol} />
+
 
               </Switch>
             {/* Aqui se cierra el componente de layout privado*/}
@@ -58,7 +54,6 @@ function App() {
     </Router>
 
       
->>>>>>> f7314f5a536f4af2b423520c94af3f678fba9a09
   );
 }
 
