@@ -16,7 +16,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path={['/sales', '/register', '/products']}>
+        <Route path={['/sales', '/register', '/products', '/rol']}>
             {/* Aqui va el componente de layout privado */}
               <Switch>
 
