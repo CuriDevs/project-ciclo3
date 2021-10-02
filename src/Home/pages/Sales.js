@@ -1,12 +1,12 @@
 import Header from "../../Shared/components/Header";
-import Consulta from "../components/Consulta";
+import Query from "../components/Query";
 
 function Sales() {
     return(
-        <div>
+        <>
             <Header />
-            <Consulta />
-        </div>    
+            <Query />
+        </>    
     );
 }
 
