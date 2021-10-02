@@ -8,7 +8,6 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
-import Notificacion from "./Notification"
 function AddSales () {
   
   const [showNotificacion, setShowNotificacion] = useState(false);
@@ -21,8 +20,7 @@ function AddSales () {
   return (
     <>
     {/*esto se activara al momento de que el vendedor presione el boton de registrar*/}
-    <Notificacion show={showNotificacion} onClose={() => setShowNotificacion(false)} delay={1500} autohide />
-
+    
     <Container className="principal">
       <Row className="justify-content-center mt-5 mb-5">
         <Col className="principal-first-container" lg="6">
