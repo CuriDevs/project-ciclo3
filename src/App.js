@@ -4,14 +4,14 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+
 } from "react-router-dom";
 
 import Register from './Sales/pages/Register';
 import Sales from './Sales/pages/Sales';
 import Products from "./productsManagement/pages/gestionProductos.jsx"
 import Rol from './Home/pages/Rol';
-import Productos from './RegistroProductos/RegistroyEdicion'
+import productos from './RegistroProductos/RegistroyEdicion'
 import PrivateLayout from "./layouts/PrivateLayout";
 
 function App() {
@@ -33,10 +33,9 @@ function App() {
                 {/*  Forma 2 de hacer el enrutamiento con pagina x */}
                 <Route exact path="/products" component={Products} />
 
-                <Productos/>
-
                 <Route exact path="/rol" component={Rol} />
-
+                
+                <Route exact path="/productos" component={productos} />
 
               </Switch>
                 {/* Aqui se cierra el componente de layout privado*/}
