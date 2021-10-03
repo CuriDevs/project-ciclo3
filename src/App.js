@@ -13,6 +13,7 @@ import Products from "./productsManagement/pages/gestionProductos.jsx"
 import Rol from './Home/pages/Rol';
 import Productos from './RegistroProductos/RegistroyEdicion'
 import PrivateLayout from "./layouts/PrivateLayout";
+
 function App() {
   return (
     <Router>
@@ -38,23 +39,23 @@ function App() {
 
 
               </Switch>
-            {/* Aqui se cierra el componente de layout privado*/}
-        </Route>
-        <PrivateLayout/>
-        <Route>
-          {/* Aqui va el componente de layout publico */}
-            <Switch>
-              <Route>
-                {/* Primera pantalla (antes de ingresar al sistema) */}
+                {/* Aqui se cierra el componente de layout privado*/}
               </Route>
+                  <PrivateLayout/>
+              <Route>
+                  {/* Aqui va el componente de layout publico */}
+              <Switch>
+                <Route>
+                 {/* Primera pantalla (antes de ingresar al sistema) */}
+                </Route>
 
-            </Switch>
-          {/* Aqui se cierra el componente de layout publico*/}
-        </Route>
+              </Switch>
+                {/* Aqui se cierra el componente de layout publico*/}
+              </Route>
         
-      </Switch>
+              </Switch>
 
-    </Router>
+              </Router>
 
       
   );
