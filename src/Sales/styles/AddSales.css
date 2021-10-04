@@ -1,43 +1,12 @@
-/*se modifico la anchura y altura de los labels flotantes*/
-:root{
-  --alturaInputs: 25px; /*variable para reutilizar*/
+#formGridIdVenta{
+  width: 89%;
 }
 
-#floatingInputIdVenta{
-  width: 34.8em;
-  height: var(--alturaInputs);
+#formGridIdProducto, #formGridCantidad, #formGridIdCliente, #formGridNombreCliente{
+  width: 91%;
 }
 
-
-#floatingInputIdProducto, 
-#floatingInputValorTotal,
-#floatingInputIdCliente,
-#floatingInputNombreCliente{
-  width: 15.8em;
-  height: var(--alturaInputs);
+#formGridIdPrecioU, #formGridPrecioTotal, #formGridFechaVenta{
+  width: 97.5%;
 }
 
-#floatingInputCantidad, 
-#floatingInputPrecioUnitario,
-#floatingInputFechaVenta{
-  width: 9.5em;
-  height: var(--alturaInputs);
-}
-/*fin*/
-.btn-principal{
-  width: 80px;
-}
-
-.principal-first-container{
-  border: 1px solid #DBDADA;
-  border-radius: 10px;
-  padding-bottom: 10px;
-  padding-top: 15px;
-  box-shadow: 0px 10px 30px #DBDADA;
-}
-/* 
-.principal-second-container{
-  border: 1px solid #DBDADA;
-  border-radius: 10px;
-}
- */
