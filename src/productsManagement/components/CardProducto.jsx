@@ -20,7 +20,11 @@ const CardProducto = (props) => {
                             <p>Estado: {product.estadoProducto ? (<span>Disponible</span>) : (<span>No disponible</span>)}</p>
                             <p className="cardDescipcion">{product.descripcionProducto}</p>
                         </div> 
-                        <BtnCardProducts />
+                        <div className="containerBtnCard">
+                            <BtnCardProducts nombre={"Editar"} claseUnicaEstilos={"btnEdit"} claseEstiloBoostrap={"btn-primary"}/>
+                            <BtnCardProducts nombre={"Eliminar"} claseUnicaEstilos={"btnDelete"} claseEstiloBoostrap={"btn-danger"}/>
+                        </div>
+
                     </div>
                 );
             })}

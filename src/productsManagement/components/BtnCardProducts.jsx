@@ -1,12 +1,14 @@
 import React from 'react'
+import BorrarProducto from "./borrarProducto"
 
-const BtnCardProducts = () => {
+const BtnCardProducts = ({nombre, claseUnicaEstilos, claseEstiloBoostrap}) => {
+
     return (
-        <div className="containerBtnCard">
-            <button className="btn btn-primary btnEdit btnCardChildren">Editar</button>
-            <button className="btn btn-danger btnDelete btnCardChildren">Eliminar</button>
-        </div>
+        <>
+            <button className={`btn ${claseEstiloBoostrap} ${claseUnicaEstilos} btnCardChildren `}>{nombre}</button>
+        </>    
     )
 }
 
 export default BtnCardProducts
+
