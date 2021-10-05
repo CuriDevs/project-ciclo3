@@ -43,7 +43,16 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     padding: 1%;
     margin: 4% 2%; 
     flex-direction: column;
+    border: 3px double rgb(200, 200, 200);
+}
+
+/*estilos para cuando alguien pase por encima de alguna card*/
+.card:hover{
+    box-shadow: 0 1em rgba(43, 52, 56, 0.5);
+    /*background-color: rgb(235, 235, 235);*/
     
+    transform: translateY(-10px);
+    /*transform: scale(1.01);*/
 }
 
 .card .cardBody{
@@ -53,13 +62,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     flex: 1 1 auto;
 } 
 
-/*estilos para cuando alguien pase por encima de alguna card*/
-.card:hover{
-    box-shadow: 0 1em rgba(43, 52, 56, 0.5);
-    background-color: rgb(230, 230, 230);
-    transform: translateY(-10px);
-    /*transform: scale(1.01);*/
-}
+
 
 
 .cardNuevoProducto{
@@ -79,7 +82,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 /*Estilos para el h3 de los titulos de las card en el componente CardProduct*/
 .containerTituloCard{
-    
+
 }
 
 /*Estilos para card de agregar producto*/
@@ -107,7 +110,26 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     border-radius: 0;
 }
 
+/* reseteando estilos de botones de bootstrap en las card*/
+.btn-check:active, .btn-primary:focus, .btn-check:checked+.btn-primary:focus, .btn-primary.active:focus, .btn-primary:active:focus, .show>.btn-primary.dropdown-toggle:focus {
+    box-shadow: none;
+}
 
+.btn-check:active, .btn-danger:focus, .btn-check:checked+.btn-danger:focus, .btn-danger.active:focus, .btn-danger:active:focus, .show>.btn-danger.dropdown-toggle:focus {
+    box-shadow: none;
+}
+
+.btn-check:active+.btn-dark:focus, .btn-check:checked+.btn-dark:focus, .btn-dark.active:focus, .btn-dark:active:focus, .show>.btn-dark.dropdown-toggle:focus {
+    box-shadow: none;
+}
+
+.btnEdit{
+    background-color: #03588C;
+}
+
+.btnDelete{
+    background-color: #ff0000;
+}
 
 
 /*Estilos para el header de gestion de productos*/
@@ -130,6 +152,31 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 .containerBarraBusqueda{ 
     display: flex;
+    justify-content: space-between;
+    border: 2px solid #03588C; 
+    border-radius: 15px;
+    width: 70vw;
+}
+
+
+.childrenBarraBusqueda{
+    border: 0;
+    outline: 0;
+    margin: 5px;
+    
+}
+
+.childrenBarraBusqueda:focus{
+    border: 0;
+    outline: 0;
+}
+
+.inputBarraBusqueda{
+    width: 100%;
+}
+
+.btnBarraBusqueda{
+background: none;
 }
 
 
