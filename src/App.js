@@ -38,8 +38,10 @@ function App() {
                 <Route exact path="/RegistroyEdicion" component={Productos} />
               
               </Switch>
-                {/* Aqui se cierra el componente de layout privado*/}
+                // eslint-disable-next-line no-undef
+                {PrivateLayout}
               </Route>
+              
                   
               <Route>
                   {/* Aqui va el componente de layout publico */}
