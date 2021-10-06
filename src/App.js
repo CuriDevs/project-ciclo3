@@ -14,11 +14,14 @@ import Rol from './Home/pages/Rol';
 import PrivateLayout from './RegistroProductos/layouts/PrivateLayout';
 import Productos from "./RegistroProductos/RegistroyEdicion";
 
+
+
 function App() {
   return (
+    
     <Router>
       <Switch>
-        <Route path={['/sales', '/register', '/products', '/RegistroyEdicion']}>
+        <Route path={['/sales', '/products', '/rol']}>
             {/* Aqui va el componente de layout privado */}
               <Switch>
 
@@ -55,8 +58,6 @@ function App() {
               </Switch>
 
               </Router>
-
-      
   );
 }
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*se modifico la anchura y altura de los labels flotantes*/
 :root{
   --alturaInputs: 25px; /*variable para reutilizar*/
@@ -38,3 +39,17 @@
   border-radius: 10px;
 }
  */
+=======
+#formGridIdVenta{
+  width: 89%;
+}
+
+#formGridIdProducto, #formGridCantidad, #formGridIdCliente, #formGridNombreCliente{
+  width: 91%;
+}
+
+#formGridIdPrecioU, #formGridPrecioTotal, #formGridFechaVenta{
+  width: 97.5%;
+}
+
+>>>>>>> 2209fa87ef72a197c6664edfc33413f5bd4c0e86
