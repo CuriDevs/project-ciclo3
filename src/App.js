@@ -23,6 +23,7 @@ function App() {
               <Switch>
 
                 {/* Forma 1 de hacer el enrotamiento con pagina x */}  
+                
                 <Route exact path="/sales"> 
                   <Sales />
                 </Route>
@@ -35,7 +36,7 @@ function App() {
 
                 <Route exact path="/rol" component={Rol} />
                 
-                <Route exact path="/RegistroyEdicion" component={Productos} />
+                <Route exact path="" component={Productos} />
               
               </Switch>
                 {/* Aqui se cierra el componente de layout privado*/}

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import {MenuItems} from './MenuItems';
 import {Button} from './Button';
 import './navbar.css';
+import logo from '../../../Images/iconPngSinTexto.png'
+import avatar from '../../../Images/avatar.png'
 
 class Navbar extends Component {
     state = {clicked:false}
@@ -13,11 +15,15 @@ class Navbar extends Component {
 render(){
     return (
         <nav className="NavbarItems">
-            <h3 className="navbar-logo">JALMED<i className= "logo"></i></h3> 
+            <div className="navbar-logo">
+            <img  src={logo} alt="logo" />    
+             </div> 
+             <div className="navbar-avatar">
+             <i class="far fa-user-circle"></i>
+   
+             </div> 
             <div class="flex flex-wrap justify-center">
-                <div class="w-8/12 md:w-6 px-4">
-                <img src="https://mdbootstrap.com/img/new/avatars/15.jpg" alt="Maria" class="rounded-full max-w-full h-auto align-middle border-none" />
-                </div>
+                
             </div>
             <div className="Menu-icon" onClick={this.handleClick}>
                 <i className= {this.state.clicked ? 'fas fa-time' : 'fas fa-bars'}></i>
