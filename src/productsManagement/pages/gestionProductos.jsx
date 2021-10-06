@@ -6,11 +6,11 @@ import HeaderProducts from '../components/HeaderProducts'
 
 import '../styles/styles.css'
 
-//import productos from "../datosDePrueba/datosPrueba.json"
+import productos from "../datosDePrueba/datosPrueba.json"
 
 import Header from "../../Shared/components/Header"
 
-
+/* 
 const productos = [
     {
         idProducto: 1,
@@ -76,13 +76,24 @@ const productos = [
         estadoProducto: true
     }
 ]
+ */
 
 
 
 const GestionProductos = () => {
 
+
     /*El set products se usara para agregar y eliminar productos (para editar no estoy seguro)*/ 
     const [products, setProducts] = useState(productos)
+
+
+    const deleteProduct = (id) => {
+
+        const arrayFiltrado = products.filter( product => product.idProducto !== id)
+
+        setProducts(arrayFiltrado)
+        console.log(arrayFiltrado)
+    }
 
     
     return (
@@ -91,7 +102,7 @@ const GestionProductos = () => {
             <HeaderProducts />
             <CardNuevoProducto />
             <ul className="containerCard">
-                <CardProducto products={products} />
+                <CardProducto products={products} setProducts={setProducts} deleteProduct={deleteProduct} />
             </ul>
         </div>
     )

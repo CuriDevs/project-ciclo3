@@ -6,9 +6,12 @@ import BtnCardProducts from './BtnCardProducts'
 const CardProducto = (props) => {
     console.log(props.products)
 
+
     return (
         <>
-            {props.products.map((product)=>{
+            {
+            props.products.length > 0 ?
+            props.products.map((product)=>{
                 return(
                     <div className="card">
                         <div className="cardBody">
@@ -21,13 +24,17 @@ const CardProducto = (props) => {
                             <p className="cardDescipcion">{product.descripcionProducto}</p>
                         </div> 
                         <div className="containerBtnCard">
-                            <BtnCardProducts nombre={"Editar"} claseUnicaEstilos={"btnEdit"} claseEstiloBoostrap={"btn-primary"}/>
-                            <BtnCardProducts nombre={"Eliminar"} claseUnicaEstilos={"btnDelete"} claseEstiloBoostrap={"btn-danger"}/>
-                        </div>
+                            <BtnCardProducts nombre={"Editar"} estilos={"btnEdit"} estiloBootstrap={"btn-primary"}/>
 
+                            <BtnCardProducts nombre={"Eliminar"} estilos={"btnDelete"} estiloBootstrap={"btn-danger"} product={product} deleteProduct={props.deleteProduct}/>
+                        </div>
                     </div>
                 );
-            })}
+            }):(
+                <h3>No hay productos</h3>
+            )
+        
+        }
         </>
     )
 }

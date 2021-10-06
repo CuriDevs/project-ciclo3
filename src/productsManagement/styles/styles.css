@@ -51,7 +51,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     box-shadow: 0 1em rgba(43, 52, 56, 0.5);
     /*background-color: rgb(235, 235, 235);*/
     
-    transform: translateY(-10px);
+    transform: translateY(-2px);
     /*transform: scale(1.01);*/
 }
 
@@ -155,7 +155,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     justify-content: space-between;
     border: 2px solid #03588C; 
     border-radius: 15px;
-    width: 70vw;
+    width: 65vw;
 }
 
 

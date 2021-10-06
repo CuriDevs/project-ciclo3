@@ -1,11 +1,10 @@
 import React from 'react'
-import BorrarProducto from "./borrarProducto"
 
-const BtnCardProducts = ({nombre, claseUnicaEstilos, claseEstiloBoostrap}) => {
+const BtnCardProducts = ({nombre, estilos, estiloBootstrap, deleteProduct, product}) => {
 
     return (
         <>
-            <button className={`btn ${claseEstiloBoostrap} ${claseUnicaEstilos} btnCardChildren `}>{nombre}</button>
+            <button className={`btn ${estiloBootstrap} ${estilos} btnCardChildren `} onClick={()=>{deleteProduct(product.idProducto)}}> {nombre} </button>
         </>    
     )
 }
