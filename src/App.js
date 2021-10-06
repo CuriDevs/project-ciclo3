@@ -11,10 +11,7 @@ import Register from './Sales/pages/Register';
 import Sales from './Sales/pages/Sales';
 import Products from "./productsManagement/pages/gestionProductos.jsx"
 import Rol from './Home/pages/Rol';
-import PrivateLayout from './RegistroProductos/layouts/PrivateLayout';
 import Productos from "./RegistroProductos/RegistroyEdicion";
-
-
 
 function App() {
   return (
@@ -43,7 +40,7 @@ function App() {
               </Switch>
                 {/* Aqui se cierra el componente de layout privado*/}
               </Route>
-                  <PrivateLayout/>
+                  
               <Route>
                   {/* Aqui va el componente de layout publico */}
               <Switch>
