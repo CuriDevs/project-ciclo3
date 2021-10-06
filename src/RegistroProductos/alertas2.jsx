@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Success = () => {
+const Eliminar = () => {
     return (
         <div class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-            <div class="flex items-center justify-center w-12 bg-green-500">
+            <div class="flex items-center justify-center w-12 bg-red-500">
             <svg class="w-6 h-6 text-white fill-current"
                  viewBox="0 0 40 40"
                  xmlns="http://www.w3.org/2000/svg">
@@ -13,12 +13,12 @@ const Success = () => {
             </div>
             <div class="px-4 py-2 -mx-3">
                 <div class="mx-3">
-                    <span class="font-semibold text-green-500 dark:text-green-400">Success</span>
-                    <p class="text-sm text-gray-600 dark:text-gray-200"> Your product was registered!</p>
+                    <span class="font-semibold text-red-500 dark:text-green-400">Eliminado</span>
+                    <p class="text-sm text-gray-600 dark:text-gray-200"> Your product was Eliminado!</p>
                 </div>
             </div>
         </div>
     )
 }
 
-            export default Success;
+            export default Eliminar;

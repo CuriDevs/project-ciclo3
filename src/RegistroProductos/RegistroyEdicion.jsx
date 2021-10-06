@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 
 const Productos = ()=> {
     const [nombreProducto, setNombreProducto]= useState('');
-    const [valorProducto, setValorProducto]= useState('');
+    const [valorProducto, setValorProducto]= useState("");
     const [descripcionProducto, setDescripcionProducto]= useState('');
     const [idProducto, setIdProducto]= useState('');
 
@@ -13,7 +13,6 @@ useEffect(() => {
         console.log('', valorProducto);
         console.log('', descripcionProducto);
         
-
     },[idProducto,nombreProducto,valorProducto,descripcionProducto]);
 
     const agregarDatosBD = () => {
@@ -31,9 +30,12 @@ useEffect(() => {
     const guardarDatos = () => {
         console.log('', idProducto)
 };
+const eliminarDatos = () => {
+    console.log('', idProducto)
+};
 
     return(
-    <form className='h-screen p-4 my-4 border-2 border-black mx-96 place-self-auto decoration-clone sm:decoration-slice bg-gradient-to-b from-blue-200 bg-gradient-to-f to-white'> 
+    <form className='h-screen p-4 my-4 border-2 border-black mx-96 place-self-auto decoration-clone sm:decoration-slice bg-gradient-to-b from-blue-100 bg-gradient-to-f to-white'> 
             <h1  className= "p-10 text-bold"> Registro de Productos</h1>
                  <div className= 'p-2 '>
                     <input value={idProducto} onChange={(e)=> {setIdProducto(e.target.value);}} className='mx-4 text-center placeholder-blue-500 border-2 border-gray-600 border-opacity-50 rounded md:ring-4' type="text" placeholder= 'ID del Producto'/> 
@@ -52,19 +54,19 @@ useEffect(() => {
                                             <input value={descripcionProducto} onChange={(e)=> {setDescripcionProducto(e.target.value);}} className='h-40 px-40 placeholder-blue-500 border-2 border-gray-600 border-opacity-50 rounded 'type='text' placeholder= 'Descripcion del producto'/>
                                         </div>
                                             <div className= 'guardar'>
-                                                <button  type='button' onclick={guardarDatos} className='p-2 flex-inline'>
-                                                    <img src="./CrearProductos/Images/Floppy-icon.png" alt="Guardar"/>
+                                                <button type='button' onclick={()=>guardarDatos(idProducto +1)} className='p-2 flex-inline'>
+                                                    <img src="../CrearProductos/Images/Floppy-icon.png" alt="Guardar"/>
                                                 </button>
-                                                <button  type='button' onclick={guardarDatos} className='p-2 flex-inline'>
+                                                <button  type='button' onclick={()=>eliminarDatos(idProducto -1)} className='p-2 flex-inline'>
                                                     <img src="./CrearProductos/Images/Trash-icon.png" alt="Eliminar" />
                                                 </button>
                                             </div>
                                         </div>
                                             <div className= 'inline p-4 pr-5 m-8 space-x-10 ' >
-                                                <button  type='button' onclick={editarDatos} className='px-4 py-3 text-white transition-opacity duration-100 bg-blue-700 rounded '>Editar</button>
-                                                <button  type='button' onclick={consultarDatos} className='px-4 py-3 text-white transition-opacity duration-100 bg-yellow-600 rounded'>Consultar</button>
-                                                <button  type='button' onclick={agregarDatosBD} className='px-4 py-3 text-white transition-opacity duration-100 bg-green-500 rounded'>Agregar</button>
-                                                <button  type='button' onclick={cancelarDatos} className='px-4 py-3 text-white transition-opacity duration-100 bg-red-600 rounded'>Cancelar</button>
+                                                <button  type='button' onclick={()=>editarDatos(idProducto - idProducto)} className='px-4 py-3 text-white transition-opacity duration-100 bg-blue-700 rounded '>Editar</button>
+                                                <button  type='button' onclick={()=>consultarDatos(idProducto)} className='px-4 py-3 text-white transition-opacity duration-100 bg-yellow-600 rounded'>Consultar</button>
+                                                <button  type='button' onclick={()=>agregarDatosBD(idProducto+1)} className='px-4 py-3 text-white transition-opacity duration-100 bg-green-500 rounded'>Agregar</button>
+                                                <button  type='button' onclick={()=>cancelarDatos(idProducto)}className='px-4 py-3 text-white transition-opacity duration-100 bg-red-600 rounded'>Cancelar</button>
                                             </div>
                                         </div>
                                     </div>

@@ -11,14 +11,14 @@ import Register from './Sales/pages/Register';
 import Sales from './Sales/pages/Sales';
 import Products from "./productsManagement/pages/gestionProductos.jsx"
 import Rol from './Home/pages/Rol';
-import productos from './RegistroProductos/RegistroyEdicion'
-import PrivateLayout from "./layouts/PrivateLayout";
+import PrivateLayout from './RegistroProductos/layouts/PrivateLayout';
+import Productos from "./RegistroProductos/RegistroyEdicion";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path={['/sales', '/register', '/products']}>
+        <Route path={['/sales', '/register', '/products', '/RegistroyEdicion']}>
             {/* Aqui va el componente de layout privado */}
               <Switch>
 
@@ -35,8 +35,8 @@ function App() {
 
                 <Route exact path="/rol" component={Rol} />
                 
-                <Route exact path="/productos" component={productos} />
-
+                <Route exact path="/RegistroyEdicion" component={Productos} />
+              
               </Switch>
                 {/* Aqui se cierra el componente de layout privado*/}
               </Route>
