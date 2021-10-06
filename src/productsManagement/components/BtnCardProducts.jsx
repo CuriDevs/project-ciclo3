@@ -1,12 +1,13 @@
 import React from 'react'
 
-const BtnCardProducts = () => {
+const BtnCardProducts = ({nombre, estilos, estiloBootstrap, deleteProduct, product}) => {
+
     return (
-        <div className="containerBtnCard">
-            <button className="btn btn-primary btnEdit btnCardChildren">Editar</button>
-            <button className="btn btn-danger btnDelete btnCardChildren">Eliminar</button>
-        </div>
+        <>
+            <button className={`btn ${estiloBootstrap} ${estilos} btnCardChildren `} onClick={()=>{deleteProduct(product.idProducto)}}> {nombre} </button>
+        </>    
     )
 }
 
 export default BtnCardProducts
+
