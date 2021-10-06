@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+import Header from "../../Shared/components/Header";
+import Query from "../components/Query";
+
+function Sales() {
+    return(
+        <>
+            <Header />
+            <Query />
+        </>    
+    );
+=======
 import React, {useState, useEffect} from "react";
 import '../styles/Sales.css';
 import "../styles/Sales.css";
@@ -40,6 +52,7 @@ function Sales() {
       <Query />
     </>
   );
+>>>>>>> 2209fa87ef72a197c6664edfc33413f5bd4c0e86
 }
 
 export default Sales;

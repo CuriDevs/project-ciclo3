@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+=======
 body {
   box-sizing: border-box;
   padding: 0;
@@ -13,3 +19,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+>>>>>>> 2209fa87ef72a197c6664edfc33413f5bd4c0e86

@@ -1,0 +1,11 @@
+.container{
+    background:#cedfec; 
+    display:inline-flex;
+    font-size: 0.8rem;
+    font-weight: bold;
+    height: 5rem;
+    padding: 2vw;
+    justify-content:space-around; 
+    margin:0%;
+    
+}
