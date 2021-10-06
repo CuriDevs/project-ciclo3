@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from "../components/Navbar/navbar";
 import Footer from "../components/footer/footer";
-import Productos from '../RegistroyEdicion';
+import Modal from '../modal'
 
 const PrivateLayout = () => {
     return (
@@ -15,15 +15,12 @@ const PrivateLayout = () => {
             </section>
 
             <section className= "Productos">
-                <body  className="w-full h-full ">
-                    <Productos/>
+                <body  className="w-screen h-screen ">
+                    
+                    <Modal/>
                  </body > 
-            </section>
-            <section className= "Pie">
-                <footer>
-                    <Footer/>
-                </footer>
-            </section>
+            </section>            
+          
         </div>
 
       );
