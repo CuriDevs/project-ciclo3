@@ -9,7 +9,7 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import Query from "./Query"
+import Query from "./Query";
 
 function AddSales (props) {
   /*
