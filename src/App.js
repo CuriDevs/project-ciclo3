@@ -11,18 +11,19 @@ import Register from './Sales/pages/Register';
 import Sales from './Sales/pages/Sales';
 import Products from "./productsManagement/pages/gestionProductos.jsx"
 import Rol from './Home/pages/Rol';
+import PrivateLayout from './RegistroProductos/layouts/PrivateLayout';
 import Productos from "./RegistroProductos/RegistroyEdicion";
 
 function App() {
   return (
-    
     <Router>
       <Switch>
-        <Route path={['/sales', '/products', '/rol']}>
+        <Route path={['/sales', '/register', '/products', '/RegistroyEdicion']}>
             {/* Aqui va el componente de layout privado */}
               <Switch>
 
                 {/* Forma 1 de hacer el enrotamiento con pagina x */}  
+                
                 <Route exact path="/sales"> 
                   <Sales />
                 </Route>
@@ -35,14 +36,12 @@ function App() {
 
                 <Route exact path="/rol" component={Rol} />
                 
-                <Route exact path="/RegistroyEdicion" component={Productos} />
+                <Route exact path="" component={Productos} />
               
               </Switch>
-                // eslint-disable-next-line no-undef
-                {PrivateLayout}
+                {/* Aqui se cierra el componente de layout privado*/}
               </Route>
-              
-                  
+                  <PrivateLayout/>
               <Route>
                   {/* Aqui va el componente de layout publico */}
               <Switch>
@@ -57,6 +56,8 @@ function App() {
               </Switch>
 
               </Router>
+
+      
   );
 }
 
