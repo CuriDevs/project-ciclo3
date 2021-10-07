@@ -20,8 +20,8 @@ function App() {
       <Switch>
         <Route path={['/sales', '/register', '/products', '/RegistroyEdicion']}>
             {/* Aqui va el componente de layout privado */}
+            
               <Switch>
-
                 {/* Forma 1 de hacer el enrotamiento con pagina x */}  
                 
                 <Route exact path="/sales"> 
@@ -39,23 +39,23 @@ function App() {
                 <Route exact path="" component={Productos} />
               
               </Switch>
-                {/* Aqui se cierra el componente de layout privado*/}
+          {/* Aqui se cierra el componente de layout privado*/}
+        </Route>
+                  
+
+
+        <Route>
+          {/* Aqui va el componente de layout publico */}
+            <Switch>
+            <Route>
+                {/* Primera pantalla (antes de ingresar al sistema) */}
               </Route>
-                  <PrivateLayout/>
-              <Route>
-                  {/* Aqui va el componente de layout publico */}
-              <Switch>
-                <Route>
-                 {/* Primera pantalla (antes de ingresar al sistema) */}
-                </Route>
 
               </Switch>
                 {/* Aqui se cierra el componente de layout publico*/}
-              </Route>
-        
-              </Switch>
-
-              </Router>
+        </Route>
+      </Switch>
+    </Router>
 
       
   );
