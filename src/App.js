@@ -10,7 +10,7 @@ import {
 import Register from './Sales/pages/Register';
 import Sales from './Sales/pages/Sales';
 import Products from "./productsManagement/pages/gestionProductos.jsx"
-import Rol from './Home/pages/Rol';
+import Rol from './Sales/pages/Rol';
 import PrivateLayout from './RegistroProductos/layouts/PrivateLayout';
 import Productos from "./RegistroProductos/RegistroyEdicion";
 
@@ -18,7 +18,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path={['/sales', '/register', '/products', '/RegistroyEdicion']}>
+        <Route path={['/sales', '/register', '/products', '/RegistroyEdicion', '/Rol']}>
             {/* Aqui va el componente de layout privado */}
             
               <Switch>
