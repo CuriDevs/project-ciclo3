@@ -62,19 +62,6 @@ const eliminarDatos = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="relative flex w-full flex-wrap items-stretch mb-3 ">
-                                    <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                      <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-                        City
-                      </label>
-                      <input
-                        type="text"
-                        name="city"
-                        id="city"
-                        className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      />
-                    </div>
-  </div>
         </form>
     
     )

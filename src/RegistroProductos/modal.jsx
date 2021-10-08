@@ -1,4 +1,5 @@
-import React, {} from 'react';
+import React, {toggle} from 'react';
+
 
 
 const Productos = ()=> {
@@ -32,13 +33,13 @@ const Productos = ()=> {
                                     className="block w-full mt-1 border-2 border-gray-400 rounded-md shadow-sm to-black text text-sm-center focus:ring-indigo-500 focus:border-indigo-500"/>
                                 </div>
                             </div>                                                    
-                                <div className= "flex flex-wrap items-stretch w-full mb-3 space-x-5 elative">
+                                <div className= "flex flex-wrap items-stretch w-full mb-3 space-x-6 elative">
                                 <div className="col-span-6 sm:col-span-3 lg:col-span-2 ">
                                 <h6 className="text-gray-800 text-bold ">Estado</h6>
-                                <input type="checkbox" class=" form-checkbox transition duration-500 ease-in-out hover:bg-green-600 transform hover:-translate-y-1 hover:scale-110 "checked/>
-                                <span className="ml-1 text-green-700">Disponible</span>
-                                <input type="checkbox" className="transition duration-500 ease-in-out transform form-checkbox hover:bg-red-600 hover:-translate-y-1 hover:scale-110 "checked/>
-                                <span className="ml-1 text-red-700">No Disponible</span>
+                                <input type="checkbox" class=" form-checkbox transition duration-500 ease-in-out hover:bg-green-600 transform hover:-translate-y-1 hover:scale-110 "/>
+                                <span className="ml-2 text-green-700">Disponible</span>
+                                <input type="checkbox" className="transition duration-500 ease-in-out transform form-checkbox hover:bg-red-600 hover:-translate-y-1 hover:scale-110 "/>
+                                <span className="ml-2 text-red-700">No Disponible</span>
                             <div>
                                 <label htmlFor="about" className="block text-sm font-medium text-gray-700"></label>
                                 <div className="mt-2">
@@ -61,8 +62,9 @@ const Productos = ()=> {
                     </div>
                  </div>
               </div>
-    </form>
-    
+              <div class="hidden opacity-25 fixed inset-0 z-40 bg-black" id="modal-example-small-backdrop"></div>
+              
+         </form>
 
     )
 }

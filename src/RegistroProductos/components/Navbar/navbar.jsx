@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import {MenuItems} from './MenuItems';
-import {Button} from './Button';
 import './navbar.css';
 import logo from '../../../Images/iconPngSinTexto.png'
-import avatar from '../../../Images/avatar.png'
+
 
 class Navbar extends Component {
     state = {clicked:false}
@@ -41,7 +40,7 @@ render(){
                 })}
              </ul> 
               
-              <Button>Login</Button>
+              
            
         </nav>        
         );
