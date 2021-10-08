@@ -17,34 +17,6 @@ const GestionProductos = () => {
 
     
 
-
-
-
-    /* Se obtiene el valor de la barra de busqueda
-    const valorInputInGP = value => console.log(value)
-    /*Se sube desde BarraBusqueda a HeaderProducts a gestionProductos
-
- */
-    
-/*     
-    useEffect(()=>{
-        console.log("busqueda", busqueda)
-        console.log("lista de productos", productos) 
-        console.log("lista filtrada", productos.filter(element => {
-            return JSON.stringify(element).toLowerCase().includes(busqueda.toLowerCase())
-        }))   
-
-        
-        console.log()
-
-        setProductosFiltrados(products.filter(element => {
-            return JSON.stringify(element).toLowerCase().includes(valorBarraBusqueda.toLowerCase())
-        }))
-
-    },[valorBarraBusqueda, products])
-    
- */
-
     return (
         <div className="containerGestionProductos">
             <Header />
