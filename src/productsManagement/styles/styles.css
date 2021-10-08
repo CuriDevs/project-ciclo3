@@ -191,3 +191,12 @@ background: none;
 .title-form{
     text-align: center !important; 
 }
+
+
+
+
+.containerNoHayProductos{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
