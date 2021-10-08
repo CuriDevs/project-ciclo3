@@ -64,7 +64,6 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 
 
-
 .cardNuevoProducto{
     min-height: 5em;
     max-height: 9em;
@@ -182,4 +181,13 @@ background: none;
 
 
 
+/*Form*/
+.form{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
+.title-form{
+    text-align: center !important; 
+}
