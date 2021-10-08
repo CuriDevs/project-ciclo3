@@ -1,19 +1,43 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
 import '../styles/styles.css'
 import BtnCardProducts from './BtnCardProducts'
+import HeaderProducts from '../components/HeaderProducts'
 
-const CardProducto = (props) => {
-    console.log(props.products)
+import CardNuevoProducto from '../components/CardNuevoProducto'
+
+
+
+
+
+const CardProducto = ({products, setProducts}) => {
+    /* console.log(props.products) */
+
+    const [busqueda, setBusqueda] = useState("")
+
+    const deleteProduct = (id) => {
+        const arrayFiltrado = products.filter( product => product.idProducto !== id)
+        console.log(arrayFiltrado)   
+    }
+
+    
 
 
     return (
         <>
+            <div className="headerProducts">
+                <HeaderProducts productos={products}  />
+                <form className="containerBarraBusqueda">
+                    <input type="text" className="inputBarraBusqueda childrenBarraBusqueda" placeholder="Buscar" value={busqueda} onChange={e => setBusqueda(e.target.value)}  />
+                </form>
+            </div>
+
+            <CardNuevoProducto productos={products} setProduct={setProducts}/>
             {
-            props.products.length > 0 ?
-            props.products.map((product)=>{
+            products.length > 0 ?
+            products.map((product)=>{
                 return(
-                    <div className="card">
+                    <div className="card" key={product.idProducto}>
                         <div className="cardBody">
                             {/*  <span>{product.idProducto}</span>  */}
                             <div className="containerTituloCard">
@@ -24,9 +48,10 @@ const CardProducto = (props) => {
                             <p className="cardDescipcion">{product.descripcionProducto}</p>
                         </div> 
                         <div className="containerBtnCard">
+                            
                             <BtnCardProducts nombre={"Editar"} estilos={"btnEdit"} estiloBootstrap={"btn-primary"}/>
 
-                            <BtnCardProducts nombre={"Eliminar"} estilos={"btnDelete"} estiloBootstrap={"btn-danger"} product={product} deleteProduct={props.deleteProduct}/>
+                            <BtnCardProducts nombre={"Eliminar"} estilos={"btnDelete"} estiloBootstrap={"btn-danger"} product={product} setProducts={setProducts} products={products} nombreProducto={product.nombreProducto}/>
                         </div>
                     </div>
                 );
