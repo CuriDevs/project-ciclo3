@@ -20,42 +20,41 @@ function App() {
       <Switch>
         <Route path={['/sales', '/register', '/products', '/RegistroyEdicion', '/Rol']}>
             {/* Aqui va el componente de layout privado */}
+            
               <Switch>
 
                 {/* Forma 1 de hacer el enrotamiento con pagina x */}  
-                
                 <Route exact path="/sales"> 
                   <Sales />
                 </Route>
 
-                {/*ruta para acceder a la pagina de registro */}
-                <Route exact path="/register" component={Register} />
-
                 {/*  Forma 2 de hacer el enrutamiento con pagina x */}
                 <Route exact path="/products" component={Products} />
 
+                {/*ruta para acceder a la pagina de registro */}
+                <Route exact path="/register" component={Register} />
+                
                 <Route exact path="/rol" component={Rol} />
                 
-                <Route exact path="" component={Productos} />
               
               </Switch>
-                {/* Aqui se cierra el componente de layout privado*/}
+          {/* Aqui se cierra el componente de layout privado*/}
+        </Route>
+                  
+
+
+        <Route>
+          {/* Aqui va el componente de layout publico */}
+            <Switch>
+            <Route>
+                {/* Primera pantalla (antes de ingresar al sistema) */}
               </Route>
-                  <PrivateLayout/>
-              <Route>
-                  {/* Aqui va el componente de layout publico */}
-              <Switch>
-                <Route>
-                 {/* Primera pantalla (antes de ingresar al sistema) */}
-                </Route>
 
               </Switch>
                 {/* Aqui se cierra el componente de layout publico*/}
-              </Route>
-        
-              </Switch>
-
-              </Router>
+        </Route>
+      </Switch>
+    </Router>
 
       
   );

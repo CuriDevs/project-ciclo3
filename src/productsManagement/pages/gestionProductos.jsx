@@ -1,8 +1,6 @@
-import React, {useState} from 'react'
-import CardNuevoProducto from '../components/CardNuevoProducto'
+import React, { useState} from 'react'
 
 import CardProducto from '../components/CardProducto'
-import HeaderProducts from '../components/HeaderProducts'
 
 import '../styles/styles.css'
 
@@ -10,7 +8,72 @@ import productos from "../datosDePrueba/datosPrueba.json"
 
 import Header from "../../Shared/components/Header"
 
+
+const GestionProductos = () => {
+
+
+    /*El set products se usara para agregar y eliminar productos (para editar no estoy seguro)*/
+    const [products, setProducts] = useState(productos)
+
+    
+
+
+
+
+    /* Se obtiene el valor de la barra de busqueda
+    const valorInputInGP = value => console.log(value)
+    /*Se sube desde BarraBusqueda a HeaderProducts a gestionProductos
+
+ */
+    
+/*     
+    useEffect(()=>{
+        console.log("busqueda", busqueda)
+        console.log("lista de productos", productos) 
+        console.log("lista filtrada", productos.filter(element => {
+            return JSON.stringify(element).toLowerCase().includes(busqueda.toLowerCase())
+        }))   
+
+        
+        console.log()
+
+        setProductosFiltrados(products.filter(element => {
+            return JSON.stringify(element).toLowerCase().includes(valorBarraBusqueda.toLowerCase())
+        }))
+
+    },[valorBarraBusqueda, products])
+    
+ */
+
+    return (
+        <div className="containerGestionProductos">
+            <Header />
+            {/* Pase los otros componentes a CardProducto para salir de varios problemas,
+            probablemente el código sea mas difícil de leer */}
+            <ul className="containerCard">
+                <CardProducto products={products} setProducts={setProducts} />
+            </ul>
+        </div>
+    )
+}
+
+export default GestionProductos
+
+
+
+
+/*
+const [busqueda, setBusqueda] = useState("")
+
+    
+
+    
+
+    
+*/
+
 /* 
+
 const productos = [
     {
         idProducto: 1,
@@ -79,33 +142,3 @@ const productos = [
  */
 
 
-
-const GestionProductos = () => {
-
-
-    /*El set products se usara para agregar y eliminar productos (para editar no estoy seguro)*/ 
-    const [products, setProducts] = useState(productos)
-
-
-    const deleteProduct = (id) => {
-
-        const arrayFiltrado = products.filter( product => product.idProducto !== id)
-
-        setProducts(arrayFiltrado)
-        console.log(arrayFiltrado)
-    }
-
-    
-    return (
-        <div className="containerGestionProductos">
-            <Header />
-            <HeaderProducts />
-            <CardNuevoProducto />
-            <ul className="containerCard">
-                <CardProducto products={products} setProducts={setProducts} deleteProduct={deleteProduct} />
-            </ul>
-        </div>
-    )
-}
-
-export default GestionProductos
