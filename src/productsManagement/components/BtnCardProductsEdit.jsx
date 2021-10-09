@@ -40,9 +40,10 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, nombreProducto
                         <br />
 
                         <div className="my-2">
-                            <label className='flex flex-col' htmlFor='valorProducto'>
+                            <label className='flex flex-col' htmlFor='nombreProducto'>
                                 Nombre del producto
                                 <input
+                                    name="nombreProducto"
                                     className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
                                     type='text'
                                     value={infoNuevoProducto.nombreProducto}
@@ -55,6 +56,7 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, nombreProducto
                             <label className='flex flex-col' htmlFor='valorProducto'>
                                 Valor del producto
                                 <input
+                                    name="valorProducto"
                                     className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
                                     type='text'
                                     value={infoNuevoProducto.valorUnitarioProducto}
