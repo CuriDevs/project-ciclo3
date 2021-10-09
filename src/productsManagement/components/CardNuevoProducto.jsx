@@ -11,119 +11,120 @@ import FormControl from 'react-bootstrap/FormControl'
 import Form from 'react-bootstrap/Form' */
 
 
-const CardNuevoProducto = ({ products, setProducts}) => {
+const CardNuevoProducto = ({ products, setProducts }) => {
 
-    const [show, setShow] = useState(false);
-    const [estadoProducto, setEstadoProducto] = useState(false);
+  const [show, setShow] = useState(false);
+  const [estadoProducto, setEstadoProducto] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-
-    /*  const addProduct = (product) => {
-        product.id = uuid4()
-        setProducts([
-            ...products,
-            product])
-    } */
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
 
-    const form = useRef(null);
+  /*  const addProduct = (product) => {
+      product.id = uuid4()
+      setProducts([
+          ...products,
+          product])
+  } */
 
 
-    const submitForm = (product) => {
-        product.id = 1234
-        setProducts([
-            ...products,
-            product])
-        }
+  const form = useRef(null);
 
 
-    return (
-        
-        <>
-            <button onClick={handleShow} className="card cardNuevoProducto">
-                <img className="imgAgregarProducto" src={imgPrueba} alt="agregar pruducto" />
-                <h3 className="titleCardAgregarProducto">Agregar producto</h3>
-            </button>
+  const submitForm = (product) => {
+    product.id = 1234
+    setProducts([
+      ...products,
+      product])
+  }
 
-            <Modal show={show} onHide={handleClose}>
 
-                <div className='flex flex-col items-center justify-center my-2'>
-                    <Modal.Header>
-                        <h2 className='text-2xl font-extrabold text-gray-800'>Nuevo producto</h2>
-                    </Modal.Header>
-                    <form ref={form} onSubmit={submitForm} className='flex flex-col'>
-                        
-                        <label className='flex flex-col' htmlFor='nombreProducto'>
-                            Nombre del producto
-                            <input
-                                name='nombreProducto'
-                                className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-                                type='text'
-                                placeholder='iphone 10'
-                                required
-                            />
-                        </label>
+  return (
 
-                        <label className='flex flex-col' htmlFor='valorProducto'>
-                            Valor del producto
-                            <input
-                                name='valorProducto'
-                                className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-                                type='number'
-                                min={0}
-                                max={100000000}
-                                placeholder='1000000'
-                                required
-                            />
-                        </label>
+    <>
+      <button onClick={handleShow} className="card cardNuevoProducto">
+        <img className="imgAgregarProducto" src={imgPrueba} alt="agregar pruducto" />
+        <h3 className="titleCardAgregarProducto">Agregar producto</h3>
+      </button>
 
-                        <label className='flex flex-col' htmlFor='disponibleProducto'>
-                            Estado del producto
-                            <select
-                                className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-                                name='disponibleProducto'
-                                required
-                                defaultValue={0}
-                            >
-                                <option disabled value={0}>
-                                    Seleccione una opción
-                                </option>
-                                <option value="Disponible">Disponible</option>
-                                <option value="No disponible">No disponible</option>
-                            </select>
-                        </label>
-                        
-                        <label className='flex flex-col' htmlFor='descripcionProducto'>
-                            Descripción del producto
-                            <textarea
-                                name='descripcionProducto'
-                                className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2 h-80'
-                                placeholder=' Capacidad: 256 GB
+      <Modal show={show} onHide={handleClose}>
+
+        <div className='flex flex-col items-center justify-center my-2'>
+          <Modal.Header>
+            <h2 className='text-2xl font-extrabold text-gray-800'>Nuevo producto</h2>
+          </Modal.Header>
+          <form ref={form} onSubmit={submitForm} className='flex flex-col'>
+            <div className="my-2">
+              <label className='flex flex-col' htmlFor='nombreProducto'>
+                Nombre del producto
+                <input
+                  name='nombreProducto'
+                  className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                  type='text'
+                  placeholder='iphone 10'
+                  required
+                />
+              </label>
+            </div>
+
+            <div className="my-2">
+              <label className='flex flex-col' htmlFor='valorProducto'>
+                Valor del producto
+                <input
+                  name='valorProducto'
+                  className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                  type='number'
+                  min={0}
+                  max={100000000}
+                  placeholder='1000000'
+                  required
+                />
+              </label>
+            </div>
+
+            <div className="my-2">
+              <p>Estado del producto</p>
+              <div className="flex flex-col">
+              <label>
+                <input type="radio" name="estadoProducto" value={true} /> Disponible
+              </label>
+              <label>
+                <input type="radio" name="estadoProducto" value={false} required/> No disponible
+              </label>
+              </div>
+            </div>
+
+            <div className="my-2">
+              <label className='flex flex-col' htmlFor='descripcionProducto'>
+                Descripción del producto
+                <textarea
+                  name='descripcionProducto'
+                  className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2 h-80'
+                  placeholder=' Capacidad: 256 GB
                                 Alto: 14,36 cm
                                 Ancho: 7,09 cm
                                 Grosor: 0,77 cm
                                 Peso: 174 g'
-                                required
-                            />
+                  required
+                />
+              </label>
+            </div>
+            <Modal.Footer>
+              <button type="button" onClick={handleClose} className="col-span-2 bg-gray-600 p-2 rounded-md shadow-md hover:bg-gray-800 text-white">Cancelar</button>
 
-                            
-                        </label>
-                        <Modal.Footer>
-                        <button
-                            type='submit'
-                            className='col-span-2 bg-blue-600 p-2 rounded-md shadow-md hover:bg-blue-800 text-white'>
-                            Guardar producto
-                        </button>
-                        </Modal.Footer>
-                    </form>
-                </div>
+              <button
+                type='submit'
+                className='col-span-2 bg-blue-600 p-2 rounded-md shadow-md hover:bg-blue-800 text-white'>
+                Guardar producto
+              </button>
+            </Modal.Footer>
+          </form>
+        </div>
 
-            </Modal>
+      </Modal>
 
-        </>
-    )
+    </>
+  )
 }
 
 export default CardNuevoProducto

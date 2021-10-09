@@ -16,12 +16,11 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, nombreProducto
         estadoProducto: product.estadoProducto,
         descripcionProducto: product.descripcionProducto,
     });
-    const [disponible, setDisponible] = useState(infoNuevoProducto.estadoProducto);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    
+
 
 
     return (
@@ -34,64 +33,90 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, nombreProducto
                     <Modal.Header>
                         <h2 className='text-2xl font-extrabold text-gray-800'>Editar producto</h2>
                     </Modal.Header>
-                    <form  className='flex flex-col'>
+                    <form className='flex flex-col'>
 
-                        
+
                         <label>{product.idProducto}</label>
-                        <br/>
+                        <br />
 
-                        <label className='flex flex-col' htmlFor='valorProducto'>
-                            Nombre del producto
-                        <input
-                            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-                            type='text'
-                            value={infoNuevoProducto.nombreProducto}
-                            onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, nombreProducto: e.target.value })}
-                        />
-                        </label>
+                        <div className="my-2">
+                            <label className='flex flex-col' htmlFor='valorProducto'>
+                                Nombre del producto
+                                <input
+                                    className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                                    type='text'
+                                    value={infoNuevoProducto.nombreProducto}
+                                    onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, nombreProducto: e.target.value })}
+                                />
+                            </label>
+                        </div>
 
-                        <label className='flex flex-col' htmlFor='valorProducto'>
-                            Valor del producto
-                            <input
-                            className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
-                            type='text'
-                            value={infoNuevoProducto.valorUnitarioProducto}
-                            onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, valorUnitarioProducto: e.target.value })}
-                        />
-                        </label>
+                        <div className="my-2">
+                            <label className='flex flex-col' htmlFor='valorProducto'>
+                                Valor del producto
+                                <input
+                                    className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                                    type='text'
+                                    value={infoNuevoProducto.valorUnitarioProducto}
+                                    onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, valorUnitarioProducto: e.target.value })}
+                                />
+                            </label>
+                        </div>
 
-                        <label className='flex flex-col' htmlFor='disponibleProducto'>
-                            Estado del producto
-                            {/* Añadir codigo para cambiar el estado */}
-                        </label>
 
-                        <label className='flex flex-col' htmlFor='descripcionProducto'>
-                            Descripción del producto
-                            <textarea
-                                name='descripcionProducto'
-                                className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2 h-80'
-                                value={infoNuevoProducto.descripcionProducto}
-                                onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, descripcionProducto: e.target.value })}
-                                placeholder='Capacidad: 256 GB
+                        <div className="my-2">
+                            <p>Estado del producto</p>
+                            <div className="flex flex-col">
+                                {infoNuevoProducto.estadoProducto ?
+                                    <>
+                                        <label>
+                                            <input type="radio" name="estadoProducto" value={true} required checked/> Disponible
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="estadoProducto" value={false} required /> No disponible
+                                        </label>
+                                    </>
+                                    :
+                                    <>
+                                        <label>
+                                            <input type="radio" name="estadoProducto" value={true} required/> Disponible
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="estadoProducto" value={false} required checked/> No disponible
+                                        </label>
+                                    </>
+                                }
+
+                            </div>
+                        </div>
+
+                        <div className="my-2">
+                            <label className='flex flex-col' htmlFor='descripcionProducto'>
+                                Descripción del producto
+                                <textarea
+                                    name='descripcionProducto'
+                                    className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2 h-80'
+                                    value={infoNuevoProducto.descripcionProducto}
+                                    onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, descripcionProducto: e.target.value })}
+                                    placeholder='Capacidad: 256 GB
                                 Alto: 14,36 cm
                                 Ancho: 7,09 cm
                                 Grosor: 0,77 cm
                                 Peso: 174 g'
-                                required
-                            />
-
-
-                        </label>
+                                    required
+                                />
+                            </label>
+                        </div>
                         <Modal.Footer>
+                            <button
+                                type="button" className='col-span-2 bg-gray-600 p-2 rounded-md shadow-md hover:bg-gray-800 text-white' onClick={handleClose} >
+                                Cancelar
+                            </button>
+
                             <button
                                 type='submit'
                                 className='col-span-2 bg-blue-600 p-2 rounded-md shadow-md hover:bg-blue-800 text-white'>
                                 Guardar producto
-                            </button>
-
-                            <button
-                                type="button" className='col-span-2 bg-gray-600 p-2 rounded-md shadow-md hover:bg-gray-800 text-white' onClick={handleClose} >
-                                Cancelar
                             </button>
                         </Modal.Footer>
                     </form>
