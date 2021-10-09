@@ -200,3 +200,7 @@ background: none;
     align-items: center;
     justify-content: center;
 }
+
+.fade {
+    padding:0;
+}
