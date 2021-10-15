@@ -4,7 +4,7 @@ import CardProducto from '../components/CardProducto'
 
 import '../styles/styles.css'
 
-import productos from "../datosDePrueba/datosPrueba.json"
+/* import productos from "../datosDePrueba/datosPrueba.json" */
 
 import Header from "../../Shared/components/Header"
 
@@ -13,7 +13,7 @@ const GestionProductos = () => {
 
 
     /*El set products se usara para agregar y eliminar productos (para editar no estoy seguro)*/
-    const [products, setProducts] = useState(productos)
+    /* const [products, setProducts] = useState(productos) */
 
     
 
@@ -23,7 +23,7 @@ const GestionProductos = () => {
             {/* Pase los otros componentes a CardProducto para salir de varios problemas,
             probablemente el código sea mas difícil de leer */}
             <ul className="containerCard">
-                <CardProducto products={products} setProducts={setProducts} />
+                <CardProducto /* products={products} setProducts={setProducts} */ />
             </ul>
         </div>
     )
