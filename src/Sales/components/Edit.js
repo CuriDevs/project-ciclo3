@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import React, {useState, useEffect} from "react";
 
-function Edit() {
+function Edit({venta}) {
     const [value, setValue] = useState(new Date().toLocaleString())
     const [show, setShow] = useState(false);
 
@@ -28,23 +28,23 @@ function Edit() {
                 <Form>
                     <Form.Group className="mb-3" controlId="formGridAddress1">
                         <Form.Label>Identificador</Form.Label>
-                        <Form.Control size="sm" type="number" readOnly placeholder="ID Unico" />
+                        <Form.Control size="sm" type="number" readOnly placeholder={venta.idSales}/>
                     </Form.Group>
 
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridVenta">
                         <Form.Label>Valor venta</Form.Label>
-                        <Form.Control size="sm" type="number" placeholder="Valor de venta" />
+                        <Form.Control size="sm" type="number" placeholder={venta.vTotal} />
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridCantidad">
                         <Form.Label>Cantidad</Form.Label>
-                        <Form.Control size="sm" type="number" placeholder="Cantidad" />
+                        <Form.Control size="sm" type="number" placeholder={venta.amount} />
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridPrecio">
                         <Form.Label>Precio Unitario</Form.Label>
-                        <Form.Control size="sm" type="number" placeholder="Precio por unidad" />
+                        <Form.Control size="sm" type="number" placeholder={venta.price} />
                         </Form.Group>
                     </Row>
 
@@ -56,24 +56,24 @@ function Edit() {
                     <Row className="mb-3">
                     <Form.Group as={Col} controlId="formGridDocumento">
                         <Form.Label>Numero Documento</Form.Label>
-                        <Form.Control size="sm" type="number" placeholder="# Documento" />
+                        <Form.Control size="sm" type="number" placeholder={venta.idClient} />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridNombre">
                         <Form.Label>Nombre Cliente</Form.Label>
-                        <Form.Control size="sm" placeholder="Nombre Cliente" />
+                        <Form.Control size="sm" placeholder={venta.nameC} />
                     </Form.Group>
                     </Row>
 
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridVendedor">
                         <Form.Label>Vendedor</Form.Label>
-                        <Form.Control size="sm" type="text" readOnly placeholder="Nombre Vendedor"/>
+                        <Form.Control size="sm" type="text" readOnly placeholder={venta.nameV}/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridEstado">
                         <Form.Label>Estado</Form.Label>
-                        <Form.Select defaultValue="Seleccione...">
+                        <Form.Select defaultValue="En proceso">
                             <option>Choose...</option>
                             <option>Entregada</option>
                             <option>En proceso</option>
@@ -81,10 +81,10 @@ function Edit() {
                         </Form.Select>
                         </Form.Group>
                     </Row>
-
+                    {/* 
                     <Form.Group className="mb-3" id="formGridCheckbox">
                         <Form.Check type="checkbox" label="Check me out" />
-                    </Form.Group>
+                    </Form.Group> */}
 
                 </Form>
 
