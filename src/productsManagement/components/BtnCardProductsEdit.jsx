@@ -1,26 +1,50 @@
 import React, { useState, useRef } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { editarProducto } from '../utils/api';
 /* import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import Form from 'react-bootstrap/Form' */
 
 
-const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, nombreProducto }) => {
+const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, setEjecutarConsulta }) => {
 
     const [show, setShow] = useState(false);
 
     const [infoNuevoProducto, setInfoNuevoProducto] = useState({
-        nombreProducto: product.nombreProducto,
-        valorUnitarioProducto: product.valorUnitarioProducto,
-        estadoProducto: product.estadoProducto,
-        descripcionProducto: product.descripcionProducto,
+        name: product.name,
+        value: product.value,
+        status: product.status,
+        description: product.description,
     });
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
+    const actualizarVehiculo = async () => {
+        
+        await editarProducto(
+            product._id,
+            {
+                name: infoNuevoProducto.name,
+                value: infoNuevoProducto.value,
+                status: infoNuevoProducto.status,
+                description: infoNuevoProducto.description
+            },
+            (response) => {
+                console.log(response.data);
+                toast.success('Vehículo modificado con éxito');
+                /* setEdit(false);*/
+                setEjecutarConsulta(true); 
+            },
+            (error) => {
+                toast.error('Error modificando el vehículo');
+                console.error(error);
+            }
+        );
+    };
 
 
     return (
@@ -36,7 +60,7 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, nombreProducto
                     <form className='flex flex-col'>
 
 
-                        <label>{product.idProducto}</label>
+                        <label className="flex bg-gray-200 rounded-md p-2 justify-center">ID: {product._id}</label>
                         <br />
 
                         <div className="my-2">
@@ -46,8 +70,8 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, nombreProducto
                                     name="nombreProducto"
                                     className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
                                     type='text'
-                                    value={infoNuevoProducto.nombreProducto}
-                                    onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, nombreProducto: e.target.value })}
+                                    value={infoNuevoProducto.name}
+                                    onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, name: e.target.value })}
                                 />
                             </label>
                         </div>
@@ -59,8 +83,8 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, nombreProducto
                                     name="valorProducto"
                                     className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
                                     type='text'
-                                    value={infoNuevoProducto.valorUnitarioProducto}
-                                    onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, valorUnitarioProducto: e.target.value })}
+                                    value={infoNuevoProducto.value}
+                                    onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, value: e.target.value })}
                                 />
                             </label>
                         </div>
@@ -69,22 +93,22 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, nombreProducto
                         <div className="my-2">
                             <p>Estado del producto</p>
                             <div className="flex flex-col">
-                                {infoNuevoProducto.estadoProducto ?
+                                {infoNuevoProducto.status ?
                                     <>
                                         <label>
-                                            <input type="radio" name="estadoProducto" value={true} required checked/> Disponible
+                                            <input type="radio" name="status" value={true} required  checked onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, status: e.target.value })}/> Disponible
                                         </label>
                                         <label>
-                                            <input type="radio" name="estadoProducto" value={false} required /> No disponible
+                                            <input type="radio" name="status" value={"false"} required onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, status: e.target.value })}/> No disponible
                                         </label>
                                     </>
                                     :
                                     <>
                                         <label>
-                                            <input type="radio" name="estadoProducto" value={true} required/> Disponible
+                                            <input type="radio" name="status" value={"true"} required  onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, status: e.target.value })}/> Disponible
                                         </label>
                                         <label>
-                                            <input type="radio" name="estadoProducto" value={false} required checked/> No disponible
+                                            <input type="radio" name="status" value={"false"} required  checked onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, status: e.target.value })}/> No disponible
                                         </label>
                                     </>
                                 }
@@ -96,10 +120,10 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, nombreProducto
                             <label className='flex flex-col' htmlFor='descripcionProducto'>
                                 Descripción del producto
                                 <textarea
-                                    name='descripcionProducto'
+                                    name='descriptionProducto'
                                     className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2 h-80'
-                                    value={infoNuevoProducto.descripcionProducto}
-                                    onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, descripcionProducto: e.target.value })}
+                                    value={infoNuevoProducto.description}
+                                    onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, description: e.target.value })}
                                     placeholder='Capacidad: 256 GB
                                 Alto: 14,36 cm
                                 Ancho: 7,09 cm
@@ -117,6 +141,7 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, nombreProducto
 
                             <button
                                 type='submit'
+                                onClick={()=>actualizarVehiculo()}
                                 className='col-span-2 bg-blue-600 p-2 rounded-md shadow-md hover:bg-blue-800 text-white'>
                                 Guardar producto
                             </button>
@@ -124,33 +149,13 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, nombreProducto
                     </form>
                 </div>
             </Modal>
+            <ToastContainer position='bottom-center' autoClose={5000} />
+            
         </>
     )
 }
 
 export default BtnCardProductsEdit
 
-/*
-const actualizarVehiculo = async () => {
-    //enviar la info al backend
-    const options = {
-      method: 'PATCH',
-      url: 'https://vast-waters-45728.herokuapp.com/vehicle/update/',
-      headers: { 'Content-Type': 'application/json' },
-      data: { ...infoNuevoVehiculo, id: vehiculo._id },
-    };
 
-    await axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-        toast.success('Vehículo modificado con éxito');
-        setEdit(false);
-        setEjecutarConsulta(true);
-      })
-      .catch(function (error) {
-        toast.error('Error modificando el vehículo');
-        console.error(error);
-      });
-  };
-*/
+

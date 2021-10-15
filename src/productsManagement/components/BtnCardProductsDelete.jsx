@@ -2,8 +2,13 @@ import React, { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const BtnCardProductsDelete = ({ products, setProducts, estilos, nombreProducto, id/* , product */}) => {
+import { eliminarProducto } from '../utils/api';
+
+
+const BtnCardProductsDelete = ({ products, setProducts, estilos, product, setEjecutarConsulta }) => {
 
     const [show, setShow] = useState(false);
 
@@ -11,14 +16,21 @@ const BtnCardProductsDelete = ({ products, setProducts, estilos, nombreProducto,
     const handleShow = () => setShow(true);
 
 
-    const deleteProduct = (id) => {
-        const arrayFiltrado = products.filter(product => product.idProducto !== id)
-        console.log(id)
-        console.log(products.idProducto)
-        console.log(arrayFiltrado)
-        setProducts(arrayFiltrado)
-        handleClose()
-    }
+    const deleteProduct = async () => {
+      await eliminarProducto(
+        product._id,
+        (response) => {
+          console.log(response.data);
+          toast.success('Producto eliminado con éxito');
+          setEjecutarConsulta(true);
+        },
+        (error) => {
+          console.error(error);
+          toast.error('Error eliminando el producto');
+        }
+      );
+      handleClose()
+    };
 
 
 
@@ -33,17 +45,19 @@ return (
                 <Modal.Title>Eliminar producto</Modal.Title>
             </Modal.Header>
                 <Modal.Body>
-                    {`¿Estás seguro de querer eliminar el producto: ${nombreProducto}?`}
+                    {`¿Estás seguro de querer eliminar el producto: ${product.name}?`}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Cerrar
                     </Button>
-                    <Button variant="danger" onClick={() => deleteProduct(id)} type="submit">
+                    <Button variant="danger" onClick={() => deleteProduct(product._id)} type="submit">
                         Eliminar
                     </Button>
                 </Modal.Footer>
         </Modal>
+      <ToastContainer position='bottom-center' autoClose={5000} />
+
     </>
 )
 }
@@ -53,26 +67,20 @@ export default BtnCardProductsDelete
 
 
 /*
-  const eliminarVehiculo = async () => {
-    const options = {
-      method: 'DELETE',
-      url: 'https://vast-waters-45728.herokuapp.com/vehicle/delete/',
-      headers: { 'Content-Type': 'application/json' },
-      data: { id: vehiculo._id },
-    };
-
-    await axios
-      .request(options)
-      .then(function (response) {
+  const deleteVehicle = async () => {
+    await eliminarVehiculo(
+      vehiculo._id,
+      (response) => {
         console.log(response.data);
         toast.success('vehículo eliminado con éxito');
         setEjecutarConsulta(true);
-      })
-      .catch(function (error) {
+      },
+      (error) => {
         console.error(error);
         toast.error('Error eliminando el vehículo');
-      });
+      }
+    );
+
     setOpenDialog(false);
   };
-
 */

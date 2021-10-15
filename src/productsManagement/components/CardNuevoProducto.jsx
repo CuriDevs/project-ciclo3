@@ -10,8 +10,13 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import Form from 'react-bootstrap/Form' */
 
+import { crearProducto } from '../utils/api'; 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const CardNuevoProducto = ({ products, setProducts }) => {
+
+
+const CardNuevoProducto = ({ products, setProducts, setEjecutarConsulta }) => {
 
   const [show, setShow] = useState(false);
   const [estadoProducto, setEstadoProducto] = useState(false);
@@ -20,24 +25,38 @@ const CardNuevoProducto = ({ products, setProducts }) => {
   const handleShow = () => setShow(true);
 
 
-  /*  const addProduct = (product) => {
-      product.id = uuid4()
-      setProducts([
-          ...products,
-          product])
-  } */
-
 
   const form = useRef(null);
 
+  const submitForm = async (e) => {
+    e.preventDefault();
+    const fd = new FormData(form.current);
 
-  const submitForm = (product) => {
-    product.id = 1234
-    setProducts([
-      ...products,
-      product])
+    const nuevoProducto = {};
+    fd.forEach((value, key) => {
+      nuevoProducto[key] = value;
+    });
+
+    await crearProducto(
+      {
+        name: nuevoProducto.name,
+        value: nuevoProducto.value,
+        status: nuevoProducto.status,
+        description: nuevoProducto.description,
+      },
+      (response) => {
+        console.log(response.data);
+        toast.success('El producto fue agregado con éxito');
+        setEjecutarConsulta(true);
+      },
+      (error) => {
+        console.error(error);
+        toast.error('Error creando un producto');
+      }
+    );
+    handleClose()
+
   }
-
 
   return (
 
@@ -55,10 +74,10 @@ const CardNuevoProducto = ({ products, setProducts }) => {
           </Modal.Header>
           <form ref={form} onSubmit={submitForm} className='flex flex-col'>
             <div className="my-2">
-              <label className='flex flex-col' htmlFor='nombreProducto'>
+              <label className='flex flex-col' htmlFor='name'>
                 Nombre del producto
                 <input
-                  name='nombreProducto'
+                  name='name'
                   className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
                   type='text'
                   placeholder='iphone 10'
@@ -68,10 +87,10 @@ const CardNuevoProducto = ({ products, setProducts }) => {
             </div>
 
             <div className="my-2">
-              <label className='flex flex-col' htmlFor='valorProducto'>
+              <label className='flex flex-col' htmlFor='value'>
                 Valor del producto
                 <input
-                  name='valorProducto'
+                  name='value'
                   className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
                   type='number'
                   min={0}
@@ -86,19 +105,19 @@ const CardNuevoProducto = ({ products, setProducts }) => {
               <p>Estado del producto</p>
               <div className="flex flex-col">
               <label>
-                <input type="radio" name="estadoProducto" value={true} /> Disponible
+                <input type="radio" name="status" value={true} /> Disponible
               </label>
               <label>
-                <input type="radio" name="estadoProducto" value={false} required/> No disponible
+                <input type="radio" name="status" value={false} required/> No disponible
               </label>
               </div>
             </div>
 
             <div className="my-2">
-              <label className='flex flex-col' htmlFor='descripcionProducto'>
+              <label className='flex flex-col' htmlFor='description'>
                 Descripción del producto
                 <textarea
-                  name='descripcionProducto'
+                  name='description'
                   className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2 h-80'
                   placeholder=' Capacidad: 256 GB
                                 Alto: 14,36 cm
@@ -114,7 +133,8 @@ const CardNuevoProducto = ({ products, setProducts }) => {
 
               <button
                 type='submit'
-                className='col-span-2 bg-blue-600 p-2 rounded-md shadow-md hover:bg-blue-800 text-white'>
+                
+                className='col-span-2 bg-blue-600 p-2 rounded-md shadow-md hover:bg-blue-800 text-white '>
                 Guardar producto
               </button>
             </Modal.Footer>
@@ -122,16 +142,18 @@ const CardNuevoProducto = ({ products, setProducts }) => {
         </div>
 
       </Modal>
-
+      <ToastContainer position='bottom-center' autoClose={5000} />
     </>
   )
 }
+
 
 export default CardNuevoProducto
 
 
 /*
-const form = useRef(null);
+const FormularioCreacionVehiculos = ({ setMostrarTabla, listaVehiculos, setVehiculos }) => {
+  const form = useRef(null);
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -142,26 +164,21 @@ const form = useRef(null);
       nuevoVehiculo[key] = value;
     });
 
-    const options = {
-      method: 'POST',
-      url: 'https://vast-waters-45728.herokuapp.com/vehicle/create',
-      headers: { 'Content-Type': 'application/json' },
-      data: { name: nuevoVehiculo.name, brand: nuevoVehiculo.brand, model: nuevoVehiculo.model },
-    };
-
-    await axios
-      .request(options)
-      .then(function (response) {
+    await crearVehiculo(
+      {
+        name: nuevoVehiculo.name,
+        brand: nuevoVehiculo.brand,
+        model: nuevoVehiculo.model,
+      },
+      (response) => {
         console.log(response.data);
         toast.success('Vehículo agregado con éxito');
-      })
-      .catch(function (error) {
+      },
+      (error) => {
         console.error(error);
         toast.error('Error creando un vehículo');
-      });
-
-    setMostrarTabla(true);
-  };
+      }
+    );
 
   return (
     <div className='flex flex-col items-center justify-center'>
@@ -219,6 +236,3 @@ const form = useRef(null);
   );
 };
 */
-
-
-
