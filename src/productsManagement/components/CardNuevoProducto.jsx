@@ -43,6 +43,8 @@ const CardNuevoProducto = ({ products, setProducts, setEjecutarConsulta }) => {
         value: nuevoProducto.value,
         status: nuevoProducto.status,
         description: nuevoProducto.description,
+        urlImg: nuevoProducto.urlImg,
+        nombreImg: nuevoProducto.nombreImg
       },
       (response) => {
         console.log(response.data);
@@ -81,6 +83,32 @@ const CardNuevoProducto = ({ products, setProducts, setEjecutarConsulta }) => {
                   className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
                   type='text'
                   placeholder='iphone 10'
+                  required
+                />
+              </label>
+            </div>
+
+            <div className="my-2">
+              <label className='flex flex-col' htmlFor='urlImg'>
+                Url imagen
+                <input
+                  name='urlImg'
+                  className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                  type='text'
+                  placeholder='http://via.placeholder.com/640x360'
+                  required
+                />
+              </label>
+            </div>
+
+            <div className="my-2">
+              <label className='flex flex-col' htmlFor='nombreImagen'>
+                Nombre imagen
+                <input
+                  name='nombreImg'
+                  className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                  type='text'
+                  placeholder='Imagen Iphone 10'
                   required
                 />
               </label>

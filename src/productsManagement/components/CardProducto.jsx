@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react'
 import { nanoid } from "nanoid";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-
-import '../styles/styles.css'
-import HeaderProducts from '../components/HeaderProducts'
-import CardNuevoProducto from '../components/CardNuevoProducto'
-import BtnCardProductsEdit from "./BtnCardProductsEdit"
-import BtnCardProductsDelete from './BtnCardProductsDelete'
-
+import React, { useEffect, useState } from 'react';
+/* import { ToastContainer, toast } from 'react-toastify'; */
+/* import 'react-toastify/dist/ReactToastify.css'; */
+import CardNuevoProducto from '../components/CardNuevoProducto';
+import HeaderProducts from '../components/HeaderProducts';
+import '../styles/styles.css';
 import { obtenerProductos } from '../utils/api';
+import BtnCardProductsDelete from './BtnCardProductsDelete';
+import BtnCardProductsEdit from "./BtnCardProductsEdit";
+
+
+
 
 
 
@@ -45,7 +45,7 @@ const CardProducto = (/* { products, setProducts } */) => {
                 /* setEjecutarConsulta(true); */
                 return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
             })
-            );
+        );
     }, [busqueda, productos]);
     /* */
 
@@ -62,7 +62,7 @@ const CardProducto = (/* { products, setProducts } */) => {
             </div>
 
             {/* Tarjeta para agregar prodcuto */}
-            <CardNuevoProducto productos={productos} setProduct={setProductos} setEjecutarConsulta={setEjecutarConsulta}/>
+            <CardNuevoProducto productos={productos} setProduct={setProductos} setEjecutarConsulta={setEjecutarConsulta} />
 
             {/* Tarjetas de los productos */}
             {
@@ -75,15 +75,18 @@ const CardProducto = (/* { products, setProducts } */) => {
                                     <div className="containerTituloCard">
                                         <h3 className="titleCardProduct">{product.name}</h3>
                                     </div>
+                                    <figure>
+                                        <img src={product.urlImg} alt={product.nombreImg}/>
+                                    </figure>    
                                     <span>$ {product.value}</span>
                                     <p>Estado: {product.status ? (<span>Disponible</span>) : (<span>No disponible</span>)}</p>
                                     <p className="cardDescipcion">{product.description}</p>
                                 </div>
                                 <div className="containerBtnCard">
 
-                                    <BtnCardProductsEdit products={productosFiltrados} setProducts={setProductos} estilos={"btn-primary btnEdit"} product={product} setEjecutarConsulta={setEjecutarConsulta}/>
+                                    <BtnCardProductsEdit products={productosFiltrados} setProducts={setProductos} estilos={"btn-primary btnEdit"} product={product} setEjecutarConsulta={setEjecutarConsulta} />
 
-                                    <BtnCardProductsDelete products={productosFiltrados} setProducts={setProductos} estilos={" btn-danger btnDelete"} nombreProducto={product.nombre} id={product.id} product={product} setEjecutarConsulta={setEjecutarConsulta}/>
+                                    <BtnCardProductsDelete products={productosFiltrados} setProducts={setProductos} estilos={" btn-danger btnDelete"} nombreProducto={product.nombre} id={product.id} product={product} setEjecutarConsulta={setEjecutarConsulta} />
                                 </div>
                             </div>
                         );
@@ -93,7 +96,7 @@ const CardProducto = (/* { products, setProducts } */) => {
                         </div>
                     )
 
-            } 
+            }
 
         </>
     )

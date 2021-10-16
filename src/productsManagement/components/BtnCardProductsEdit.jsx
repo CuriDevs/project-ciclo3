@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
+/* import Button from 'react-bootstrap/Button' */
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { editarProducto } from '../utils/api';
@@ -18,26 +18,30 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, setEjecutarCon
         value: product.value,
         status: product.status,
         description: product.description,
+        urlImg: product.urlImg,
+        nombreImg: product.nombreImg
     });
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const actualizarVehiculo = async () => {
-        
+
         await editarProducto(
             product._id,
             {
                 name: infoNuevoProducto.name,
                 value: infoNuevoProducto.value,
                 status: infoNuevoProducto.status,
-                description: infoNuevoProducto.description
+                description: infoNuevoProducto.description,
+                urlImg: infoNuevoProducto.urlImg,
+                nombreImg: infoNuevoProducto.nombreImg
             },
             (response) => {
                 console.log(response.data);
                 toast.success('Vehículo modificado con éxito');
                 /* setEdit(false);*/
-                setEjecutarConsulta(true); 
+                setEjecutarConsulta(true);
             },
             (error) => {
                 toast.error('Error modificando el vehículo');
@@ -46,6 +50,7 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, setEjecutarCon
         );
     };
 
+    //TODO: tratar de cambiar lo que se envia por la url para evitar que la página vuelva a cargar
 
     return (
         <>
@@ -77,6 +82,35 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, setEjecutarCon
                         </div>
 
                         <div className="my-2">
+                            <label className='flex flex-col' htmlFor='urlImg'>
+                                Url imagen
+                                <input
+                                    name='urlImg'
+                                    className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                                    type='text'
+                                    value={infoNuevoProducto.urlImg}
+                                    onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, urlImg: e.target.value })}
+                                
+                                />
+                            </label>
+                        </div>
+
+                        <div className="my-2">
+                            <label className='flex flex-col' htmlFor='nombreImagen'>
+                                Nombre imagen
+                                <input
+                                    name='nombreImg'
+                                    className='bg-gray-50 border border-gray-600 p-2 rounded-lg m-2'
+                                    type='text'
+                                    placeholder='Imagen Iphone 10'
+                                    value={infoNuevoProducto.nombreImg}
+                                    onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, nombreImg: e.target.value })}
+                                
+                                />
+                            </label>
+                        </div>
+
+                        <div className="my-2">
                             <label className='flex flex-col' htmlFor='valorProducto'>
                                 Valor del producto
                                 <input
@@ -96,19 +130,19 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, setEjecutarCon
                                 {infoNuevoProducto.status ?
                                     <>
                                         <label>
-                                            <input type="radio" name="status" value={true} required  checked onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, status: e.target.value })}/> Disponible
+                                            <input type="radio" name="status" value={true} required checked onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, status: e.target.value })} /> Disponible
                                         </label>
                                         <label>
-                                            <input type="radio" name="status" value={"false"} required onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, status: e.target.value })}/> No disponible
+                                            <input type="radio" name="status" value={"false"} required onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, status: e.target.value })} /> No disponible
                                         </label>
                                     </>
                                     :
                                     <>
                                         <label>
-                                            <input type="radio" name="status" value={"true"} required  onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, status: e.target.value })}/> Disponible
+                                            <input type="radio" name="status" value={"true"} required onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, status: e.target.value })} /> Disponible
                                         </label>
                                         <label>
-                                            <input type="radio" name="status" value={"false"} required  checked onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, status: e.target.value })}/> No disponible
+                                            <input type="radio" name="status" value={"false"} required checked onChange={(e) => setInfoNuevoProducto({ ...infoNuevoProducto, status: e.target.value })} /> No disponible
                                         </label>
                                     </>
                                 }
@@ -141,7 +175,7 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, setEjecutarCon
 
                             <button
                                 type='submit'
-                                onClick={()=>actualizarVehiculo()}
+                                onClick={() => actualizarVehiculo()}
                                 className='col-span-2 bg-blue-600 p-2 rounded-md shadow-md hover:bg-blue-800 text-white'>
                                 Guardar producto
                             </button>
@@ -150,7 +184,7 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, setEjecutarCon
                 </div>
             </Modal>
             <ToastContainer position='bottom-center' autoClose={5000} />
-            
+
         </>
     )
 }
