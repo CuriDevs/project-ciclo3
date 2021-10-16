@@ -18,6 +18,8 @@ function AddSales (props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
   */
+
+    //le damos el estado inicial, osea sus valores por default
     const [list, setList] = useState({
       idSales:"",
       idProduct:"",
@@ -44,6 +46,7 @@ function AddSales (props) {
       
       //enviamos los datos a la api
       await api.ventas.create(list);
+      console.log("datos enviamos con exito!")
     }
 
     return (
@@ -72,37 +75,41 @@ function AddSales (props) {
                 </Row>
                 <hr/>
                 <Row className="mb-3">
-                  <Col xs={12} md={5}>
+                  <Col xs={12} sm>
                     <Form.Group controlId="formGridIdProducto">
                       <Form.Label>Id producto</Form.Label>
                       <Form.Control type="texto" placeholder="Identificador de producto" onChange={handleInputtAdd} name="idProduct"/>
                     </Form.Group>
                   </Col>
-                  
-                  <Col xs={12} md={5}>
+                </Row>
+                <hr/>
+                <Row className="mb-3">  
+                  <Col xs={12} sm>
+                    <Form.Group controlId="formGridPrecioTotal">
+                      <Form.Label>Precio total</Form.Label>
+                      <Form.Control type="number" placeholder="Precio total" onChange={handleInputtAdd} name="vTotal"/>
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row className="mb-3">
+                  <Col xs={12} sm>
                     <Form.Group controlId="formGridCantidad">
                       <Form.Label>Cantidad</Form.Label>
-                      <Form.Control type="number" placeholder="Cantidad" onChange={handleInputtAdd} name="vTotal"/>
+                      <Form.Control type="number" placeholder="Cantidad" onChange={handleInputtAdd} name="amount"/>
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row className="mb-3">
+                  <Col xs={12} sm>
+                    <Form.Group controlId="formGridIdPrecioU">
+                      <Form.Label>Precio x U</Form.Label>
+                      <Form.Control type="number" placeholder="Precio por U" onChange={handleInputtAdd} name="price"/>
                     </Form.Group>
                   </Col>
                 </Row>
                 <hr/>
                 <Row className="mb-3">
-                  <Col xs={12} md={3}>
-                    <Form.Group controlId="formGridIdPrecioU">
-                      <Form.Label>Precio x U</Form.Label>
-                      <Form.Control type="number" placeholder="Precio por U" onChange={handleInputtAdd} name="amount"/>
-                    </Form.Group>
-                  </Col>
-                  
-                  <Col xs={12} md={3}>
-                    <Form.Group controlId="formGridPrecioTotal">
-                      <Form.Label>Precio total</Form.Label>
-                      <Form.Control type="number" placeholder="Precio total" onChange={handleInputtAdd} name="price"/>
-                    </Form.Group>
-                  </Col>
-
-                  <Col xs={12} md={3}>
+                  <Col xs={12} sm>
                     <Form.Group controlId="formGridFechaVenta">
                       <Form.Label>Fecha de venta</Form.Label>
                       <Form.Control type="date" placeholder="Fecha de venta" onChange={handleInputtAdd} name="dateV"/>
@@ -111,20 +118,22 @@ function AddSales (props) {
                 </Row>
                 <hr/>
                 <Row className="mb-3">
-                  <Col xs={12} md={5}>
+                  <Col xs={12} sm>
                     <Form.Group controlId="formGridIdCliente">
                       <Form.Label>Identificacion del cliente</Form.Label>
                       <Form.Control type="texto" placeholder="Identificacion del cliente" onChange={handleInputtAdd} name="idClient"/>
                     </Form.Group>
                   </Col>
-                  
-                  <Col xs={12} md={5}>
+                </Row>
+                <Row className="mb-3">
+                  <Col xs={12} sm>
                     <Form.Group controlId="formGridNombreCliente">
                       <Form.Label>Nombre del cliente</Form.Label>
                       <Form.Control type="text" placeholder="Nombre del cliente" onChange={handleInputtAdd} name="nameC"/>
                     </Form.Group>
                   </Col>
                 </Row>
+                <hr/>
                 <Row className="mb-3">
                   <Col xs={12} sm>
                     <Form.Group controlId="formGridNombreVendedor">
@@ -132,7 +141,8 @@ function AddSales (props) {
                       <Form.Control type="text" placeholder="Nombre del vendedor" onChange={handleInputtAdd} name="nameV"/>
                     </Form.Group>
                   </Col>
-                    <OverlayTrigger
+                </Row>
+                <OverlayTrigger
                     key={"top"}
                     placement={"top"}
                     overlay={
@@ -154,7 +164,6 @@ function AddSales (props) {
                     >
                       <Button variant="danger" onClick={props.onHide}><img src="https://img.icons8.com/material-outlined/20/ffffff/close-window.png"/></Button>
                 </OverlayTrigger>
-                </Row>
               </Form>
             </Container>
           </Modal.Body>

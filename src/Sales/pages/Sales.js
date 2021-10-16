@@ -17,20 +17,46 @@ function Sales() {
   const [ show, setShow ] = useState(false);
   const [ ventas, setVentas ] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await api.ventas.list();
-      setVentas(response);
-    };
+  //consultar venta
+  const [search,  setSearch] = useState({
+    idSales:""
+  });
 
-    fetchData();
+  
+ useEffect(() => {
+    //si search es vacio significa que no se esta buscando nada
+    if(search.idSales === ""){
+      setInterval(() =>{
+        const fetchData = async () => {
+          const response = await api.ventas.list();
+          setVentas(response);
+        };
+        fetchData();
+      }, 1000);
+    }
   }, []);
+  
+  //implementando busqueda individual, aun en proceso...
+  const handleInput = async(e) => {
+    setSearch({
+      ...search, 
+      [e.target.name] : e.target.value
+    });
+  };
+
+  const handleListAdd = async(e) =>{
+    e.preventDefault();
+    
+    const res = await api.ventas.getProduct(search.idSales);
+    setVentas(res);
+  }
+
 
   return (
     <>
       <Header />
       <Container className="principal">
-        <Row className="justify-content-center">
+        <Row className="justify-content-center" >
           <Col className="principal-second" xs={ 6 } md={ 2 }>
             <Button id="registrar" variant="primary" onClick={ () => setShow(true) } >Registrar{ ' ' }<img src="https://img.icons8.com/material-outlined/20/ffffff/add.png" /></Button>
             <AddSales show={ show } onHide={ () => setShow(false) } />
@@ -40,11 +66,13 @@ function Sales() {
               <FormControl
                 aria-label="Default"
                 aria-describedby="inputGroup-sizing-default"
+                onChange={handleInput}
+                name="idSales"
               />
             </InputGroup>
           </Col>
-          <Col className="principal-fourth" xs={ 6 } md={ 1 }>
-            <Button variant="primary"><img src="https://img.icons8.com/material-outlined/24/ffffff/search-in-list.png" /></Button>
+          <Col className="principal-fourth" xs={ 6 } md={ 1 } onSubmit={handleListAdd}>
+            <Button type="submit"><img src="https://img.icons8.com/material-outlined/24/ffffff/search-in-list.png" /></Button>
           </Col>
         </Row>
       </Container>

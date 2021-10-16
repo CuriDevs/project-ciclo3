@@ -2,13 +2,20 @@
 :root{
   --alturaInputs: 25px; /*variable para reutilizar*/
 }
-
-#floatingInputIdVenta{
+/* 
+#floatingInputIdVenta,
+#floatingInputIdProducto, 
+#floatingInputValorTotal,
+#floatingInputIdCliente,
+#floatingInputNombreCliente,
+#floatingInputCantidad, 
+#floatingInputPrecioUnitario,
+#floatingInputFechaVenta{
   width: 34.8em;
   height: var(--alturaInputs);
 }
-
-
+ */
+/* 
 #floatingInputIdProducto, 
 #floatingInputValorTotal,
 #floatingInputIdCliente,
@@ -22,7 +29,7 @@
 #floatingInputFechaVenta{
   width: 9.5em;
   height: var(--alturaInputs);
-}
+} */
 /*fin*/
 
 .principal-first-container{
@@ -39,10 +46,18 @@
 }
  */
 
-#formGridIdVenta{
+#formGridIdVenta, 
+#formGridIdProducto, 
+#formGridCantidad, 
+#formGridIdCliente, 
+#formGridNombreCliente,
+#formGridIdPrecioU, 
+#formGridPrecioTotal, 
+#formGridFechaVenta,
+#formGridNombreVendedor{
   width: 89%;
 }
-
+/* 
 #formGridIdProducto, #formGridCantidad, #formGridIdCliente, #formGridNombreCliente{
   width: 91%;
 }
@@ -50,3 +65,4 @@
 #formGridIdPrecioU, #formGridPrecioTotal, #formGridFechaVenta{
   width: 97.5%;
 }
+ */
