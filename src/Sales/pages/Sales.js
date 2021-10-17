@@ -54,7 +54,7 @@ function Sales() {
       <Container className="principal">
         <Row className="justify-content-center" >
           <Col className="principal-second" xs={ 6 } md={ 2 }>
-            <Button id="registrar" variant="primary" onClick={ () => setShow(true) } >Registrar{ ' ' }<img src="https://img.icons8.com/material-outlined/20/ffffff/add.png" /></Button>
+            <Button id="registrar" variant="primary" onClick={ () => setShow(true) } >Crear{''}<img src="https://img.icons8.com/material-outlined/20/ffffff/add.png" /></Button>
             <AddSales show={ show } onHide={ () => setShow(false) } />
           </Col>
           <Col className="principal-third" xs={ 6 } md={ 7 }>
