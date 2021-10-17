@@ -22,18 +22,13 @@ function Sales() {
     idSales:""
   });
 
-  
- useEffect(() => {
-    //si search es vacio significa que no se esta buscando nada
-    if(search.idSales === ""){
-      setInterval(() =>{
-        const fetchData = async () => {
-          const response = await api.ventas.list();
-          setVentas(response);
-        };
-        fetchData();
-      }, 1000);
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await api.ventas.list();
+      setVentas(response);
+    };
+
+    fetchData();
   }, []);
   
   //implementando busqueda individual, aun en proceso...
