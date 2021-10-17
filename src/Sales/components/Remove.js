@@ -2,12 +2,11 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import { api } from '../utils/api';
-import Toast from 'react-bootstrap/Toast'
+
 
 function Remove({ venta }) {
 
     const [ show, setShow ] = useState(false);
-    const [ show2, setToast ] = useState(false);
     const id = [];
 
     const ventaDelete = () => {
@@ -17,25 +16,9 @@ function Remove({ venta }) {
     };
 
     const deleteVentas = async (ventaDelete) => {
-        const responde = await api.ventas.delete(ventaDelete[0]._id);
-        if (responde) {
-            <Toast onClose={() => setToast(true)} show2={show2} delay={3000} autohide>
-                <Toast.Header>
-                    <strong className="me-auto">Eliminacion exitosa</strong>
-                    <small>1 second ago</small>
-                </Toast.Header>
-                <Toast.Body>Venta {ventaDelete[0].idSales} eliminada con exito</Toast.Body>
-            </Toast>
-        } else {
-            <Toast onClose={() => setToast(true)} show2={show2} delay={3000} autohide>
-                <Toast.Header>
-                    <strong className="me-auto">No se elimino la venta</strong>
-                    <small>1 second ago</small>
-                </Toast.Header>
-                <Toast.Body>La venta {ventaDelete[0].idSales} no se elimino</Toast.Body>
-            </Toast>
-        }
-        console.log("Se elimino la venta: " + ventaDelete[0].idSales);
+        const responde = await api.ventas.delete(ventaDelete[ 0 ]._id);
+        console.log("Se elimino la venta: " + ventaDelete[ 0 ].idSales);
+        //setToast(true);
     };
 
     const handleShow = () => setShow(true);
@@ -53,7 +36,7 @@ function Remove({ venta }) {
                     <Button variant="secondary" onClick={ handleClose }>
                         Close
                     </Button>
-                    <Button variant="danger" onClick={ ventaDelete }>
+                    <Button variant="danger" onClick={ ventaDelete } href="/sales">
                         Eliminar
                     </Button>
                 </Modal.Footer>

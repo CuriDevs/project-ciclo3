@@ -10,6 +10,7 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
+import Toast from '../components/Alert';
 
 import { api } from '../utils/api';
 
@@ -71,6 +72,7 @@ function Sales() {
           </Col>
         </Row>
       </Container>
+      {/* <Toast /> */}
       <Query ventas={ ventas } />
     </>
   );
