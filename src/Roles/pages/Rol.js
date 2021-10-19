@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from "../../Shared/components/Header";
+import Header from "../../Shared/components/Header"
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
