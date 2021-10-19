@@ -6,7 +6,7 @@ import Fact from "./Fact";
 import Button from "react-bootstrap/Button";
 import '../styles/Query.css';
 
-var Titulos = [ 'ID Venta', 'ID Producto', 'Valor Total', 'Cantidad', 'Precio Unitario', 'Fecha Venta', 'Documento Identificación', 'Nombre Cliente', 'Vendedor' ];
+var Titulos = [ 'ID Venta', 'ID Producto', 'Valor Total', 'Cantidad', 'Precio Unitario', 'Fecha Venta', 'Identificación', 'Cliente', 'Vendedor' ];
 
 function Query({ ventas }) {
 
