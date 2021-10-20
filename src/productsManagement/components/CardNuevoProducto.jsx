@@ -65,6 +65,7 @@ const CardNuevoProducto = ({ products, setProducts, setEjecutarConsulta }) => {
     <>
       <button onClick={handleShow} className="card cardNuevoProducto">
         <img className="imgAgregarProducto" src={imgPrueba} alt="agregar pruducto" />
+        <br/>
         <h3 className="titleCardAgregarProducto">Agregar producto</h3>
       </button>
 

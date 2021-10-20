@@ -66,18 +66,19 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 .cardNuevoProducto{
     min-height: 5em;
-    max-height: 9em;
+    max-height: 15em;
     min-width: 16rem;
     max-width: 16rem;
     
     justify-self: center;
     align-self: center;
-    justify-self: center;
+    
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-
+    padding: 2%;
+    
 }
 
 /*Estilos para el h3 de los titulos de las card en el componente CardProduct*/

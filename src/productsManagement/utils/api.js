@@ -4,6 +4,8 @@ import axios from 'axios';
     return `Bearer ${localStorage.getItem('token')}`;
 }; */
 
+const URL = '';
+
 export const obtenerProductos = async (successCallback, errorCallback) => {
     const options = {
         method: 'GET',
