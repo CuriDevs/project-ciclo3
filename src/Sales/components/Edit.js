@@ -7,7 +7,7 @@ import styles from '../styles/Table.css';
 import { api } from '../utils/api';
 import React, { useState, useEffect } from "react";
 
-function Edit({ venta }) {
+function Edit({ venta, fetchData }) {
     //const [ value, setValue ] = useState(new Date().toLocaleString());
     const [ show, setShow ] = useState(false);
     const [ list, setList ] = useState({
@@ -56,6 +56,7 @@ function Edit({ venta }) {
         console.log(list);
         const responde = await api.ventas.edit(venta,list);
         //alert("Se actualizo la venta: " + venta._id);
+        fetchData();
     };
 
     const handleShow = () => setShow(true);
@@ -154,7 +155,7 @@ function Edit({ venta }) {
                     <Button variant="secondary" onClick={ handleClose }>
                         Close
                     </Button>
-                    <Button variant="success" onClick={ editVenta } href="/sales">
+                    <Button variant="success" onClick={ editVenta } >
                         Guardar
                     </Button>
                 </Modal.Footer>
