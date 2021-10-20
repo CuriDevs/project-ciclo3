@@ -20,7 +20,7 @@ function Query({ ventas }) {
         return (
             <>
                 <Button variant="secondary" className="border border-5 border-white">Volver</Button>{ ' ' }
-                <Tab.Container defaultActiveKey="first" className="border border-5">
+                <Tab.Container defaultActiveKey="first" className="border border-5 Table">
                     <Row className="border border-5 border-white">
                         <Col sm={ 1 }></Col>
                         <Col md="auto">

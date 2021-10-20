@@ -1,6 +1,6 @@
 /*Estilos globales para páginas que usen este archivo (normalmente las de gestión de productos y sus componentes)*/
 *{
-    box-sizing: content-box;
+    /*box-sizing: content-box;*/
     margin: 0;
     padding: 0;
     padding-left: 0;

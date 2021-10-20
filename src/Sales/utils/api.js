@@ -25,10 +25,10 @@ export const api = {
                 method: "DELETE",
             });
         },
-        edit(ventas) {
+        edit(ventas,list) {
             return callApi(`/ventas/${ ventas._id }`, {
-                method: "PUT",
-                body: JSON.stringify(ventas),
+                method: "PATCH",
+                body: JSON.stringify(list),
             });
         },
         getProduct(id) {

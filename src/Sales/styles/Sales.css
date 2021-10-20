@@ -2,6 +2,9 @@
 :root{
   /*variable para reutilizar*/
 }
+* {
+  box-sizing: border-box;
+}
 
 .primary{
   padding-top: 25px;
@@ -19,19 +22,48 @@
   padding-right: 35px;
   box-shadow: 0px 0px 16px #E7E6E6;
   border-radius: 10px;
-  height: 325px;
+  height: 60vh;
   overflow-y: auto;
+}
+
+.secondary::-webkit-scrollbar {
+  -webkit-appearance: none;
+  display: none;
+}
+
+.secondary::-webkit-scrollbar:vertical {
+  width:10px;
+}
+
+.secondary::-webkit-scrollbar-button:increment,.secondary::-webkit-scrollbar-button {
+  display: none;
+} 
+
+.secondary::-webkit-scrollbar-thumb {
+  background-color: #797979;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+}
+
+.secondary::-webkit-scrollbar-track {
+  border-radius: 10px;  
 }
 
 .principal-second{
   width: 10%;
 }
-
+/*
 .principal-fourth, .principal-fifth{
   width: 4.4%;
 }
+*/
 .principal-third{
   width: 68%;
+}
+
+.BotonTable {
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 /* 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import '../styles/Sales.css';
 import "../styles/Sales.css";
 import Header from "../../Shared/components/Header";
 import Query from "../components/Query";
@@ -179,10 +178,10 @@ function Sales() {
             </InputGroup>
           </Col>
           <Col className="principal-fourth" xs={ 6 } md={ 1 } >
-            <Button onClick={handleListAdd} type="submit"><img src="https://img.icons8.com/material-outlined/24/ffffff/search-in-list.png" /></Button>
+            <Button onClick={handleListAdd} type="submit" className="BotonTable"><img src="https://img.icons8.com/material-outlined/24/ffffff/search-in-list.png" /></Button>
           </Col>
           <Col className="principal-fifth" xs={ 6 } md={ 1 } >  
-            <Button onClick={fetchData}><img src="https://img.icons8.com/material-outlined/24/ffffff/list.png"/></Button>
+            <Button onClick={fetchData} className="BotonTable"><img src="https://img.icons8.com/material-outlined/24/ffffff/list.png"/></Button>
           </Col>
         </Row>
       </Container>
