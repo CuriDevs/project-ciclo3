@@ -151,7 +151,7 @@ function Sales() {
   let component;
 
   if(notify){
-    component = <Notification mensaje="Todos los campos son obligatorios!"/>;
+    component = <Notification show={true} mensaje="Todos los campos son obligatorios!"/>;
   }else{
     component = null;
   }
