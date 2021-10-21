@@ -8,7 +8,7 @@ import '../styles/Query.css';
 
 var Titulos = [ 'ID Venta', 'ID Producto', 'Valor Total', 'Cantidad', 'Precio Unitario', 'Fecha Venta', 'Identificación', 'Cliente', 'Vendedor' ];
 
-function Query({ ventas }) {
+function Query({ ventas, fetchData }) {
 
     if (!ventas.length) {
         return (
@@ -20,7 +20,7 @@ function Query({ ventas }) {
         return (
             <>
                 <Button variant="secondary" className="border border-5 border-white">Volver</Button>{ ' ' }
-                <Tab.Container defaultActiveKey="first" className="border border-5">
+                <Tab.Container defaultActiveKey="first" className="border border-5 Table">
                     <Row className="border border-5 border-white">
                         <Col sm={ 1 }></Col>
                         <Col md="auto">
@@ -34,7 +34,7 @@ function Query({ ventas }) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <Fact ventas={ ventas } />
+                                    <Fact ventas={ ventas } fetchData={ fetchData }/>
                                 </tbody>
                             </Table>
                         </Col>

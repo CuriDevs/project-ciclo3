@@ -2,9 +2,9 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import { api } from '../utils/api';
+import styles from '../styles/Table.css';
 
-
-function Remove({ venta }) {
+function Remove({ venta, fetchData }) {
 
     const [ show, setShow ] = useState(false);
     const id = [];
@@ -18,7 +18,7 @@ function Remove({ venta }) {
     const deleteVentas = async (ventaDelete) => {
         const responde = await api.ventas.delete(ventaDelete[ 0 ]._id);
         console.log("Se elimino la venta: " + ventaDelete[ 0 ].idSales);
-        //setToast(true);
+        fetchData();
     };
 
     const handleShow = () => setShow(true);
@@ -26,7 +26,9 @@ function Remove({ venta }) {
 
     return (
         <>
-            <Button variant="danger" onClick={ handleShow }>Eliminar</Button>{ ' ' }
+            <Button variant="danger" onClick={ handleShow } className="BotonTable">
+            <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-delete-miscellaneous-kiranshastry-solid-kiranshastry.png"/>
+            </Button>{ ' ' }
             <Modal show={ show } onHide={ handleClose }>
                 <Modal.Header closeButton>
                     <Modal.Title>Eliminar venta</Modal.Title>
@@ -36,7 +38,7 @@ function Remove({ venta }) {
                     <Button variant="secondary" onClick={ handleClose }>
                         Close
                     </Button>
-                    <Button variant="danger" onClick={ ventaDelete } href="/sales">
+                    <Button variant="danger" onClick={ ventaDelete } >
                         Eliminar
                     </Button>
                 </Modal.Footer>

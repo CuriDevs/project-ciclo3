@@ -9,7 +9,7 @@ import FormControl from 'react-bootstrap/FormControl'
 import Form from 'react-bootstrap/Form' */
 
 
-const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, setEjecutarConsulta }) => {
+const BtnCardProductsEdit = ({ estilos, product, setEjecutarConsulta }) => {
 
     const [show, setShow] = useState(false);
 
@@ -39,12 +39,11 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, setEjecutarCon
             },
             (response) => {
                 console.log(response.data);
-                toast.success('Vehículo modificado con éxito');
-                /* setEdit(false);*/
+                toast.success('Producto modificado con éxito');
                 setEjecutarConsulta(true);
             },
             (error) => {
-                toast.error('Error modificando el vehículo');
+                toast.error('Error modificando el producto');
                 console.error(error);
             }
         );
@@ -54,7 +53,7 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, setEjecutarCon
 
     return (
         <>
-            <button className={`btn ${estiloBootstrap} ${estilos} btnCardChildren `} onClick={handleShow}> Editar </button>
+            <button className={`btn ${estilos} btnCardChildren `} onClick={handleShow}> Editar </button>
 
 
             <Modal show={show} onHide={handleClose}>
@@ -62,9 +61,8 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, setEjecutarCon
                     <Modal.Header>
                         <h2 className='text-2xl font-extrabold text-gray-800'>Editar producto</h2>
                     </Modal.Header>
+
                     <form className='flex flex-col'>
-
-
                         <label className="flex bg-gray-200 rounded-md p-2 justify-center">ID: {product._id}</label>
                         <br />
 
@@ -174,7 +172,7 @@ const BtnCardProductsEdit = ({ estilos, estiloBootstrap, product, setEjecutarCon
                             </button>
 
                             <button
-                                type='submit'
+                                type='button'
                                 onClick={() => actualizarVehiculo()}
                                 className='col-span-2 bg-blue-600 p-2 rounded-md shadow-md hover:bg-blue-800 text-white'>
                                 Guardar producto

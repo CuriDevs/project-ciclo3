@@ -44,9 +44,10 @@ const CardProducto = (/* { products, setProducts } */) => {
             productos.filter((elemento) => {
                 /* setEjecutarConsulta(true); */
                 return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
+                setEjecutarConsulta(false)
             })
         );
-    }, [busqueda, productos]);
+    }, [busqueda, productos,ejecutarConsulta]);
     /* */
 
 
@@ -62,8 +63,8 @@ const CardProducto = (/* { products, setProducts } */) => {
             </div>
 
             {/* Tarjeta para agregar prodcuto */}
-            <CardNuevoProducto productos={productos} setProduct={setProductos} setEjecutarConsulta={setEjecutarConsulta} />
-
+            {<CardNuevoProducto productos={productos} setProduct={setProductos} setEjecutarConsulta={setEjecutarConsulta} />
+}
             {/* Tarjetas de los productos */}
             {
                 productosFiltrados.length > 0 ?
@@ -71,11 +72,14 @@ const CardProducto = (/* { products, setProducts } */) => {
                         return (
                             <div className="card" key={nanoid()}>
                                 <div className="cardBody">
-                                    {/* <span>{product.id}</span> */}
                                     <div className="containerTituloCard">
                                         <h3 className="titleCardProduct">{product.name}</h3>
                                     </div>
-                                    <figure>
+
+                                    {<span className="bg-gray-200 rounded-md p-1">ID: {product._id}</span>}                                
+
+                                    
+                                    <figure className="py-2">
                                         <img src={product.urlImg} alt={product.nombreImg}/>
                                     </figure>    
                                     <span>$ {product.value}</span>
