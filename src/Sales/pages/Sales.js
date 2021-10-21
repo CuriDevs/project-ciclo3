@@ -149,15 +149,9 @@ function Sales() {
   //esta variable captura el mensaje y lo manda al componente
   let component;
 
-<<<<<<< HEAD
-  if(notify){
-    component = <Notification show={true} mensaje="Todos los campos son obligatorios!"/>;
-  }else{
-=======
   if (notify) {
     component = <Notification mensaje="Todos los campos son obligatorios!" />;
   } else {
->>>>>>> 4c4ce0e61f87a5e030358aaa5bdb5e636d9c9ddc
     component = null;
   }
 
