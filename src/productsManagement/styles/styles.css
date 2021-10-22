@@ -68,7 +68,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     min-height: 5em;
     max-height: 15em;
     min-width: 16rem;
-    max-width: 16rem;
+    /* max-width: 16rem; */
     
     justify-self: center;
     align-self: center;
@@ -203,6 +203,6 @@ background: none;
     justify-content: center;
 }
 
-.fade {
+.fade, .modal {
     padding:0;
 }

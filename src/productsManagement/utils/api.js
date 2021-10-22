@@ -4,12 +4,13 @@ import axios from 'axios';
     return `Bearer ${localStorage.getItem('token')}`;
 }; */
 
-const URL = '';
+const urlLocal = 'http://localhost:5000';
+const urlBackend = 'https://jalmed-backend.herokuapp.com';
 
 export const obtenerProductos = async (successCallback, errorCallback) => {
     const options = {
         method: 'GET',
-        url: 'http://localhost:5000/productos/',
+        url: `${urlBackend}/productos/`,
         /* headers: {
         Authorization: getToken(),
         }, */
@@ -17,10 +18,11 @@ export const obtenerProductos = async (successCallback, errorCallback) => {
     await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
+
 export const crearProducto = async (data, successCallback, errorCallback) => {
     const options = {
         method: 'POST',
-        url: 'http://localhost:5000/productos/',
+        url: `${urlBackend}/productos/`,
         headers: { 'Content-Type': 'application/json'/* , Authorization: getToken() */ },
         data,
     };
@@ -30,7 +32,7 @@ export const crearProducto = async (data, successCallback, errorCallback) => {
 export const editarProducto = async (id, data, successCallback, errorCallback) => {
     const options = {
         method: 'PATCH',
-        url: `http://localhost:5000/productos/${id}/`,
+        url: `${urlBackend}/productos/${id}/`,
         headers: { 'Content-Type': 'application/json'/* , Authorization: getToken() */ },
         data,
     };
@@ -40,7 +42,7 @@ export const editarProducto = async (id, data, successCallback, errorCallback) =
 export const eliminarProducto = async (id, successCallback, errorCallback) => {
     const options = {
         method: 'DELETE',
-        url: `http://localhost:5000/productos/${id}/`,
+        url: `${urlBackend}/productos/${id}/`,
         headers: { 'Content-Type': 'application/json'/* , Authorization: getToken() */ },
     };
     await axios.request(options).then(successCallback).catch(errorCallback);
