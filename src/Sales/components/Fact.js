@@ -7,7 +7,7 @@ function Fact({ ventas, fetchData }) {
         <>
             { ventas.map((venta) => (
                 <tr>
-                    <th>{ venta.idSales }</th>
+                    <th>{ venta._id }</th>
                     <th>{ venta.idProduct }</th>
                     <th>{ venta.vTotal }</th>
                     <th>{ venta.amount }</th>

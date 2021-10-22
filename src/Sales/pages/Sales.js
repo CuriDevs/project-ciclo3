@@ -9,7 +9,6 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
-import Notification from '../components/Notification';
 
 import { api } from '../utils/api';
 
@@ -21,13 +20,11 @@ function Sales() {
   //lista de ventas registradas
   const [ ventas, setVentas ] = useState([]);
 
-  //hook para mostrar la notificacion
-  const [ notify, setNotify ] = useState(false);
-
   //consultar venta
   const [ search, setSearch ] = useState({
     idSales: ""
   });
+
 
   //con esta funcion pedimos todos los datos a la api
   const fetchData = async () => {
@@ -39,24 +36,6 @@ function Sales() {
   useEffect(() => {
     fetchData();
   }, []);
-
-  //function para ordenar los datos
-  const sortData = (datos) => {
-    //ordenamos los datos y retornamos
-    const listAdd = {
-      idSales: datos.idSales,
-      idProduct: datos.idProduct,
-      vTotal: datos.vTotal,
-      amount: datos.amount,
-      price: datos.price,
-      dateV: datos.dateV,
-      state: datos.state,
-      idClient: datos.idClient,
-      nameC: datos.nameC,
-      nameV: datos.nameV,
-    };
-    return listAdd;
-  };
 
   //guarda los datos del input search
   const handleInput = (e) => {
@@ -79,8 +58,7 @@ function Sales() {
         //se llama al componente notification y mostramos un mensaje de que no se muestra el producto, en proceso
       }
 
-      const object = sortData(res);
-      setVentas([ object ]);
+      setVentas([ res ]);
       console.log('datos guardados en el hook');
     };
 
@@ -92,84 +70,15 @@ function Sales() {
     setShow(datos); //cambiamos el estado de show pasando false para cerrar el modal
   };
 
-  /* const send = async(datos) =>{
-    //en caso de tener todo correctamente pasamos los datos a la funcion que ordena
-    const list = sortData(datos);
-
-    console.log('enviando datos');
-    console.log(list);
-    
-    await api.ventas.create(list);
-    console.log('datos enviados');
-    //solicitamos una nueva consulta para refrescar los datos y poder mostrar los registros recientes
-    fetchData();
-  } */
-
-  //obtenemos los datos de el componente AddSales y validamos que no esten vacios
-  const datosConsulta = (datos) => {
-
-    if (
-      datos.idSales === '' ||
-      datos.idProduct === '' ||
-      datos.vTotal === '' ||
-      datos.amount == 0 ||
-      datos.price == 0 ||
-      datos.idClient === '' ||
-      datos.nameC === '' ||
-      datos.nameV === ''
-    ) {
-      //mandamos true, si los capos estan vacios o si uno de ellos lo esta
-      setNotify(true);
-      return;
-    }
-
-    const object = sortData(datos);
-    //enviamos los datos a la funcion que se encargara de enviarlos a la api
-    const send = async (datos) => {
-      //en caso de tener todo correctamente pasamos los datos a la funcion que ordena
-      const list = sortData(datos);
-
-      console.log('enviando datos');
-      console.log(list);
-
-      await api.ventas.create(list);
-      console.log('datos enviados');
-
-    };
-
-    send(object); //enviamos los datos recibidos a la funcion encargada de enviarlos a la api
-
-    //solicitamos una nueva consulta para refrescar los datos y poder mostrar los registros recientes
-    fetchData();
-
-    //en caso de que ningun capo este vacio, mandamos false para no mostrar el mensaje
-    setNotify(false);
-  };
-
-  //esta variable captura el mensaje y lo manda al componente
-  let component;
-
-<<<<<<< HEAD
-  if(notify){
-    component = <Notification show={true} mensaje="Todos los campos son obligatorios!"/>;
-  }else{
-=======
-  if (notify) {
-    component = <Notification mensaje="Todos los campos son obligatorios!" />;
-  } else {
->>>>>>> 4c4ce0e61f87a5e030358aaa5bdb5e636d9c9ddc
-    component = null;
-  }
-
   return (
     <>
       <Header />
       <Container className="primary">
-        <Row>{ component }</Row>
+        {/*<Row>{component }</Row>*/}
         <Row className="justify-content-center" >
           <Col className="principal-second" xs={ 6 } md={ 2 }>
             <Button id="registrar" variant="primary" onClick={ () => setShow(true) }>Crear</Button>
-            <AddSales show={ show } show2={ show2 } datosConsulta={ datosConsulta } />
+            <AddSales show={ show } show2={ show2 } fetchData={fetchData}/>
           </Col>
           <Col className="principal-third" xs={ 6 } md={ 7 }>
             <InputGroup className="mb-3">
@@ -184,10 +93,10 @@ function Sales() {
             </InputGroup>
           </Col>
           <Col className="principal-fourth" xs={ 6 } md={ 1 } >
-            <Button onClick={ handleListAdd } type="submit" className="BotonTable"><img src="https://img.icons8.com/material-outlined/24/ffffff/search-in-list.png" /></Button>
+            <Button onClick={ handleListAdd } type="submit" className="BotonTable"><img src="https://img.icons8.com/material-outlined/30/ffffff/search-in-list.png" /></Button>
           </Col>
           <Col className="principal-fifth" xs={ 6 } md={ 1 } >
-            <Button onClick={ fetchData } className="BotonTable"><img src="https://img.icons8.com/material-outlined/24/ffffff/list.png" /></Button>
+            <Button onClick={ fetchData } className="BotonTable"><img src="https://img.icons8.com/material-outlined/30/ffffff/list.png" /></Button>
           </Col>
         </Row>
       </Container>

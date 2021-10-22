@@ -9,16 +9,35 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import Query from "./Query";
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 import { api } from '../utils/api';
 
-function AddSales ({show, show2, datosConsulta}) {
+//api productos
+import { obtenerProductos } from '../../productsManagement/utils/api.js';
 
+function AddSales ({show, show2, fetchData}) {
+
+  const [productos, setProductos] = useState([])
+
+  useEffect(() => {
+      const fecthProductos = async () => {
+          await obtenerProductos((response) => {
+              console.log('la respuesta que se recibio fue', response);
+              setProductos(response.data);
+          }, (error) => {
+              console.error('Salio un error:', error);
+          }
+          )
+      }
+      fecthProductos();
+
+  }, []);
+
+  
   //le damos el estado inicial al hook, osea sus valores por default
   const [list, setList] = useState({
-    idSales: "",
-    idProduct: "",
+    idProduct: '',
     vTotal: 0,
     amount: 0,
     price: 0,
@@ -31,20 +50,40 @@ function AddSales ({show, show2, datosConsulta}) {
 
   //escucha el cambio de los inputs
   const handleInputtAdd = (e) => {
-    //cambiamos el estado
-    setList({
-      ...list,
-      [e.target.name]: e.target.value, //obtenemos los datos y los pasamos al hook
-    });
+    if(e.target.name === ''|| e.target.value == 0){
+      console.log('f');
+    }else{
+      //cambiamos el estado
+      setList({
+        ...list,
+        [e.target.name]: e.target.value, //obtenemos los datos y los pasamos al hook
+      });
+    }
   };
 
   //luego esto se acciona al momento de presionar el boton guardar
-  const handleListAdd = (e) => {
+  const handleListAdd = async(e) => {
     e.preventDefault();
-
-    //mandamos los datos a la funcion de la page principal
-    datosConsulta(list);
+    console.log(list);
+    insert(list);
+    
+    fetchData();
   };
+
+  const insert = async(list) =>{
+    const listAdd = {
+      idProduct: list.idProduct,
+      vTotal: list.vTotal,
+      amount: list.amount,
+      price: list.price,
+      dateV: list.dateV,
+      state: list.state,
+      idClient: list.idClient,
+      nameC: list.nameC,
+      nameV: list.nameV,
+    };
+    await api.ventas.create(listAdd);
+  }
 
   //al presionar el boton de cerrar el modal enviamos un boolean(false) a la page sales para cambiar el estado del hook show
   const close = () =>{
@@ -53,7 +92,7 @@ function AddSales ({show, show2, datosConsulta}) {
 
   return (
     <>
-      <Modal show={show} className="mb" onHide={false}>
+      <Modal show={show} className="mb" onHide={show}>
         <Modal.Header>
           <Modal.Title>Regitro de ventas</Modal.Title>
         </Modal.Header>
@@ -62,42 +101,33 @@ function AddSales ({show, show2, datosConsulta}) {
           <Container className="principal">
             <Form onSubmit={handleListAdd}>
               <Row className="mb-3">
+              </Row>
+              <Row className="mb-3">
                 <Col xs={12} sm>
-                  <Form.Group controlId="formGridIdVenta">
-                    <Form.Label>Id venta</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Identificador de venta"
-                      onChange={handleInputtAdd}
-                      name="idSales"
-                    />
-                  </Form.Group>
+                  
+                  <FloatingLabel controlId="formGridIdProducto" label="Id producto">
+                    <Form.Select aria-label="Floating label select example" onChange={handleInputtAdd} name="idProduct">
+                      <option>Seleciona el Id del producto</option>
+                      {/*<QueryProducts products={productos}/>*/}
+                      {productos.map((value) => (
+                        <option>{value._id}</option>
+                      ))} 
+                      {/*<option value="3">Three</option>*/}
+                    </Form.Select>
+                  </FloatingLabel>
                 </Col>
               </Row>
               <hr />
               <Row className="mb-3">
                 <Col xs={12} sm>
-                  <Form.Group controlId="formGridIdProducto">
-                    <Form.Label>Id producto</Form.Label>
-                    <Form.Control
-                      type="texto"
-                      placeholder="Identificador de producto"
-                      onChange={handleInputtAdd}
-                      name="idProduct"
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <hr />
-              <Row className="mb-3">
-                <Col xs={12} sm>
-                  <Form.Group controlId="formGridPrecioTotal">
-                    <Form.Label>Precio total</Form.Label>
+                  <Form.Group controlId="formGridIdPrecioU">
+                    <Form.Label>Precio x U</Form.Label>
                     <Form.Control
                       type="number"
-                      placeholder="Precio total"
+                      placeholder={list.price}
+                      
                       onChange={handleInputtAdd}
-                      name="vTotal"
+                      name="price"
                     />
                   </Form.Group>
                 </Col>
@@ -117,13 +147,14 @@ function AddSales ({show, show2, datosConsulta}) {
               </Row>
               <Row className="mb-3">
                 <Col xs={12} sm>
-                  <Form.Group controlId="formGridIdPrecioU">
-                    <Form.Label>Precio x U</Form.Label>
+                  <Form.Group controlId="formGridPrecioTotal">
+                    <Form.Label>Precio total</Form.Label>
                     <Form.Control
                       type="number"
-                      placeholder="Precio por U"
+                      placeholder={list.vTotal}
+                      
                       onChange={handleInputtAdd}
-                      name="price"
+                      name="vTotal"
                     />
                   </Form.Group>
                 </Col>
