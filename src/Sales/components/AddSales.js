@@ -26,16 +26,15 @@ function AddSales ({show, show2, setConsulta}) {
   const [consultarProducto, setConsultarProducto] = useState({_id: ''})
 
   useEffect(() => {
-      const fecthProductos = async () => {
-          await obtenerProductos((response) => {
-              console.log('la respuesta que se recibio fue', response);
-              setProductos(response.data);
-          }, (error) => {
-              console.error('Salio un error:', error);
-          }
-          )
+    const fecthProductos = async () => {
+      await obtenerProductos((response) => {
+        console.log('la respuesta que se recibio fue', response);
+        setProductos(response.data);
+      }, (error) => {
+        console.error('Salio un error:', error);
       }
-      fecthProductos();
+      )}
+    fecthProductos();
 
   }, []);
 
