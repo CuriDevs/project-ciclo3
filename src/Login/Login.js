@@ -8,7 +8,7 @@ import { api } from '../Roles/utils/api';
 function Login() {
 
   //const user = []
-  const value = new Date().toLocaleDateString();
+  const value = new Date().toISOString();
 
   const [ user, setList ] = useState({
     UserName: "",

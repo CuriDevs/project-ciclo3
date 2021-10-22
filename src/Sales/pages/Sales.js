@@ -10,7 +10,7 @@ import Col from "react-bootstrap/Col";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 
-import { api } from '../utils/api';
+import { api } from '../../utils/api';
 
 function Sales() {
 

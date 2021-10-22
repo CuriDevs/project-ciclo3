@@ -34,5 +34,30 @@ export const api = {
         getProduct(id) {
             return callApi(`/ventas/${ id }`);
         },
+    },
+    Users: {
+        list() {
+            return callApi("/Users");
+        },
+        create(Users) {
+            return callApi("/Users", {
+                method: "POST",
+                body: JSON.stringify(Users),
+            });
+        },
+        delete(id) {
+            return callApi(`/Users/${ id }`, {
+                method: "DELETE",
+            });
+        },
+        edit(Users,list) {
+            return callApi(`/Users/${ Users._id }`, {
+                method: "PATCH",
+                body: JSON.stringify(list),
+            });
+        },
+        getProduct(id) {
+            return callApi(`/Users/${ id }`);
+        },
     }
 };
