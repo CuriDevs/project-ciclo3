@@ -23,7 +23,7 @@ function AddSales ({show, show2, setConsulta}) {
 
   const [productos, setProductos] = useState([])
 
-  const [consultarProducto, setConsultarProducto] = useState({idProducto: ''})
+  const [consultarProducto, setConsultarProducto] = useState({_id: ''})
 
   useEffect(() => {
       const fecthProductos = async () => {
@@ -54,7 +54,7 @@ function AddSales ({show, show2, setConsulta}) {
 
   //escucha el cambio de los inputs
   const handleInputtAdd = (e) => {
-    if(e.target.name === ''|| e.target.value == 0){
+    if(e.target.value === ''){
       console.log('f');
     }else{
       //cambiamos el estado
@@ -68,7 +68,6 @@ function AddSales ({show, show2, setConsulta}) {
   //luego esto se acciona al momento de presionar el boton guardar
   const handleListAdd = (e) => {
     e.preventDefault();
-    console.log(list);
     insert(list);
     
     setConsulta(true);
@@ -91,9 +90,32 @@ function AddSales ({show, show2, setConsulta}) {
     setNotify(true);
   }
 
+  const handleInputProduct = (e) => {
+    if(e.target.value === ''){
+      console.log('f');
+    }else{
+      //cambiamos el estado
+      setConsultarProducto({
+        ...consultarProducto,
+        [e.target.name]: e.target.value, //obtenemos los datos y los pasamos al hook
+      });
+      e.preventDefault();
+
+      console.log(consultarProducto);
+      const productData = productos.filter(item => item._id === consultarProducto._id);
+      list.idProduct = productData[0]._id;
+      list.price= productData[0].value;
+      list.vTotal = list.amount * productData[0].value ;
+      console.log(productData)
+    }
+  };
+
+  
+
+
   let component;
   if(notify){
-    component = <Notification show={true} mensaje='Registrado correctamente!'/>
+    component = <Notification setNotify={setNotify} mensaje='Registrado correctamente!'/>
   }else{
     component = null;
   }
@@ -119,7 +141,7 @@ function AddSales ({show, show2, setConsulta}) {
                 <Col xs={12} sm>
                   
                   <FloatingLabel controlId="formGridIdProducto" label="Id producto">
-                    <Form.Select aria-label="Floating label select example" onChange={handleInputtAdd} name="idProduct">
+                    <Form.Select aria-label="Floating label select example" onChange={handleInputProduct} name="_id">
                       <option>Seleciona el Id del producto</option>
                       {/*<QueryProducts products={productos}/>*/}
                       {productos.map((value) => (
@@ -138,7 +160,7 @@ function AddSales ({show, show2, setConsulta}) {
                     <Form.Control
                       type="number"
                       placeholder={list.price}
-                      
+                      readOnly
                       onChange={handleInputtAdd}
                       name="price"
                     />
@@ -165,7 +187,7 @@ function AddSales ({show, show2, setConsulta}) {
                     <Form.Control
                       type="number"
                       placeholder={list.vTotal}
-                      
+                      readOnly
                       onChange={handleInputtAdd}
                       name="vTotal"
                     />
