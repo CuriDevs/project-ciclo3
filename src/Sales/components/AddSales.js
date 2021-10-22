@@ -10,15 +10,20 @@ import Container from "react-bootstrap/Container";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Notification from './Notification';
 
 import { api } from '../utils/api';
 
 //api productos
 import { obtenerProductos } from '../../productsManagement/utils/api.js';
 
-function AddSales ({show, show2, fetchData}) {
+function AddSales ({show, show2, setConsulta}) {
+
+  const [notify, setNotify] = useState(false);
 
   const [productos, setProductos] = useState([])
+
+  const [consultarProducto, setConsultarProducto] = useState({idProducto: ''})
 
   useEffect(() => {
       const fecthProductos = async () => {
@@ -34,7 +39,6 @@ function AddSales ({show, show2, fetchData}) {
 
   }, []);
 
-  
   //le damos el estado inicial al hook, osea sus valores por default
   const [list, setList] = useState({
     idProduct: '',
@@ -62,13 +66,14 @@ function AddSales ({show, show2, fetchData}) {
   };
 
   //luego esto se acciona al momento de presionar el boton guardar
-  const handleListAdd = async(e) => {
+  const handleListAdd = (e) => {
     e.preventDefault();
     console.log(list);
     insert(list);
     
-    fetchData();
+    setConsulta(true);
   };
+
 
   const insert = async(list) =>{
     const listAdd = {
@@ -83,8 +88,15 @@ function AddSales ({show, show2, fetchData}) {
       nameV: list.nameV,
     };
     await api.ventas.create(listAdd);
+    setNotify(true);
   }
 
+  let component;
+  if(notify){
+    component = <Notification show={true} mensaje='Registrado correctamente!'/>
+  }else{
+    component = null;
+  }
   //al presionar el boton de cerrar el modal enviamos un boolean(false) a la page sales para cambiar el estado del hook show
   const close = () =>{
     show2(false);
@@ -92,6 +104,7 @@ function AddSales ({show, show2, fetchData}) {
 
   return (
     <>
+      <Row>{component }</Row>
       <Modal show={show} className="mb" onHide={show}>
         <Modal.Header>
           <Modal.Title>Regitro de ventas</Modal.Title>
@@ -214,7 +227,12 @@ function AddSales ({show, show2, fetchData}) {
                   </Form.Group>
                 </Col>
               </Row>
-              <OverlayTrigger
+            </Form>
+            
+          </Container>
+        </Modal.Body>
+        <Modal.Footer>
+        <OverlayTrigger
                 key={"top"}
                 placement={"top"}
                 overlay={
@@ -223,7 +241,7 @@ function AddSales ({show, show2, fetchData}) {
                   </Tooltip>
                 }
               >
-                <Button type="submit" className="btn btn-primary">
+                <Button onClick={handleListAdd} className="btn btn-primary">
                   <img src="https://img.icons8.com/material-outlined/20/ffffff/save.png" />
                 </Button>
               </OverlayTrigger>
@@ -240,9 +258,7 @@ function AddSales ({show, show2, fetchData}) {
                   <img src="https://img.icons8.com/material-outlined/20/ffffff/close-window.png" />
                 </Button>
               </OverlayTrigger>
-            </Form>
-          </Container>
-        </Modal.Body>
+        </Modal.Footer>
       </Modal>
     </>
   );

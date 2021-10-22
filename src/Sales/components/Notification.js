@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import Toast from 'react-bootstrap/Toast'
 
-function Confirmacion({setNotifyFalse, mensaje}) {
+function Confirmacion({setNotify, mensaje}) {
 /*   let now = 0;
   //if(mensaje){
   const progressInstance = (
@@ -21,7 +21,7 @@ function Confirmacion({setNotifyFalse, mensaje}) {
     setShow(false)
   } */
   const notifyFalse = () =>{
-    setNotifyFalse(false);
+    setNotify(false);
   }
 
   return (

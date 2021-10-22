@@ -7,11 +7,10 @@ import styles from '../styles/Table.css';
 import { api } from '../utils/api';
 import React, { useState, useEffect } from "react";
 
-function Edit({ venta, fetchData }) {
+function Edit({ venta, setConsulta}) {
     //const [ value, setValue ] = useState(new Date().toLocaleString());
     const [ show, setShow ] = useState(false);
     const [ list, setList ] = useState({
-        idSales: venta.idSales,
         idProduct: venta.idProduct,
         vTotal: venta.vTotal,
         amount: venta.amount,
@@ -56,7 +55,7 @@ function Edit({ venta, fetchData }) {
         console.log(list);
         const responde = await api.ventas.edit(venta,list);
         //alert("Se actualizo la venta: " + venta._id);
-        fetchData();
+        setConsulta(true);
     };
 
     const handleShow = () => setShow(true);
@@ -80,7 +79,7 @@ function Edit({ venta, fetchData }) {
                     <Form>
                         <Form.Group className="mb-3" controlId="formGridAddress1">
                             <Form.Label>Identificador</Form.Label>
-                            <Form.Control size="sm" type="number" readOnly placeholder={ venta.idSales }
+                            <Form.Control size="sm" type="number" readOnly placeholder={ venta._id }
                                 onChange={ handleInputtAdd }
                                 name="idSales"
                             />

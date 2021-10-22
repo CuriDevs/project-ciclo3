@@ -4,7 +4,7 @@ import { useState } from "react";
 import { api } from '../utils/api';
 import styles from '../styles/Table.css';
 
-function Remove({ venta, fetchData }) {
+function Remove({ venta, setConsulta}) {
 
     const [ show, setShow ] = useState(false);
     const id = [];
@@ -18,7 +18,7 @@ function Remove({ venta, fetchData }) {
     const deleteVentas = async (ventaDelete) => {
         const responde = await api.ventas.delete(ventaDelete[ 0 ]._id);
         console.log("Se elimino la venta: " + ventaDelete[ 0 ].idSales);
-        fetchData();
+        setConsulta(true);
     };
 
     const handleShow = () => setShow(true);

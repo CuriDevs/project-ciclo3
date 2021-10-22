@@ -8,7 +8,7 @@ import '../styles/Query.css';
 
 var Titulos = [ 'ID Venta', 'ID Producto', 'Valor Total', 'Cantidad', 'Precio Unitario', 'Fecha Venta', 'Identificación', 'Cliente', 'Vendedor' ];
 
-function Query({ ventas, fetchData }) {
+function Query({ ventas, setConsulta }) {
 
     if (!ventas.length) {
         return (
@@ -34,7 +34,7 @@ function Query({ ventas, fetchData }) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <Fact ventas={ ventas } fetchData={ fetchData }/>
+                                    <Fact ventas={ ventas } setConsulta={setConsulta}/>
                                 </tbody>
                             </Table>
                         </Col>

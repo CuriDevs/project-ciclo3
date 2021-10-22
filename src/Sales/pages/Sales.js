@@ -25,44 +25,45 @@ function Sales() {
     idSales: ""
   });
 
-
-  //con esta funcion pedimos todos los datos a la api
-  const fetchData = async () => {
-    const response = await api.ventas.list();
-    setVentas(response);
-  };
+  const [consulta, setConsulta] = useState(true);
 
   //cada vez que recargemos el use entrara en funcion
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  //guarda los datos del input search
-  const handleInput = (e) => {
-    setSearch({
-      ...search,
-      [ e.target.name ]: e.target.value
-    });
-  };
-
-  //al presionar el boton buscar nos mostrara solo los datos buscados
-  const handleListAdd = (e) => {
-    e.preventDefault();
-
+    //con esta funcion pedimos todos los datos a la api
     const fetchData = async () => {
-      console.log('enviando datos a la api');
-      const res = await api.ventas.getProduct(search.idSales);
-      if (res === null) {
-        console.log('venta no encontrada');
-        return; //404
-        //se llama al componente notification y mostramos un mensaje de que no se muestra el producto, en proceso
-      }
-
-      setVentas([ res ]);
-      console.log('datos guardados en el hook');
+      const response = await api.ventas.list();
+      setVentas(response);
+      setConsulta(false)
     };
 
-    fetchData();
+    if(consulta){
+      fetchData();
+    }
+
+  }, [consulta]);
+
+
+  //guarda los datos del input search
+  const handleInput = async(e) => {
+    if(e.target.value === ''){
+      setConsulta(true);
+    }
+    setSearch({
+      ...search,
+      [ e.target.name ]: e.target.value,
+    });
+
+    e.preventDefault();
+
+    console.log('enviando datos a la api');
+    const res = await api.ventas.getProduct(search.idSales);
+    if (res === null) {
+      console.log('venta no encontrada');
+      return; //404
+      //se llama al componente notification y mostramos un mensaje de que no se muestra el producto, en proceso
+    }
+    setVentas([res]);
+    setConsulta(false);
   };
 
   //recibimos un boolean(false) que mandamos desde sales, para cerrar el modal
@@ -78,7 +79,7 @@ function Sales() {
         <Row className="justify-content-center" >
           <Col className="principal-second" xs={ 6 } md={ 2 }>
             <Button id="registrar" variant="primary" onClick={ () => setShow(true) }>Crear</Button>
-            <AddSales show={ show } show2={ show2 } fetchData={fetchData}/>
+            <AddSales show={ show } show2={ show2 } setConsulta={setConsulta}/>
           </Col>
           <Col className="principal-third" xs={ 6 } md={ 7 }>
             <InputGroup className="mb-3">
@@ -92,18 +93,12 @@ function Sales() {
               />
             </InputGroup>
           </Col>
-          <Col className="principal-fourth" xs={ 6 } md={ 1 } >
-            <Button onClick={ handleListAdd } type="submit" className="BotonTable"><img src="https://img.icons8.com/material-outlined/30/ffffff/search-in-list.png" /></Button>
-          </Col>
-          <Col className="principal-fifth" xs={ 6 } md={ 1 } >
-            <Button onClick={ fetchData } className="BotonTable"><img src="https://img.icons8.com/material-outlined/30/ffffff/list.png" /></Button>
-          </Col>
         </Row>
       </Container>
       <Container className="secondary">
         <Col>
           {/* <Toast /> */ }
-          <Query ventas={ ventas } fetchData={ fetchData } />
+          <Query ventas={ ventas } setConsulta={setConsulta} />
         </Col>
       </Container>
     </>

@@ -1,7 +1,7 @@
 import Remove from "./Remove";
 import Edit from "./Edit";
 
-function Fact({ ventas, fetchData }) {
+function Fact({ ventas, setConsulta}) {
 
     return (
         <>
@@ -16,8 +16,8 @@ function Fact({ ventas, fetchData }) {
                     <th>{ venta.idClient }</th>
                     <th>{ venta.nameC }</th>
                     <th>{ venta.nameV }</th>
-                    <td><Edit venta={ venta } fetchData={ fetchData }/></td>
-                    <td><Remove venta={ venta } fetchData={ fetchData }/></td>
+                    <td><Edit venta={ venta } setConsulta={setConsulta}/></td>
+                    <td><Remove venta={ venta } setConsulta={setConsulta}/></td>
                 </tr>
             )) }
         </>
