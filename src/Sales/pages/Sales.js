@@ -44,7 +44,7 @@ function Sales() {
 
 
   //guarda los datos del input search
-  const handleInput = async(e) => {
+  const handleInput = (e) => {
     if(e.target.value === ''){
       setConsulta(true);
     }
@@ -55,6 +55,10 @@ function Sales() {
 
     e.preventDefault();
 
+    searchIdSales();
+  };
+
+  const searchIdSales = async() =>{
     console.log('enviando datos a la api');
     const res = await api.ventas.getProduct(search.idSales);
     if (res === null) {
@@ -63,8 +67,7 @@ function Sales() {
       //se llama al componente notification y mostramos un mensaje de que no se muestra el producto, en proceso
     }
     setVentas([res]);
-    setConsulta(false);
-  };
+  }
 
   //recibimos un boolean(false) que mandamos desde sales, para cerrar el modal
   const show2 = datos => {
@@ -86,7 +89,7 @@ function Sales() {
               <FormControl
                 aria-label="Default"
                 aria-describedby="inputGroup-sizing-default"
-                onChange={ handleInput }
+                onChange={handleInput}
                 placeholder="Buscar"
                 type="text"
                 name="idSales"

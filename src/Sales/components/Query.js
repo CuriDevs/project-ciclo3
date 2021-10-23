@@ -22,7 +22,6 @@ function Query({ ventas, setConsulta }) {
                 <Button variant="secondary" className="border border-5 border-white">Volver</Button>{ ' ' }
                 <Tab.Container defaultActiveKey="first" className="border border-5 Table">
                     <Row className="border border-5 border-white">
-                        <Col sm={ 1 }></Col>
                         <Col md="auto">
                             <Table striped bordered hover size="sm" responsive="xl">
                                 <thead>
@@ -33,12 +32,11 @@ function Query({ ventas, setConsulta }) {
                                         <th colSpan="2">Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody >
                                     <Fact ventas={ ventas } setConsulta={setConsulta}/>
                                 </tbody>
                             </Table>
                         </Col>
-                        <Col sm={ 1 }></Col>
                     </Row>
                 </Tab.Container>
             </>

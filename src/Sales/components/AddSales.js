@@ -99,18 +99,19 @@ function AddSales ({show, show2, setConsulta}) {
         [e.target.name]: e.target.value, //obtenemos los datos y los pasamos al hook
       });
       e.preventDefault();
-
-      console.log(consultarProducto);
-      const productData = productos.filter(item => item._id === consultarProducto._id);
-      list.idProduct = productData[0]._id;
-      list.price = productData[0].value;
-      list.vTotal = list.amount * list.price ;
-      console.log(productData)
     }
   };
-
-  
-
+ 
+  const res = () =>{
+    const productData = productos.filter(item => item._id === consultarProducto._id);
+    console.log(productData);
+    /*mapeamos el array productData que creamos al filtrar la lista productos para obtener el _id y le ponemos [0] ya que 
+    el mapeo nos devuelve el valor en un array en la posicion 0, lo mismo hacemos con el valu*/
+    list.idProduct = productData.map(item => item._id)[0]; 
+    list.price = productData.map(item => item.value)[0];
+    list.vTotal = list.amount * list.price;
+  }
+  res();
 
   let component;
   if(notify){
