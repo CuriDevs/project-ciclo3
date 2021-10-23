@@ -56,7 +56,7 @@ export const api = {
                 body: JSON.stringify(list),
             });
         },
-        getProduct(id) {
+        getUser(id) {
             return callApi(`/Users/${ id }`);
         },
     }
