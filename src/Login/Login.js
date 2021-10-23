@@ -29,6 +29,8 @@ function Login() {
     date: value,
   });
 
+  const usuario = [];
+
   const creacion = async (data) => {
     const create = await api.Users.create(data);
     if (!create) {
@@ -47,6 +49,9 @@ function Login() {
       if (usuarios[i].Email == data.Email && usuarios[i].State == "Activo") {
         console.log(usuarios[i].Email);
         create = "Creado";
+        sessionStorage.setItem("_id", usuarios[i]._id);
+        sessionStorage.setItem("Image", usuarios[i].UrlImage);
+        sessionStorage.setItem("Name", usuarios[i].UserName);
       } else if (usuarios[i].Email == data.Email && usuarios[i].State == "Inactivo") {
         create = "Inactivo";
       } else {
@@ -67,7 +72,7 @@ function Login() {
   }
 
   const login = async (res) => {
-    localStorage.setItem("token", res.tokenId);
+    sessionStorage.setItem("token", res.tokenId);
     setList(user.UserName = res.profileObj.name,
       user.Email = res.profileObj.email,
       user.UrlImage = res.profileObj.imageUrl,
