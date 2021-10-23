@@ -6,6 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../../Images/logo copia1.png';
 import Fondo from '../../Images/Fondo.png';
 import styles from "../styles/Image.css";
+import { useHistory } from "react-router-dom";
 
 import {
     Link
@@ -13,9 +14,19 @@ import {
 
 function Header() {
 
+    const history = useHistory();
+
     const url = sessionStorage.getItem('Image');
     const user = sessionStorage.getItem('_id');
-    const name = sessionStorage.getItem('Name')
+    const name = sessionStorage.getItem('Name');
+
+    const logout = () => {
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem('Image');
+        sessionStorage.removeItem('_id');
+        sessionStorage.removeItem('Name');
+        history.push("/");
+      };
 
     return (
         
@@ -44,7 +55,7 @@ function Header() {
                             </Link>
 
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Cerrar Sesion</NavDropdown.Item>
+                            <NavDropdown.Item href="/" onClick={logout}>Cerrar Sesion</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     {/* <Images usuarios={usuarios} /> */}
