@@ -103,8 +103,8 @@ function AddSales ({show, show2, setConsulta}) {
       console.log(consultarProducto);
       const productData = productos.filter(item => item._id === consultarProducto._id);
       list.idProduct = productData[0]._id;
-      list.price= productData[0].value;
-      list.vTotal = list.amount * productData[0].value ;
+      list.price = productData[0].value;
+      list.vTotal = list.amount * list.price ;
       console.log(productData)
     }
   };
