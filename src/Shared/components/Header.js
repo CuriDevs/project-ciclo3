@@ -26,7 +26,7 @@ function Header() {
         sessionStorage.removeItem('_id');
         sessionStorage.removeItem('Name');
         history.push("/");
-      };
+    };
 
     return (
         
