@@ -73,6 +73,9 @@ function Login() {
 
   const login = async (res) => {
     sessionStorage.setItem("token", res.tokenId);
+    sessionStorage.setItem("_id", res._id);
+    sessionStorage.setItem("Image", res.UrlImage);
+    sessionStorage.setItem("Name", res.UserName);
     setList(user.UserName = res.profileObj.name,
       user.Email = res.profileObj.email,
       user.UrlImage = res.profileObj.imageUrl,
