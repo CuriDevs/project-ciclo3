@@ -1,4 +1,3 @@
-import { createConnection } from "net";
 import React, { useState, useEffect } from "react";
 import GoogleLogin from 'react-google-login';
 import logo from "../Images/Jalmedfactory.png";
@@ -10,79 +9,99 @@ function Login() {
 
   const history = useHistory();
 
-  function navigateToHome() {
-    history.push("/sales");
-  }
-
   function navigateToProducts() {
     history.push("/products");
   }
 
   const value = new Date().toString();
 
-  const [ user, setList ] = useState({
+  const baseUser = {
     UserName: "",
     Email: "",
     UrlImage: "",
     Rol: "",
     State: "",
     date: value,
-  });
-
-  const usuario = [];
-
-  const creacion = async (data) => {
-    const create = await api.Users.create(data);
-    if (!create) {
-      console.log('Usuario creado');
-    }
   };
 
-  const busqueda = async () => {
-    const resultado = await api.Users.list();
-    return resultado;
-  }
+  const [usuarios, setConsulta] = useState([]);
+  const [consulta, setUsers] = useState(true);
 
-  const validacion = (data, usuarios) => {
-    var create = "vacio";
-    for (let i=0; i<usuarios.length; i++) {
-      if (usuarios[i].Email == data.Email && usuarios[i].State == "Activo") {
-        console.log(usuarios[i].Email);
-        create = "Creado";
-        sessionStorage.setItem("_id", usuarios[i]._id);
-        sessionStorage.setItem("Image", usuarios[i].UrlImage);
-        sessionStorage.setItem("Name", usuarios[i].UserName);
-      } else if (usuarios[i].Email == data.Email && usuarios[i].State == "Inactivo") {
-        create = "Inactivo";
-      } else {
-        create = "Por crear"
+  //cada vez que recargemos el use entrara en funcion
+  useEffect(() => {
+    //con esta funcion pedimos todos los datos a la api
+    const fetchData = async () => {
+      const response = await api.Users.list();;
+      if (!response.message) {
+        setConsulta(response);
+        setUsers(false);
       }
     }
+    if(consulta){
+      fetchData();
+    }
+  }, [consulta]);
 
-    if (create == "Creado") {
-      navigateToProducts();
-      console.log('Redigido');
-    } else if (create == "Inactivo") {
-      console.log('Pendiente activacion')
-    } else {
+  const creacion = async (data) => {
+    await api.Users.create(data);
+  };
+
+  const validacion = (data, usuarios) => {
+    var estado = "vacio";
+    if (!usuarios.length) {
       creacion(data);
-      navigateToHome();
-      console.log('Usuario creado');
+      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("_id");
+      sessionStorage.removeItem("Image");
+      sessionStorage.removeItem("Name");
+      alert('Usuario creado, espere la activación por el Administrador del sistema');
+    } else {
+      for (let i=0; i<usuarios.length; i++) {
+        if (usuarios[i].Email == data.Email) {
+          console.log(usuarios[i].Email);
+          console.log(data.Email);
+          estado = usuarios[i].State;
+          console.log(estado);
+          sessionStorage.setItem("_id", usuarios[i]._id);
+          break;
+        } else {
+          estado = "Por crear";
+        }
+      }
+  
+      if (estado == 'Activo') {
+        navigateToProducts();
+      } else if (estado == "Inactivo") {
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("_id");
+        sessionStorage.removeItem("Image");
+        sessionStorage.removeItem("Name");
+        alert('Pendiente activación del usuario');
+        setUsers(true);
+      } else if (estado == "Por crear") {
+        creacion(data);
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("_id");
+        sessionStorage.removeItem("Image");
+        sessionStorage.removeItem("Name");
+        alert('Usuario creado, espere la activación por el Administrador del sistema');
+        setUsers(true);
+      }
     }
   }
 
-  const login = async (res) => {
+  const login = (res) => {
+    sessionStorage.clear();
     sessionStorage.setItem("token", res.tokenId);
-    sessionStorage.setItem("_id", res._id);
-    sessionStorage.setItem("Image", res.UrlImage);
-    sessionStorage.setItem("Name", res.UserName);
-    setList(user.UserName = res.profileObj.name,
-      user.Email = res.profileObj.email,
-      user.UrlImage = res.profileObj.imageUrl,
-      user.Rol = "Cliente",
-      user.State = "Inactivo");
-    console.log(res);
-    const usuarios = await busqueda();
+    sessionStorage.setItem("Image", res.profileObj.imageUrl);
+    sessionStorage.setItem("Name", res.profileObj.name);
+    const user = {...baseUser}
+    user.UserName = res.profileObj.name;
+    user.Email = res.profileObj.email;
+    user.UrlImage = res.profileObj.imageUrl;
+    user.Rol = "Cliente";
+    user.State = "Inactivo";
+    console.log(user);
     console.log(usuarios);
     validacion(user, usuarios);
   };
