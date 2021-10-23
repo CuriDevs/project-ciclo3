@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styles from '../styles/Table.css';
-import { api } from '../utils/api';
+import { api } from '../../utils/api';
 import React, { useState, useEffect } from "react";
 
 function Edit({ venta, setConsulta}) {

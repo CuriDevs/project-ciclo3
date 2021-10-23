@@ -10,6 +10,31 @@ const callApi = async (url, options = {}) => {
 };
 
 export const api = {
+    ventas: {
+        list() {
+            return callApi("/ventas");
+        },
+        create(ventas) {
+            return callApi("/ventas", {
+                method: "POST",
+                body: JSON.stringify(ventas),
+            });
+        },
+        delete(id) {
+            return callApi(`/ventas/${ id }`, {
+                method: "DELETE",
+            });
+        },
+        edit(ventas,list) {
+            return callApi(`/ventas/${ ventas._id }`, {
+                method: "PATCH",
+                body: JSON.stringify(list),
+            });
+        },
+        getProduct(id) {
+            return callApi(`/ventas/${ id }`);
+        },
+    },
     Users: {
         list() {
             return callApi("/Users");
@@ -31,7 +56,7 @@ export const api = {
                 body: JSON.stringify(list),
             });
         },
-        getProduct(id) {
+        getUser(id) {
             return callApi(`/Users/${ id }`);
         },
     }

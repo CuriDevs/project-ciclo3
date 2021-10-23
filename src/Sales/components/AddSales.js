@@ -12,7 +12,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Notification from './Notification';
 
-import { api } from '../utils/api';
+import { api } from '../../utils/api';
 
 //api productos
 import { obtenerProductos } from '../../productsManagement/utils/api.js';

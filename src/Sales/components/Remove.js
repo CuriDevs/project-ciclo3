@@ -1,7 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-import { api } from '../utils/api';
+import { api } from '../../utils/api';
 import styles from '../styles/Table.css';
 
 function Remove({ venta, setConsulta}) {
