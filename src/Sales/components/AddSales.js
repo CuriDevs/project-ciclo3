@@ -17,13 +17,28 @@ import { api } from '../../utils/api';
 //api productos
 import { obtenerProductos } from '../../productsManagement/utils/api.js';
 
-function AddSales ({show, show2, setConsulta, users}) {
+function AddSales ({show, show2, setConsulta}) {
 
   const [notify, setNotify] = useState(false);
+  const [notifyError, setNotifyError] = useState(false);
+  //const handle = () => setNotifyError(true);
 
   const [productos, setProductos] = useState([])
 
-  const [consultarProducto, setConsultarProducto] = useState({_id: ''})
+  const [consultarProducto, setConsultarProducto] = useState({_id_product: ''})
+  const user_id = sessionStorage.getItem('_id');
+  //le damos el estado inicial al hook, osea sus valores por default
+  const [list, setList] = useState({
+    idProduct: '',
+    vTotal: 0,
+    amount: 0,
+    price: 0,
+    dateV: "",
+    state: "En proceso",
+    idVendedor: "",
+    nameC: "",
+    Documento: 1,
+  });
 
   useEffect(() => {
     const fecthProductos = async () => {
@@ -38,30 +53,14 @@ function AddSales ({show, show2, setConsulta, users}) {
 
   }, []);
 
-  //le damos el estado inicial al hook, osea sus valores por default
-  const [list, setList] = useState({
-    idProduct: '',
-    vTotal: 0,
-    amount: 0,
-    price: 0,
-    dateV: "",
-    state: "En proceso",
-    idVendedor: "",
-    nameC: "",
-    Documento: 1,
-  });
-
   //escucha el cambio de los inputs
   const handleInputtAdd = (e) => {
-    if(e.target.value === ''){
-      console.log('f');
-    }else{
-      //cambiamos el estado
-      setList({
-        ...list,
-        [e.target.name]: e.target.value, //obtenemos los datos y los pasamos al hook
-      });
-    }
+
+    //cambiamos el estado
+    setList({...list,
+      [e.target.name]: e.target.value, //obtenemos los datos y los pasamos al hook
+    });
+
   };
 
   //luego esto se acciona al momento de presionar el boton guardar
@@ -71,8 +70,8 @@ function AddSales ({show, show2, setConsulta, users}) {
     
     setConsulta(true);
   };
-
-
+  
+  
   const insert = async(list) =>{
     const listAdd = {
       idProduct: list.idProduct,
@@ -81,45 +80,56 @@ function AddSales ({show, show2, setConsulta, users}) {
       price: list.price,
       dateV: list.dateV,
       state: list.state,
-      idVendedor: list.idVendedor,
+      idVendedor: user_id,
       nameC: list.nameC,
       Documento: list.Documento,
     };
-    await api.ventas.create(listAdd);
-    setNotify(true);
+    const res = await api.ventas.create(listAdd);
+    console.log(res);
+    console.log(res.statusCode)
+
+    if(res.statusCode == 400){
+      setNotifyError(true);
+    }
+    if(res.statusCode == 201){
+      setNotify(true);
+    }
   }
 
-  const handleInputProduct = (e) => {
-    if(e.target.value === ''){
-      console.log('f');
-    }else{
+  const handleInputIdProduct = (e) => {
+
       //cambiamos el estado
       setConsultarProducto({
         ...consultarProducto,
         [e.target.name]: e.target.value, //obtenemos los datos y los pasamos al hook
       });
       e.preventDefault();
-    }
+
   };
- 
-  const res = () =>{
-    const productData = productos.filter(item => item._id === consultarProducto._id);
+
+  const getResIdProductos = () =>{
+    const productData = productos.filter(item => item._id === consultarProducto._id_product);
     console.log(productData);
     /*mapeamos el array productData que creamos al filtrar la lista productos para obtener el _id y le ponemos [0] ya que 
-    el mapeo nos devuelve el valor en un array en la posicion 0, lo mismo hacemos con el valu*/
+    el mapeo nos devuelve el valor en un array en la posicion 0, lo mismo hacemos con el value*/
     list.idProduct = productData.map(item => item._id)[0]; 
     list.price = productData.map(item => item.value)[0];
     list.vTotal = list.amount * list.price;
   }
-  res();
+  getResIdProductos();
+
 
   let component;
   if(notify){
-    component = <Notification setNotify={setNotify} mensaje='Registrado correctamente!'/>
-  }else{
-    component = null;
-  }
+    component = <Notification setNotify={setNotify} setNotifyError={setNotifyError} show={notify} mensaje='Venta registrada correctamente!'/>
+  }else
+    if(notifyError){
+      component = <Notification setNotify={setNotify} setNotifyError={setNotifyError}  show={notifyError} mensaje='Todos los campos son obligatorios'/>
+    }else{
+      component = null;
+    }
   //al presionar el boton de cerrar el modal enviamos un boolean(false) a la page sales para cambiar el estado del hook show
+
   const close = () =>{
     show2(false);
   }
@@ -127,7 +137,7 @@ function AddSales ({show, show2, setConsulta, users}) {
   return (
     <>
       <Row>{component }</Row>
-      <Modal show={show} className="mb" onHide={show}>
+      <Modal onClose={show} show={show} className="mb" onHide={show}>
         <Modal.Header>
           <Modal.Title>Regitro de ventas</Modal.Title>
         </Modal.Header>
@@ -141,7 +151,7 @@ function AddSales ({show, show2, setConsulta, users}) {
                 <Col xs={12} sm>
                   
                   <FloatingLabel controlId="formGridIdProducto" label="Id producto">
-                    <Form.Select aria-label="Floating label select example" onChange={handleInputProduct} name="_id">
+                    <Form.Select aria-label="Floating label select example" onChange={handleInputIdProduct} name="_id_product">
                       <option>Seleciona el Id del producto</option>
                       {/*<QueryProducts products={productos}/>*/}
                       {productos.map((value) => (
@@ -238,16 +248,15 @@ function AddSales ({show, show2, setConsulta, users}) {
               <hr />
               <Row className="mb-3">
                 <Col xs={12} sm>
-                  <Form.Group controlId="formGridNombreVendedor">
-                    <Form.Label>Identificacion del Vendedor</Form.Label>
-                    <Form.Select aria-label="Floating label select example" onChange={handleInputtAdd} name="idVendedor">
-                      <option>Seleciona el Id del Vendedor</option>
-                      {/*<QueryProducts products={productos}/>*/}
-                      {users.map((value) => (
-                        <option>{value._id}</option>
-                      ))} 
-                      {/*<option value="3">Three</option>*/}
-                    </Form.Select>
+                  <Form.Group controlId="formGridIdVendedor">
+                    <Form.Label>Id vendedor</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder={user_id}
+                      readOnly
+                      onChange={handleInputtAdd}
+                      name="idVendedor"
+                    />
                   </Form.Group>
                 </Col>
               </Row>
