@@ -20,10 +20,25 @@ import { obtenerProductos } from '../../productsManagement/utils/api.js';
 function AddSales ({show, show2, setConsulta}) {
 
   const [notify, setNotify] = useState(false);
+  const [notifyError, setNotifyError] = useState(false);
+  //const handle = () => setNotifyError(true);
 
   const [productos, setProductos] = useState([])
 
   const [consultarProducto, setConsultarProducto] = useState({_id: ''})
+  
+  //le damos el estado inicial al hook, osea sus valores por default
+  const [list, setList] = useState({
+    idProduct: '',
+    vTotal: 0,
+    amount: 0,
+    price: 0,
+    dateV: "",
+    state: "En proceso",
+    idClient: "",
+    nameC: "",
+    nameV: ""
+  });
 
   useEffect(() => {
     const fecthProductos = async () => {
@@ -38,30 +53,16 @@ function AddSales ({show, show2, setConsulta}) {
 
   }, []);
 
-  //le damos el estado inicial al hook, osea sus valores por default
-  const [list, setList] = useState({
-    idProduct: '',
-    vTotal: 0,
-    amount: 0,
-    price: 0,
-    dateV: "",
-    state: "En proceso",
-    idClient: "",
-    nameC: "",
-    nameV: "",
-  });
+
 
   //escucha el cambio de los inputs
   const handleInputtAdd = (e) => {
-    if(e.target.value === ''){
-      console.log('f');
-    }else{
-      //cambiamos el estado
-      setList({
-        ...list,
-        [e.target.name]: e.target.value, //obtenemos los datos y los pasamos al hook
-      });
-    }
+
+    //cambiamos el estado
+    setList({...list,
+      [e.target.name]: e.target.value, //obtenemos los datos y los pasamos al hook
+    });
+
   };
 
   //luego esto se acciona al momento de presionar el boton guardar
@@ -71,8 +72,8 @@ function AddSales ({show, show2, setConsulta}) {
     
     setConsulta(true);
   };
-
-
+  
+  
   const insert = async(list) =>{
     const listAdd = {
       idProduct: list.idProduct,
@@ -85,41 +86,51 @@ function AddSales ({show, show2, setConsulta}) {
       nameC: list.nameC,
       nameV: list.nameV,
     };
-    await api.ventas.create(listAdd);
-    setNotify(true);
+    const res = await api.ventas.create(listAdd);
+    console.log(res);
+    console.log(res.statusCode)
+
+    if(res.statusCode == 400){
+      setNotifyError(true);
+    }
+    if(res.statusCode == 201){
+      setNotify(true);
+    }
   }
 
   const handleInputProduct = (e) => {
-    if(e.target.value === ''){
-      console.log('f');
-    }else{
+
       //cambiamos el estado
       setConsultarProducto({
         ...consultarProducto,
         [e.target.name]: e.target.value, //obtenemos los datos y los pasamos al hook
       });
       e.preventDefault();
-    }
+
   };
- 
-  const res = () =>{
+
+  const getRes = () =>{
     const productData = productos.filter(item => item._id === consultarProducto._id);
     console.log(productData);
     /*mapeamos el array productData que creamos al filtrar la lista productos para obtener el _id y le ponemos [0] ya que 
-    el mapeo nos devuelve el valor en un array en la posicion 0, lo mismo hacemos con el valu*/
+    el mapeo nos devuelve el valor en un array en la posicion 0, lo mismo hacemos con el value*/
     list.idProduct = productData.map(item => item._id)[0]; 
     list.price = productData.map(item => item.value)[0];
     list.vTotal = list.amount * list.price;
   }
-  res();
+  getRes();
 
   let component;
   if(notify){
-    component = <Notification setNotify={setNotify} mensaje='Registrado correctamente!'/>
-  }else{
-    component = null;
-  }
+    component = <Notification setNotify={setNotify} setNotifyError={setNotifyError} show={notify} mensaje='Venta registrada correctamente!'/>
+  }else
+    if(notifyError){
+      component = <Notification setNotify={setNotify} setNotifyError={setNotifyError}  show={notifyError} mensaje='Todos los campos son obligatorios'/>
+    }else{
+      component = null;
+    }
   //al presionar el boton de cerrar el modal enviamos un boolean(false) a la page sales para cambiar el estado del hook show
+
   const close = () =>{
     show2(false);
   }
@@ -127,7 +138,7 @@ function AddSales ({show, show2, setConsulta}) {
   return (
     <>
       <Row>{component }</Row>
-      <Modal show={show} className="mb" onHide={show}>
+      <Modal onClose={show} show={show} className="mb" onHide={show}>
         <Modal.Header>
           <Modal.Title>Regitro de ventas</Modal.Title>
         </Modal.Header>
