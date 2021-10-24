@@ -1,225 +1,92 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
+import Table from "react-bootstrap/Table";
+import Tab from "react-bootstrap/Tab";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Header from "../../Shared/components/Header"
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Edit from "../components/Edit";
+import Remove from "../components/Remove";
+import { api } from '../../utils/api.js'
 
 
+const Titulos = [ 'ID Usuario', 'Nombre Completo', 'Correo', 'Rol', 'Estado', 'Documento de identificación', 'Fecha registro'];
 
-const data = [
-    { id: 1, Email: "Luisa@gmail.com", nombre: "Luisa", rol: "indefinido", estado: "Inactivo"},
-    { id: 2, Email: "Juan@gmail.com", nombre: "Juan", rol: "indefinido", estado: "Inactivo" },
-    { id: 3, Email: "Daniel@gmail.com", nombre: "Daniel", rol: "indefinido", estado: "Inactivo" },
-    { id: 4, Email: "Pedro@gmail.com", nombre: "Pedro", rol: "indefinido", estado: "Inactivo"},
-];
+function Rol() {
 
-class Rol extends Component {
-state={
-  data: data,
-  modalInsertar: false,
-  modalEliminar: false,
-  form:{
-    id: '',
-    Email:'',
-    nombre: '',
-    rol: '',
-    estado: '',
-    capestado: '',
-    tipoModal: ''
-  }
-}
+  //Listado de usuarios
+  const [ users, setUsuarios ] = useState([]);
 
-peticionGet=()=>{
-axios.get(data).then(response=>{
-  this.setState({data: response.data});
-}).catch(error=>{
-  console.log(error.message);
-})
-}
+  const [ consulta, setConsulta ] = useState(true);
 
+  //cada vez que recargemos el use entrara en funcion
+  useEffect(() => {
+    //con esta funcion pedimos todos los datos a la api
+    const fetchData = async () => {
+      const respUsers = await api.Users.list();
+      setUsuarios(respUsers);
+      setConsulta(false);
+    };
 
-
-editar = (dato) => {
-  var contador = 0;
-  var arreglo = this.state.data;
-  arreglo.map((registro) => {
-    if (dato.id == registro.id) {
-      arreglo[contador].rol = dato.rol;
-      arreglo[contador].estado = dato.estado;
+    if (consulta) {
+      fetchData();
     }
-    contador++;
-  });
-  this.setState({ data: arreglo});
-};
 
-eliminar = (dato) => {
-  var opcion = window.confirm("Estás Seguro que deseas Eliminar el elemento "+dato.id);
-  if (opcion == true) {
-    var contador = 0;
-    var arreglo = this.state.data;
-    arreglo.map((registro) => {
-      if (dato.id == registro.id) {
-        arreglo.splice(contador, 1);
-      }
-      contador++;
-    });
-    this.setState({ data: arreglo, modalActualizar: false });
+  }, [ consulta ]);
+
+  if (!users.length) {
+    return (
+        <>
+          <Header />
+          <h1 class="title">No se registran Usuarios!</h1>
+        </>
+    );
+  } else {
+      return (
+          <>
+            <Header />
+            <Container className="secondary">
+              <Col>
+                <Button variant="secondary" className="border border-5 border-white">Volver</Button>{ ' ' }
+                <Tab.Container defaultActiveKey="first" className="border border-5 Table">
+                    <Row className="border border-5 border-white">
+                        <Col md="auto">
+                            <Table striped bordered hover size="sm" responsive="xl">
+                                <thead>
+                                    <tr>
+                                        { Titulos.map((value) => (
+                                            <th>{ value }</th>
+                                        )) }
+                                        <th colSpan="2">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                { users.map((user) => (
+                                    <tr>
+                                        <th>{ user._id }</th>
+                                        <th>{ user.UserName }</th>
+                                        <th>{ user.Email }</th>
+                                        <th>{ user.Rol }</th>
+                                        <th>{ user.State }</th>
+                                        <th>{ user.Document }</th>
+                                        <th>{ user.date }</th>
+                                        <td><Edit user={ user } setConsulta={ setConsulta }  /></td>
+                                        <td><Remove user={ user } setConsulta={ setConsulta } /></td>
+                                    </tr>
+                                )) }
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row>
+                </Tab.Container>
+              </Col>
+            </Container>
+          </>
+      );
   }
-};
 
-insertar= ()=>{
-  var valorNuevo= {...this.state.form};
-  valorNuevo.id=this.state.data.length+1;
-  var lista= this.state.data;
-  lista.push(valorNuevo);
-  this.setState({ modalInsertar: false, data: lista });
 }
 
-
-
-
-
-
-modalInsertar=()=>{
-  this.setState({modalInsertar: !this.state.modalInsertar});
-}
-
-seleccionarEmpresa=(empresa)=>{
-  this.setState({
-    tipoModal: 'actualizar',
-    form: {
-      id: empresa.id,
-      nombre: empresa.nombre,
-      Email: empresa.Email,
-      rol: empresa.rol,
-      estado: empresa.estado,
-    }
-  })
-}
-
-handleChange=async e=>{
-e.persist();
-await this.setState({
-  form:{
-    ...this.state.form,
-    [e.target.name]: e.target.value
-  }
-});
-console.log(this.state.form);
-}
-
-  componentDidMount() {
-    this.peticionGet();
-  }
-  
-
-  render(){
-      
-    const {form}=this.state;
-  return (
-    <><div><Header /></div><div className="Rol">
-          <br /><br />
-          <h2 align="center">TABLA DE USUARIOS</h2>
-          <br />
-          <button className="btn btn-success" onClick={() => { this.setState({ form: null, tipoModal: 'insertar' }); this.modalInsertar(); } }>Agregar Usuario</button>
-          <br /><br />
-          <table className="table ">
-              <thead>
-                
-                  <tr>
-                      <th>ID</th>
-                      <th>Nombre</th>
-                      <th>Email</th>
-                      <th>Rol</th>
-                      <th>Estado</th>
-                      <th>Accion</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  {this.state.data.map(empresa => {
-                      return (
-                          <tr>
-                              <td>{empresa.id}</td>
-                              <td>{empresa.nombre}</td>
-                              <td>{empresa.Email}</td>
-                              <td>{empresa.rol}</td>
-                              <td>{empresa.estado}</td>
-
-                              <td>
-                                  <button className="btn btn-success" onClick={() => { this.seleccionarEmpresa(empresa); this.modalInsertar(); } }>Editar</button>
-                                  {"   "}
-                                  <button className="btn btn-dark" onClick={() => { this.seleccionarEmpresa(empresa); this.setState({ modalEliminar: true }); } }>Borrar</button>
-                              </td>
-                          </tr>
-                      );
-                  })}
-              </tbody>
-          </table>
-
-
-          <Modal isOpen={this.state.modalInsertar}>
-              <ModalHeader style={{ display: 'block' }}>
-                  <span style={{ float: 'right' }} onClick={() => this.modalInsertar()}>x</span>
-              </ModalHeader>
-              <ModalBody>
-                  <div className="form-group">
-                      <label htmlFor="id">ID</label>
-                      <input className="form-control" type="text" name="id" id="id" readOnly onChange={this.handleChange} value={form ? form.id : this.state.data.length + 1} />
-                      <br />
-                      <label htmlFor="nombre">Nombre</label>
-                      <input className="form-control" type="text" name="nombre" id="nombre" onChange={this.handleChange} value={form ? form.nombre : ''} />
-                      <br />
-                      <label htmlFor="Email">Email</label>
-                      <input className="form-control" type="text" name="Email" id="Email" onChange={this.handleChange} value={form ? form.Email : ''} />
-                      <br />
-                      <label htmlFor="rol">Rol</label>
-                      <select className="form-control" type="text" name="rol" id="rol" onChange={this.handleChange} value={form ? form.rol : ''}>
-                        <option>Indefinido</option>
-                        <option>Administrador</option>
-                        <option>Ventas</option>
-                     </select>
-                     <br />
-                     <label htmlFor="rol">Estado</label>
-                     <select className="form-control" type="text" name="estado" id="estado" onChange={this.handleChange} value={form ? form.estado : ''}>
-                        <option>Inactivo</option>
-                        <option>Activo</option>
-                     </select>
-                        
-                  </div>
-              </ModalBody>
-
-              <ModalFooter>
-                  {this.state.tipoModal == 'insertar' ?
-                      <button className="btn btn-success" onClick={() => this.insertar()}>
-                          Insertar
-                      </button> : <button className="btn btn-primary" onClick={() => this.editar(this.state.form)}>
-                          Actualizar
-                      </button>}
-                  <button className="btn btn-danger" onClick={() => this.modalInsertar()}>Cancelar</button>
-              </ModalFooter>
-          </Modal>
-
-
-
-
-
-
-
-
-          <Modal isOpen={this.state.modalEliminar}>
-              <ModalBody>
-                  Estás seguro que deseas eliminar a la empresa {form && form.nombre}
-              </ModalBody>
-              <ModalFooter>
-                  <button className="btn btn-danger" onClick={() => this.peticionDelete()}>Sí</button>
-                  <button className="btn btn-secundary" onClick={() => this.setState({ modalEliminar: false })}>No</button>
-              </ModalFooter>
-          </Modal>
-      </div></>
-
-
-
-  );
-}
-}
 export default Rol;

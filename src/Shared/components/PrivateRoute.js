@@ -1,5 +1,4 @@
 import { Route, Redirect } from "react-router-dom";
-//import { useJwt } from "react-jwt";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
     let auth = sessionStorage.getItem("token");
