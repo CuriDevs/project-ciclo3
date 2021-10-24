@@ -7,9 +7,20 @@ import styles from '../styles/Table.css';
 import { api } from '../../utils/api';
 import React, { useState, useEffect } from "react";
 
-function Edit({ venta, setConsulta}) {
-    //const [ value, setValue ] = useState(new Date().toLocaleString());
+function Edit({ venta, setConsulta, users}) {
+
+    const userList = {_id: venta.idVendedor, UserName: '',Documento: 0};
+
+    const res = () =>{
+        const userData = users.filter(item => item._id === venta.idVendedor);
+        console.log(userData);
+        userList.UserName = userData.map(item => item.UserName)[0]; 
+        userList.Documento = userData.map(item => item.Documento)[0]; 
+        }
+        res();
+
     const [ show, setShow ] = useState(false);
+
     const [ list, setList ] = useState({
         idProduct: venta.idProduct,
         vTotal: venta.vTotal,
@@ -19,19 +30,9 @@ function Edit({ venta, setConsulta}) {
         state: venta.state,
         idClient: venta.idClient,
         nameC: venta.nameC,
-        nameV: venta.nameV,
+        Documento: venta.Documento,
     });
-    /*
-        useEffect(() => {
-            setInterval(() => {
-                const fetchData = () => {
-                    const fecha = new Date().toLocaleString();
-                    setValue(fecha);
-                };
-                fetchData();
-            }, 1000);
-        }, []);
-    */
+    
     //escucha el cambio de los inputs
     const handleInputtAdd = (e) => {
         if (e.target.value === '' || e.target.value === 0) {
@@ -53,7 +54,7 @@ function Edit({ venta, setConsulta}) {
 
     const updateVentas = async (list) => {
         console.log(list);
-        const responde = await api.ventas.edit(venta,list);
+        await api.ventas.edit(venta,list);
         //alert("Se actualizo la venta: " + venta._id);
         setConsulta(true);
     };
@@ -88,7 +89,7 @@ function Edit({ venta, setConsulta}) {
                         <Row className="mb-3">
                             <Form.Group as={ Col } controlId="formGridVenta">
                                 <Form.Label>Valor venta</Form.Label>
-                                <Form.Control size="sm" type="number" placeholder={ venta.vTotal }
+                                <Form.Control size="sm" type="number" readOnly placeholder={ list.amount * list.price }
                                     onChange={ handleInputtAdd }
                                     name="vTotal"
                                 />
@@ -96,7 +97,7 @@ function Edit({ venta, setConsulta}) {
 
                             <Form.Group as={ Col } controlId="formGridCantidad">
                                 <Form.Label>Cantidad</Form.Label>
-                                <Form.Control size="sm" type="number" placeholder={ venta.amount }
+                                <Form.Control size="sm" type="number" placeholder={ list.amount }
                                     onChange={ handleInputtAdd }
                                     name="amount"
                                 />
@@ -104,7 +105,7 @@ function Edit({ venta, setConsulta}) {
 
                             <Form.Group as={ Col } controlId="formGridPrecio">
                                 <Form.Label>Precio Unitario</Form.Label>
-                                <Form.Control size="sm" type="number" placeholder={ venta.price }
+                                <Form.Control size="sm" type="number" placeholder={ list.price }
                                     onChange={ handleInputtAdd }
                                     name="price"
                                 />
@@ -113,33 +114,32 @@ function Edit({ venta, setConsulta}) {
 
                         <Form.Group className="mb-3" controlId="formGridFecha">
                             <Form.Label>Fecha</Form.Label>
-                            <Form.Control size="sm" readOnly placeholder={ venta.dateV } />
+                            <Form.Control size="sm" readOnly placeholder={ list.dateV } />
                         </Form.Group>
 
                         <Row className="mb-3">
-                            <Form.Group as={ Col } controlId="formGridDocumento">
-                                <Form.Label>Numero Documento</Form.Label>
-                                <Form.Control size="sm" type="number" placeholder={ venta.idClient } />
-                            </Form.Group>
 
                             <Form.Group as={ Col } controlId="formGridNombre">
                                 <Form.Label>Nombre Cliente</Form.Label>
-                                <Form.Control size="sm" placeholder={ venta.nameC }
-                                    onChange={ handleInputtAdd }
-                                    name="nameC"
-                                />
+                                <Form.Control size="sm" type="text" placeholder={ venta.nameC } />
                             </Form.Group>
+
+                            <Form.Group as={ Col } controlId="formGridDocumento">
+                                <Form.Label>Numero Documento</Form.Label>
+                                <Form.Control size="sm" type="number" placeholder={ venta.Documento } />
+                            </Form.Group>
+                            
                         </Row>
 
                         <Row className="mb-3">
                             <Form.Group as={ Col } controlId="formGridVendedor">
                                 <Form.Label>Vendedor</Form.Label>
-                                <Form.Control size="sm" type="text" readOnly placeholder={ venta.nameV } />
+                                <Form.Control size="sm" type="text" readOnly placeholder={ userList.UserName } />
                             </Form.Group>
 
                             <Form.Group as={ Col } controlId="formGridEstado">
                                 <Form.Label>Estado</Form.Label>
-                                <Form.Select defaultValue="En proceso" onChange={ handleInputtAdd } name="state">
+                                <Form.Select size="sm" defaultValue="En proceso" onChange={ handleInputtAdd } name="state">
                                     <option>Choose...</option>
                                     <option>Entregada</option>
                                     <option>En proceso</option>

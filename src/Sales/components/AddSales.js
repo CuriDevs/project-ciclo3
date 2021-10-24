@@ -17,7 +17,7 @@ import { api } from '../../utils/api';
 //api productos
 import { obtenerProductos } from '../../productsManagement/utils/api.js';
 
-function AddSales ({show, show2, setConsulta}) {
+function AddSales ({show, show2, setConsulta, users}) {
 
   const [notify, setNotify] = useState(false);
 
@@ -46,9 +46,9 @@ function AddSales ({show, show2, setConsulta}) {
     price: 0,
     dateV: "",
     state: "En proceso",
-    idClient: "",
+    idVendedor: "",
     nameC: "",
-    nameV: "",
+    Documento: 1,
   });
 
   //escucha el cambio de los inputs
@@ -81,9 +81,9 @@ function AddSales ({show, show2, setConsulta}) {
       price: list.price,
       dateV: list.dateV,
       state: list.state,
-      idClient: list.idClient,
+      idVendedor: list.idVendedor,
       nameC: list.nameC,
-      nameV: list.nameV,
+      Documento: list.Documento,
     };
     await api.ventas.create(listAdd);
     setNotify(true);
@@ -217,7 +217,7 @@ function AddSales ({show, show2, setConsulta}) {
                       type="texto"
                       placeholder="Identificacion del cliente"
                       onChange={handleInputtAdd}
-                      name="idClient"
+                      name="Documento"
                     />
                   </Form.Group>
                 </Col>
@@ -239,13 +239,15 @@ function AddSales ({show, show2, setConsulta}) {
               <Row className="mb-3">
                 <Col xs={12} sm>
                   <Form.Group controlId="formGridNombreVendedor">
-                    <Form.Label>Nombre del vendedor</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Nombre del vendedor"
-                      onChange={handleInputtAdd}
-                      name="nameV"
-                    />
+                    <Form.Label>Identificacion del Vendedor</Form.Label>
+                    <Form.Select aria-label="Floating label select example" onChange={handleInputtAdd} name="idVendedor">
+                      <option>Seleciona el Id del Vendedor</option>
+                      {/*<QueryProducts products={productos}/>*/}
+                      {users.map((value) => (
+                        <option>{value._id}</option>
+                      ))} 
+                      {/*<option value="3">Three</option>*/}
+                    </Form.Select>
                   </Form.Group>
                 </Col>
               </Row>

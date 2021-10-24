@@ -14,11 +14,13 @@ import Rol from './Roles/pages/Rol';
 import PrivateLayout from './RegistroProductos/layouts/PrivateLayout';
 import Productos from "./RegistroProductos/RegistroyEdicion";
 import Login from './Login/Login';
+import PrivateRoute from "./Shared/components/PrivateRoute";
 
 function App() {
   return (
     <Router>
       <Switch>
+        <PrivateRoute path="/rol" exact component={Rol}></PrivateRoute>
         <Route path={['/sales', '/register', '/products', '/RegistroyEdicion', '/Rol','/Login']}>
             {/* Aqui va el componente de layout privado */}
             
@@ -35,7 +37,7 @@ function App() {
                 {/*ruta para acceder a la pagina de registro */}
                 <Route exact path="/register" component={Register} />
                 
-                <Route exact path="/rol" component={Rol} />
+                <Route />
                 
               
               </Switch>

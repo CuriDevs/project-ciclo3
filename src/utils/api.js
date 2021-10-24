@@ -3,8 +3,10 @@ const callApi = async (url, options = {}) => {
         "Content-Type": "application/json",
         Accept: "application/json",
     };
+    const urlLocal = 'http://localhost:5000';
+    const urlBackend = 'https://jalmed-backend.herokuapp.com';
 
-    const response = await fetch("https://jalmed-backend.herokuapp.com/api/v1" + url, options);
+    const response = await fetch(`${urlLocal}` + url, options);
     const data = await response.json();
     return data;
 };
@@ -12,52 +14,52 @@ const callApi = async (url, options = {}) => {
 export const api = {
     ventas: {
         list() {
-            return callApi("/ventas");
+            return callApi("/api/v1/ventas");
         },
         create(ventas) {
-            return callApi("/ventas", {
+            return callApi("/api/v1/ventas", {
                 method: "POST",
                 body: JSON.stringify(ventas),
             });
         },
         delete(id) {
-            return callApi(`/ventas/${ id }`, {
+            return callApi(`/api/v1/ventas/${ id }`, {
                 method: "DELETE",
             });
         },
         edit(ventas,list) {
-            return callApi(`/ventas/${ ventas._id }`, {
+            return callApi(`/api/v1/ventas/${ ventas._id }`, {
                 method: "PATCH",
                 body: JSON.stringify(list),
             });
         },
         getProduct(id) {
-            return callApi(`/ventas/${ id }`);
+            return callApi(`/api/v1/ventas/${ id }`);
         },
     },
     Users: {
         list() {
-            return callApi("/Users");
+            return callApi("/api/v1/Users");
         },
         create(Users) {
-            return callApi("/Users", {
+            return callApi("/api/v1/Users", {
                 method: "POST",
                 body: JSON.stringify(Users),
             });
         },
         delete(id) {
-            return callApi(`/Users/${ id }`, {
+            return callApi(`/api/v1/Users/${ id }`, {
                 method: "DELETE",
             });
         },
         edit(Users,list) {
-            return callApi(`/Users/${ Users._id }`, {
+            return callApi(`/api/v1/Users/${ Users._id }`, {
                 method: "PATCH",
                 body: JSON.stringify(list),
             });
         },
         getUser(id) {
-            return callApi(`/Users/${ id }`);
+            return callApi(`/api/v1/Users/${ id }`);
         },
     }
 };
