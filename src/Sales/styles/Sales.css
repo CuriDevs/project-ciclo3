@@ -25,15 +25,17 @@
   border-radius: 10px;
   height: 60vh;
   overflow-y: auto;
+  white-space: nowrap;
 }
 
 .secondary::-webkit-scrollbar {
   -webkit-appearance: none;
-  display: none;
+
 }
 
 .secondary::-webkit-scrollbar:vertical {
-  width:10px;
+  width: 10%;
+  display: none;
 }
 
 .secondary::-webkit-scrollbar-button:increment,.secondary::-webkit-scrollbar-button {

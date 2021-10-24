@@ -48,12 +48,12 @@ function App() {
         
           {/* Aqui va el componente de layout publico */}
             <Switch>
-            <Route>
+              <Route>
                 {/* Primera pantalla (antes de ingresar al sistema) */}
                 <Login />
               </Route>
 
-              </Switch>
+            </Switch>
                 {/* Aqui se cierra el componente de layout publico*/}
         </Route>
       </Switch>
