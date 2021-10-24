@@ -17,6 +17,9 @@ function Sales() {
   //muestra el modal de registro ventas
   const [ show, setShow ] = useState(false);
 
+  //Listado de usuarios
+  const [ users, setUsuarios ] = useState([]);
+
   //lista de ventas registradas
   const [ ventas, setVentas ] = useState([]);
 
@@ -25,27 +28,29 @@ function Sales() {
     idSales: ""
   });
 
-  const [consulta, setConsulta] = useState(true);
+  const [ consulta, setConsulta ] = useState(true);
 
   //cada vez que recargemos el use entrara en funcion
   useEffect(() => {
     //con esta funcion pedimos todos los datos a la api
     const fetchData = async () => {
       const response = await api.ventas.list();
+      const respUsers = await api.Users.list();
       setVentas(response);
-      setConsulta(false)
+      setUsuarios(respUsers);
+      setConsulta(false);
     };
 
-    if(consulta){
+    if (consulta) {
       fetchData();
     }
 
-  }, [consulta]);
+  }, [ consulta ]);
 
 
   //guarda los datos del input search
   const handleInput = (e) => {
-    if(e.target.value === ''){
+    if (e.target.value === '') {
       setConsulta(true);
     }
     setSearch({
@@ -58,7 +63,7 @@ function Sales() {
     searchIdSales();
   };
 
-  const searchIdSales = async() =>{
+  const searchIdSales = async () => {
     console.log('enviando datos a la api');
     const res = await api.ventas.getProduct(search.idSales);
     if (res === null) {
@@ -66,8 +71,8 @@ function Sales() {
       return; //404
       //se llama al componente notification y mostramos un mensaje de que no se muestra el producto, en proceso
     }
-    setVentas([res]);
-  }
+    setVentas([ res ]);
+  };
 
   //recibimos un boolean(false) que mandamos desde sales, para cerrar el modal
   const show2 = datos => {
@@ -78,18 +83,18 @@ function Sales() {
     <>
       <Header />
       <Container className="primary">
-        {/*<Row>{component }</Row>*/}
+        {/*<Row>{component }</Row>*/ }
         <Row className="justify-content-center" >
           <Col className="principal-second" xs={ 6 } md={ 2 }>
             <Button id="registrar" variant="primary" onClick={ () => setShow(true) }>Crear</Button>
-            <AddSales show={ show } show2={ show2 } setConsulta={setConsulta}/>
+            <AddSales show={ show } show2={ show2 } setConsulta={ setConsulta } users={ users } />
           </Col>
           <Col className="principal-third" xs={ 6 } md={ 7 }>
             <InputGroup className="mb-3">
               <FormControl
                 aria-label="Default"
                 aria-describedby="inputGroup-sizing-default"
-                onChange={handleInput}
+                onChange={ handleInput }
                 placeholder="Buscar"
                 type="text"
                 name="idSales"
@@ -101,7 +106,7 @@ function Sales() {
       <Container className="secondary">
         <Col>
           {/* <Toast /> */ }
-          <Query ventas={ ventas } setConsulta={setConsulta} />
+          <Query ventas={ ventas } setConsulta={ setConsulta } users={ users } />
         </Col>
       </Container>
     </>
