@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../../Images/logo copia1.png';
-import Fondo from '../../Images/Fondo.png';
 import styles from "../styles/Image.css";
 import { useHistory } from "react-router-dom";
 
@@ -21,10 +20,7 @@ function Header() {
     const name = sessionStorage.getItem('Name');
 
     const logout = () => {
-        sessionStorage.removeItem("token");
-        sessionStorage.removeItem('Image');
-        sessionStorage.removeItem('_id');
-        sessionStorage.removeItem('Name');
+        sessionStorage.clear();
         history.push("/");
     };
 
@@ -67,7 +63,8 @@ function Header() {
                         className="align-top d-inline-block img-border"
                     />{ ' ' }
                     <Navbar.Text>
-                        Signed in as: <a href="#login">{name}</a>
+                        Signed in as: <a href="#login">{name}</a><br/>
+                        ID: {user}
                     </Navbar.Text>
                 </Navbar.Collapse>
             </Container>

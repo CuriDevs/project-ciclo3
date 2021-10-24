@@ -1,23 +1,27 @@
 import { Route, Redirect } from "react-router-dom";
-//import { useJwt } from "react-jwt";
 
-const PrivateRoute = ({ children, ...rest }) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
     let auth = sessionStorage.getItem("token");
 
     return (
         <Route
-            { ...rest }
-            render={ ({ location }) =>
-                auth ? (children) : (
-                    <Redirect
-                        to={ {
-                            pathname: "/",
-                            state: { from: location },
-                        } }
-                    />
-                )
+            {...rest}
+            render={(props) =>
+            auth ? (
+                <Component {...props} />
+            ) : (
+                <>
+                {alert("No tienes permitido el acceso a esta página")}
+                <Redirect
+                    to={{
+                    pathname: "/",
+                    state: { from: props.location },
+                    }}
+                />
+                </>
+            )
             }
-        />
+        ></Route>
     );
 };
 

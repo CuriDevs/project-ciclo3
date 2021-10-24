@@ -21,28 +21,30 @@ function App() {
     <Router>
       <Switch>
         <PrivateRoute path="/rol" exact component={Rol}></PrivateRoute>
-        <Route path={['/sales', '/register', '/products', '/RegistroyEdicion', '/Rol','/Login']}>
-            {/* Aqui va el componente de layout privado */}
+        <PrivateRoute path="/sales" exact component={Sales}></PrivateRoute>
+        <PrivateRoute path="/products" exact component={Products}></PrivateRoute>
+        {/*<Route path={['/sales', '/register', '/products', '/RegistroyEdicion', '/Rol','/Login']}>
+            
             
               <Switch>
 
-                {/* Forma 1 de hacer el enrotamiento con pagina x */}  
+                  
                 <Route exact path="/sales"> 
                   <Sales />
                 </Route>
 
-                {/*  Forma 2 de hacer el enrutamiento con pagina x */}
+                
                 <Route exact path="/products" component={Products} />
 
-                {/*ruta para acceder a la pagina de registro */}
+                
                 <Route exact path="/register" component={Register} />
                 
                 <Route />
                 
               
               </Switch>
-          {/* Aqui se cierra el componente de layout privado*/}
-        </Route>
+          
+        </Route> */}
                   
 
 
