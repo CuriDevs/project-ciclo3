@@ -14,33 +14,37 @@ import Rol from './Roles/pages/Rol';
 import PrivateLayout from './RegistroProductos/layouts/PrivateLayout';
 import Productos from "./RegistroProductos/RegistroyEdicion";
 import Login from './Login/Login';
+import PrivateRoute from "./Shared/components/PrivateRoute";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path={['/sales', '/register', '/products', '/RegistroyEdicion', '/Rol','/Login']}>
-            {/* Aqui va el componente de layout privado */}
+        <PrivateRoute path="/rol" exact component={Rol}></PrivateRoute>
+        <PrivateRoute path="/sales" exact component={Sales}></PrivateRoute>
+        <PrivateRoute path="/products" exact component={Products}></PrivateRoute>
+        {/*<Route path={['/sales', '/register', '/products', '/RegistroyEdicion', '/Rol','/Login']}>
+            
             
               <Switch>
 
-                {/* Forma 1 de hacer el enrotamiento con pagina x */}  
+                  
                 <Route exact path="/sales"> 
                   <Sales />
                 </Route>
 
-                {/*  Forma 2 de hacer el enrutamiento con pagina x */}
+                
                 <Route exact path="/products" component={Products} />
 
-                {/*ruta para acceder a la pagina de registro */}
+                
                 <Route exact path="/register" component={Register} />
                 
-                <Route exact path="/rol" component={Rol} />
+                <Route />
                 
               
               </Switch>
-          {/* Aqui se cierra el componente de layout privado*/}
-        </Route>
+          
+        </Route> */}
                   
 
 
@@ -48,12 +52,12 @@ function App() {
         
           {/* Aqui va el componente de layout publico */}
             <Switch>
-            <Route>
+              <Route>
                 {/* Primera pantalla (antes de ingresar al sistema) */}
                 <Login />
               </Route>
 
-              </Switch>
+            </Switch>
                 {/* Aqui se cierra el componente de layout publico*/}
         </Route>
       </Switch>

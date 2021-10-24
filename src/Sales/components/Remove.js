@@ -16,8 +16,8 @@ function Remove({ venta, setConsulta}) {
     };
 
     const deleteVentas = async (ventaDelete) => {
-        const responde = await api.ventas.delete(ventaDelete[ 0 ]._id);
-        console.log("Se elimino la venta: " + ventaDelete[ 0 ].idSales);
+        await api.ventas.delete(ventaDelete[ 0 ]._id);
+        console.log("Se elimino la venta: " + ventaDelete[ 0 ]._id);
         setConsulta(true);
     };
 

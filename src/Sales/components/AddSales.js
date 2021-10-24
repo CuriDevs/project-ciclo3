@@ -25,8 +25,8 @@ function AddSales ({show, show2, setConsulta}) {
 
   const [productos, setProductos] = useState([])
 
-  const [consultarProducto, setConsultarProducto] = useState({_id: ''})
-  
+  const [consultarProducto, setConsultarProducto] = useState({_id_product: ''})
+  const user_id = sessionStorage.getItem('_id');
   //le damos el estado inicial al hook, osea sus valores por default
   const [list, setList] = useState({
     idProduct: '',
@@ -35,9 +35,9 @@ function AddSales ({show, show2, setConsulta}) {
     price: 0,
     dateV: "",
     state: "En proceso",
-    idClient: "",
+    idVendedor: "",
     nameC: "",
-    nameV: ""
+    Documento: 1,
   });
 
   useEffect(() => {
@@ -52,8 +52,6 @@ function AddSales ({show, show2, setConsulta}) {
     fecthProductos();
 
   }, []);
-
-
 
   //escucha el cambio de los inputs
   const handleInputtAdd = (e) => {
@@ -82,9 +80,9 @@ function AddSales ({show, show2, setConsulta}) {
       price: list.price,
       dateV: list.dateV,
       state: list.state,
-      idClient: list.idClient,
+      idVendedor: user_id,
       nameC: list.nameC,
-      nameV: list.nameV,
+      Documento: list.Documento,
     };
     const res = await api.ventas.create(listAdd);
     console.log(res);
@@ -98,7 +96,7 @@ function AddSales ({show, show2, setConsulta}) {
     }
   }
 
-  const handleInputProduct = (e) => {
+  const handleInputIdProduct = (e) => {
 
       //cambiamos el estado
       setConsultarProducto({
@@ -109,8 +107,8 @@ function AddSales ({show, show2, setConsulta}) {
 
   };
 
-  const getRes = () =>{
-    const productData = productos.filter(item => item._id === consultarProducto._id);
+  const getResIdProductos = () =>{
+    const productData = productos.filter(item => item._id === consultarProducto._id_product);
     console.log(productData);
     /*mapeamos el array productData que creamos al filtrar la lista productos para obtener el _id y le ponemos [0] ya que 
     el mapeo nos devuelve el valor en un array en la posicion 0, lo mismo hacemos con el value*/
@@ -118,7 +116,8 @@ function AddSales ({show, show2, setConsulta}) {
     list.price = productData.map(item => item.value)[0];
     list.vTotal = list.amount * list.price;
   }
-  getRes();
+  getResIdProductos();
+
 
   let component;
   if(notify){
@@ -152,7 +151,7 @@ function AddSales ({show, show2, setConsulta}) {
                 <Col xs={12} sm>
                   
                   <FloatingLabel controlId="formGridIdProducto" label="Id producto">
-                    <Form.Select aria-label="Floating label select example" onChange={handleInputProduct} name="_id">
+                    <Form.Select aria-label="Floating label select example" onChange={handleInputIdProduct} name="_id_product">
                       <option>Seleciona el Id del producto</option>
                       {/*<QueryProducts products={productos}/>*/}
                       {productos.map((value) => (
@@ -228,7 +227,7 @@ function AddSales ({show, show2, setConsulta}) {
                       type="texto"
                       placeholder="Identificacion del cliente"
                       onChange={handleInputtAdd}
-                      name="idClient"
+                      name="Documento"
                     />
                   </Form.Group>
                 </Col>
@@ -249,13 +248,14 @@ function AddSales ({show, show2, setConsulta}) {
               <hr />
               <Row className="mb-3">
                 <Col xs={12} sm>
-                  <Form.Group controlId="formGridNombreVendedor">
-                    <Form.Label>Nombre del vendedor</Form.Label>
+                  <Form.Group controlId="formGridIdVendedor">
+                    <Form.Label>Id vendedor</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Nombre del vendedor"
+                      placeholder={user_id}
+                      readOnly
                       onChange={handleInputtAdd}
-                      name="nameV"
+                      name="idVendedor"
                     />
                   </Form.Group>
                 </Col>
