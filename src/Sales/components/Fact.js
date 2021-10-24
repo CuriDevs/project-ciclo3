@@ -1,7 +1,7 @@
 import Remove from "./Remove";
 import Edit from "./Edit";
 
-function Fact({ ventas, setConsulta}) {
+function Fact({ ventas, setConsulta, users }) {
 
     return (
         <>
@@ -13,11 +13,11 @@ function Fact({ ventas, setConsulta}) {
                     <th>{ venta.amount }</th>
                     <th>{ venta.price }</th>
                     <th>{ venta.dateV }</th>
-                    <th>{ venta.idClient }</th>
+                    <th>{ venta.idVendedor }</th>
                     <th>{ venta.nameC }</th>
-                    <th>{ venta.nameV }</th>
-                    <td><Edit venta={ venta } setConsulta={setConsulta}/></td>
-                    <td><Remove venta={ venta } setConsulta={setConsulta}/></td>
+                    <th>{ venta.Documento }</th>
+                    <td><Edit venta={ venta } setConsulta={ setConsulta } users={ users } /></td>
+                    <td><Remove venta={ venta } setConsulta={ setConsulta } /></td>
                 </tr>
             )) }
         </>

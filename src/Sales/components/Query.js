@@ -6,9 +6,9 @@ import Fact from "./Fact";
 import Button from "react-bootstrap/Button";
 import '../styles/Query.css';
 
-var Titulos = [ 'ID Venta', 'ID Producto', 'Valor Total', 'Cantidad', 'Precio Unitario', 'Fecha Venta', 'Identificación', 'Cliente', 'Vendedor' ];
+var Titulos = [ 'ID Venta', 'ID Producto', 'Valor Total', 'Cantidad', 'Precio Unitario', 'Fecha Venta', 'Id Vendedor', 'Cliente', 'Documento' ];
 
-function Query({ ventas, setConsulta }) {
+function Query({ ventas, setConsulta, users }) {
 
     if (!ventas.length) {
         return (
@@ -33,7 +33,7 @@ function Query({ ventas, setConsulta }) {
                                     </tr>
                                 </thead>
                                 <tbody >
-                                    <Fact ventas={ ventas } setConsulta={setConsulta}/>
+                                    <Fact ventas={ ventas } setConsulta={ setConsulta } users={ users } />
                                 </tbody>
                             </Table>
                         </Col>

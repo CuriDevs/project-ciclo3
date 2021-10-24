@@ -21,7 +21,7 @@ function Login() {
     UrlImage: "",
     Rol: "",
     State: "",
-    Document: 0,
+    Document: 1,
     date: value,
   };
 
@@ -55,7 +55,7 @@ function Login() {
       alert('Usuario creado, espere la activación por el Administrador del sistema');
     } else {
       for (let i=0; i<usuarios.length; i++) {
-        if (usuarios[i].Email == data.Email) {
+        if (usuarios[i].Email === data.Email) {
           estado = usuarios[i].State;
           sessionStorage.setItem("_id", usuarios[i]._id);
           break;
@@ -64,13 +64,13 @@ function Login() {
         }
       }
   
-      if (estado == 'Activo') {
+      if (estado === 'Activo') {
         navigateToProducts();
-      } else if (estado == "Inactivo") {
+      } else if (estado === "Inactivo") {
         sessionStorage.clear();
         alert('Pendiente activación del usuario');
         setUsers(true);
-      } else if (estado == "Por crear") {
+      } else if (estado === "Por crear") {
         creacion(data);
         sessionStorage.clear();
         alert('Usuario creado, espere la activación por el Administrador del sistema');
