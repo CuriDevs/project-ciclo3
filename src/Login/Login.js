@@ -58,6 +58,7 @@ function Login() {
         if (usuarios[i].Email === data.Email) {
           estado = usuarios[i].State;
           sessionStorage.setItem("_id", usuarios[i]._id);
+          sessionStorage.setItem("Rol", usuarios[i].Rol);
           break;
         } else {
           estado = "Por crear";
@@ -90,8 +91,6 @@ function Login() {
     user.UrlImage = res.profileObj.imageUrl;
     user.Rol = "Cliente";
     user.State = "Inactivo";
-    console.log(user);
-    console.log(usuarios);
     validacion(user, usuarios);
   };
 

@@ -3,10 +3,8 @@ const callApi = async (url, options = {}) => {
         "Content-Type": "application/json",
         Accept: "application/json",
     };
-    const urlLocal = 'http://localhost:5000';
-    const urlBackend = 'https://jalmed-backend.herokuapp.com';
 
-    const response = await fetch(`${urlLocal}` + url, options);
+    const response = await fetch(process.env.REACT_APP_API_URL + url, options);
     const data = await response.json();
     return data;
 };

@@ -13,7 +13,6 @@ function Edit({ venta, setConsulta, users}) {
 
     const res = () =>{
         const userData = users.filter(item => item._id === venta.idVendedor);
-        console.log(userData);
         userList.UserName = userData.map(item => item.UserName)[0]; 
         userList.Documento = userData.map(item => item.Documento)[0]; 
         }
@@ -53,7 +52,6 @@ function Edit({ venta, setConsulta, users}) {
     };
 
     const updateVentas = async (list) => {
-        console.log(list);
         await api.ventas.edit(venta,list);
         //alert("Se actualizo la venta: " + venta._id);
         setConsulta(true);
@@ -61,10 +59,6 @@ function Edit({ venta, setConsulta, users}) {
 
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
-
-    // useEffect(() => {
-    //     const interval = setInterval(() => setValue(new Date().toLocaleString()),60000)
-    // });
 
     return (
         <>
@@ -139,7 +133,7 @@ function Edit({ venta, setConsulta, users}) {
 
                             <Form.Group as={ Col } controlId="formGridEstado">
                                 <Form.Label>Estado</Form.Label>
-                                <Form.Select size="sm" defaultValue="En proceso" onChange={ handleInputtAdd } name="state">
+                                <Form.Select size="sm" defaultValue="Choose..." onChange={ handleInputtAdd } name="state">
                                     <option>Choose...</option>
                                     <option>Entregada</option>
                                     <option>En proceso</option>

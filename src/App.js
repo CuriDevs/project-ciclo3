@@ -15,12 +15,13 @@ import PrivateLayout from './RegistroProductos/layouts/PrivateLayout';
 import Productos from "./RegistroProductos/RegistroyEdicion";
 import Login from './Login/Login';
 import PrivateRoute from "./Shared/components/PrivateRoute";
+import PrivateRouteAdmin from "./Shared/components/PrivateRouteAdmin";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <PrivateRoute path="/rol" exact component={Rol}></PrivateRoute>
+        <PrivateRouteAdmin path="/rol" exact component={Rol}></PrivateRouteAdmin>
         <PrivateRoute path="/sales" exact component={Sales}></PrivateRoute>
         <PrivateRoute path="/products" exact component={Products}></PrivateRoute>
         {/*<Route path={['/sales', '/register', '/products', '/RegistroyEdicion', '/Rol','/Login']}>

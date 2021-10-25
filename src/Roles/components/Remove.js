@@ -17,7 +17,7 @@ function Remove({ user, setConsulta}) {
 
     const deleteUsers = async (userDelete) => {
         await api.Users.delete(userDelete[ 0 ]._id);
-        console.log("Se elimino el Usuario: " + userDelete[ 0 ]._id);
+        alert("Se elimino el Usuario: " + userDelete[ 0 ]._id);
         setConsulta(true);
     };
 

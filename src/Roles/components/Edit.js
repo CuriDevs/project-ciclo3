@@ -40,7 +40,6 @@ function Edit({ user, setConsulta}) {
     };
 
     const updateUsers = async (list) => {
-        console.log(list);
         await api.Users.edit(user,list);
         setConsulta(true);
     };
@@ -65,10 +64,24 @@ function Edit({ user, setConsulta}) {
                             <Form.Control size="sm" type="number" readOnly placeholder={ user._id } />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formGridFecha">
-                            <Form.Label>Fecha</Form.Label>
-                            <Form.Control size="sm" readOnly placeholder={ list.date } />
-                        </Form.Group>
+                        <Row className="mb-3">
+
+                            <Form.Group as={ Col } controlId="formGridFecha">
+                                <Form.Label>Fecha</Form.Label>
+                                <Form.Control size="sm" readOnly placeholder={ list.date } />
+                            </Form.Group>
+
+                            <Form.Group as={ Col } controlId="formGridRol">
+                                <Form.Label>Estado</Form.Label>
+                                <Form.Select size="sm" defaultValue="Choose..." onChange={ handleInputtAdd } name="Rol">
+                                    <option>Choose...</option>
+                                    <option>Admin</option>
+                                    <option>Coordinador</option>
+                                    <option>Vendedor</option>
+                                </Form.Select>
+                            </Form.Group>
+
+                        </Row>
 
                         <Row className="mb-3">
 

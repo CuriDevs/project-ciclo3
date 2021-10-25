@@ -13,7 +13,7 @@ function Fact({ ventas, setConsulta, users }) {
                     <th>{ venta.amount }</th>
                     <th>{ venta.price }</th>
                     <th>{ venta.dateV }</th>
-                    <th>{ venta.idVendedor }</th>
+                    <th>{ venta.state }</th>
                     <th>{ venta.nameC }</th>
                     <th>{ venta.Documento }</th>
                     <td><Edit venta={ venta } setConsulta={ setConsulta } users={ users } /></td>

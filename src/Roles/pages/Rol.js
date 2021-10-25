@@ -49,7 +49,7 @@ function Rol() {
             <Header />
             <Container className="secondary">
               <Col>
-                <Button variant="secondary" className="border border-5 border-white">Volver</Button>{ ' ' }
+                <Button variant="secondary" className="border border-5 border-white" href="/products">Volver</Button>{ ' ' }
                 <Tab.Container defaultActiveKey="first" className="border border-5 Table">
                     <Row className="border border-5 border-white">
                         <Col md="auto">
