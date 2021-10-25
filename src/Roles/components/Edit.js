@@ -109,7 +109,7 @@ function Edit({ user, setConsulta}) {
 
                             <Form.Group as={ Col } controlId="formGridEstado">
                                 <Form.Label>Estado</Form.Label>
-                                <Form.Select size="sm" defaultValue="Choose..." onChange={ handleInputtAdd } name="state">
+                                <Form.Select size="sm" defaultValue="Choose..." onChange={ handleInputtAdd } name="State">
                                     <option>Choose...</option>
                                     <option>Activo</option>
                                     <option>Inactivo</option>
