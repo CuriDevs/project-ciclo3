@@ -4,7 +4,7 @@ const callApi = async (url, options = {}) => {
         Accept: "application/json",
     };
 
-    const response = await fetch(process.env.REACT_APP_API_URL + url, options);
+    const response = await fetch('https://jalmed-backend.herokuapp.com' + url, options);
     const data = await response.json();
     return data;
 };
