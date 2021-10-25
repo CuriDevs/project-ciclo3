@@ -28,7 +28,7 @@ function Header() {
         
         <Navbar bg="dark" expand="lg" variant="dark" >
             <Container>
-                <Link to="">
+                <Link to="/products">
                     <Navbar.Brand href="/products" >
                         <img src={ logo } width="80" height="80" className="align-top d-inline-block" />
 
