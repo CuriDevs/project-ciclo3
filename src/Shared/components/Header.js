@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import logo from '../../Images/logo copia1.png';
+import logo from '../../Images/iconPngSinTexto.png';
 import styles from "../styles/Image.css";
 import { useHistory } from "react-router-dom";
 
@@ -29,7 +29,7 @@ function Header() {
         <Navbar bg="dark" expand="lg" variant="dark" >
             <Container>
                 <Link to="">
-                    <Navbar.Brand href="#home" >
+                    <Navbar.Brand href="/products" >
                         <img src={ logo } width="80" height="80" className="align-top d-inline-block" />
 
                     </Navbar.Brand>
